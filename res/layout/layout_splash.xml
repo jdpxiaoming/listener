@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#33333333"
-     >
-    	<TextView 
-    	    	android:layout_width="fill_parent"
-    	    	android:layout_height="match_parent"
-    	    	android:text="welcome to listener king!"	
-    	    	android:gravity="center"	
-    	    	/>
-
-</LinearLayout>
+<RelativeLayout android:orientation="horizontal" android:background="@drawable/default_home_bg" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@+id/welcomebutton" android:background="@drawable/default_home" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+</RelativeLayout>
