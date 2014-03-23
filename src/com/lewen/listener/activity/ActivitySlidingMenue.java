@@ -1,0 +1,253 @@
+package com.lewen.listener.activity;
+
+import java.util.HashMap;
+import com.lewen.listener.R;
+import com.lewen.listener.bean.Task;
+import com.lewen.listener.bean.TaskType;
+import com.lewen.listener.fragment.FragementYanChu;
+//import com.lewen.listener.fragment.FragementYanChu;
+import com.lewen.listener.view.SlideHolder;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+public class ActivitySlidingMenue extends FragmentActivity implements
+		OnClickListener {
+
+	private SlideHolder mSlideHolder;
+	// private LinearLayout lin_home, lin_yetai, lin_vip, lin_search, lin_more;
+	private LinearLayout lin_yc, lin_dy, lin_hz, lin_news, lin_msg, lin_yt;
+	private String from = "yanchu";
+	private Context c;
+	//footer nav
+	private ImageView mImageViewNav,mImageViewSign,mImageViewNews;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setContentView(R.layout.layout_sliding_menu);
+		c = this;
+
+		// if (!MainService.isrun) {
+		// Intent it = new Intent(this, MainService.class);
+		// this.startService(it);
+		// }
+
+		init();
+	}
+
+	public void init() {
+		// TODO Auto-generated method stub
+		from = getIntent().getStringExtra("tag");
+		mSlideHolder = (SlideHolder) findViewById(R.id.slideHolder);
+		mSlideHolder.setAllowInterceptTouch(false);
+		mSlideHolder.setEnabled(false);
+		/*
+		 * // 底部导航 lin_home = (LinearLayout) findViewById(R.id.linearHOme);
+		 * lin_yetai = (LinearLayout) findViewById(R.id.linearYetai); lin_vip =
+		 * (LinearLayout) findViewById(R.id.linearVip); lin_more =
+		 * (LinearLayout) findViewById(R.id.linearMore);
+		 * lin_search=(LinearLayout)findViewById(R.id.linearSearch);
+		 * 
+		 * lin_home.setOnClickListener(this);
+		 * lin_yetai.setOnClickListener(this); lin_vip.setOnClickListener(this);
+		 * lin_more.setOnClickListener(this);
+		 * lin_search.setOnClickListener(this);
+		 */
+
+		// 下面点击button的效果
+//		lin_yc = (LinearLayout) findViewById(R.id.linearYanchuOfSlidingMenue);
+//		lin_dy = (LinearLayout) findViewById(R.id.linearDianYingOfSlidingMenue);
+//		lin_hz = (LinearLayout) findViewById(R.id.linearHuiZhanOfSlidingMenue);
+//		lin_news = (LinearLayout) findViewById(R.id.linearMonthInfoOfSlidingMenue);
+//		lin_msg = (LinearLayout) findViewById(R.id.linearMeiShuOfSlidingMenue);
+//		lin_yt = (LinearLayout) findViewById(R.id.linearYiTanOfSlidingMenue);
+
+//		lin_hz.setOnClickListener(this);
+//		lin_news.setOnClickListener(this);
+//		lin_msg.setOnClickListener(this);
+//		lin_yt.setOnClickListener(this);
+//		lin_yc.setOnClickListener(this);
+//		lin_dy.setOnClickListener(this);
+//		
+		mImageViewNav	=	(ImageView) findViewById(R.id.imgbtnLeftOfFooter);
+		mImageViewNav.setOnClickListener(this);
+		
+		mImageViewSign	=	(ImageView) findViewById(R.id.imgbtnCenterOfFooter);
+		mImageViewSign.setOnClickListener(this);
+		
+		mImageViewNews	=	(ImageView) findViewById(R.id.imgbtnRightOfFooter);
+		mImageViewNews.setOnClickListener(this);
+		
+		// 默认去加载 演出
+		// 通知服务获取ad数据
+		loadFragment(from);
+	}
+
+	/**
+	 * 根据 from加载不同的随便布局
+	 * 
+	 * @param from
+	 */
+	private void loadFragment(final String from) {
+		// MainService.newTask(ts);
+		new Handler().postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				HashMap<String, Object> hm = new HashMap<String, Object>();
+				Task ts = null;
+				// 1.演出
+				if ("splash".equals(from)) {
+					ts = new Task(TaskType.GET_YANCHU, hm);
+				} else
+				// 2.电影
+				if ("dianying".equals(from)) {
+					ts = new Task(TaskType.GET_DIANYING, hm);
+				} else
+				// 3.会展
+				if ("huizhan".equals(from)) {
+					ts = new Task(TaskType.GET_HUIZHAN, hm);
+				} else
+				// 4.每月易迅
+				if ("news".equals(from)) {
+					ts = new Task(TaskType.GET_NEWS, hm);
+				} else
+				// 5.金鸡湖美术馆
+				if ("meishuguan".equals(from)) {
+					ts = new Task(TaskType.GET_MEISHUGUAN, hm);
+				} else
+				// 6.金鸡湖艺坛
+				if ("yitan".equals(from)) {
+					ts = new Task(TaskType.GET_YITAN, hm);
+				}
+
+				if (ts != null)
+					refresh(ts.getTaskID());
+			}
+		}, 100);
+
+	}
+
+	public void refresh(Object... param) {
+		// TODO Auto-generated method stub
+		int type = (Integer) param[0];
+		FragmentTransaction transaction = this.getSupportFragmentManager()
+				.beginTransaction();
+		loadFram(type, transaction);
+	}
+
+	private void loadFram(int key, FragmentTransaction transaction) {
+		Fragment frag;
+		switch (key) {
+		case TaskType.GET_YANCHU:
+			frag = new FragementYanChu(c, mSlideHolder);
+			transaction.replace(R.id.linearcontent, frag);
+			transaction.commit();
+			break;
+		// case TaskType.GET_DIANYING:
+		// frag = new FragementFilm(c,mSlideHolder);
+		// transaction.replace(R.id.linearcontent, frag);
+		// transaction.commit();
+		// break;
+		// case TaskType.GET_HUIZHAN:
+		// frag = new FragementHuiZhan(c,mSlideHolder);
+		// transaction.replace(R.id.linearcontent, frag);
+		// transaction.commit();
+		// break;
+		// case TaskType.GET_NEWS:// news art info
+		// frag = new FragementNews(c,mSlideHolder);
+		// transaction.replace(R.id.linearcontent, frag);
+		// transaction.commit();
+		// break;
+		// case TaskType.GET_MEISHUGUAN:
+		// frag = new FragementMeiShuGuan(c,mSlideHolder);
+		// transaction.replace(R.id.linearcontent, frag);
+		// transaction.commit();
+		// break;
+		// case TaskType.GET_YITAN:
+		// frag = new FragementYiTan(c,mSlideHolder);
+		// transaction.replace(R.id.linearcontent, frag);
+		// transaction.commit();
+		// break;
+		default:
+			break;
+		}
+
+		 mSlideHolder.toggle();
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+//		Intent intent = new Intent();
+//		intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+		switch (v.getId()) {
+		 case R.id.imgbtnLeftOfFooter:
+			 mSlideHolder.toggle();
+		 break;
+		// case R.id.linearYetai:
+		// intent.setClass(this, Activity_Yetai.class);
+		// startActivity(intent);
+		// finish();
+		// break;
+		// case R.id.linearSearch:
+		// intent.setClass(this, Activity_Yetai.class);
+		// startActivity(intent);
+		// finish();
+		// break;
+		// case R.id.linearVip:
+		// intent.setClass(this, Activity_VIP.class);
+		// startActivity(intent);
+		// finish();
+		// break;
+		// case R.id.linearMore:
+		// intent.setClass(this, Activity_More.class);
+		// startActivity(intent);
+		// finish();
+		// break;
+		// // 子选项的跳转
+		// case R.id.linearYanchuOfSlidingMenue:
+		// from="yanchu";
+		// loadFragment(from);
+		// break;
+		// case R.id.linearDianYingOfSlidingMenue:
+		// from="dianying";
+		// loadFragment(from);
+		// break;
+		// case R.id.linearHuiZhanOfSlidingMenue:
+		// from= "huizhan";
+		// loadFragment(from);
+		// break;
+		// case R.id.linearMonthInfoOfSlidingMenue:
+		// from="news";
+		// loadFragment(from);
+		// break;
+		// case R.id.linearMeiShuOfSlidingMenue:
+		// from="meishu";
+		// loadFragment(from);
+		// break;
+		// case R.id.linearYiTanOfSlidingMenue:
+		// from="yitan";
+		// loadFragment(from);
+		// break;
+		default:
+			break;
+		}
+
+		overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+	}
+}

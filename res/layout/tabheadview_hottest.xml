@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:background="@drawable/title_bar" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RadioGroup android:layout_gravity="center_vertical" android:orientation="horizontal" android:id="@+id/rb_group" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_margin="8.0dip">
+        <RadioButton android:gravity="center" android:id="@+id/button_left" android:background="@drawable/hottest_button_left" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:button="@null" android:text="@string/hottest_left" android:layout_weight="1.0" style="@style/titleshadow16px" />
+        <RadioButton android:gravity="center" android:id="@+id/button_middle" android:background="@drawable/hottest_button_middle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@null" android:text="@string/hottest_middle" android:layout_weight="1.0" style="@style/titleshadow16px" />
+        <RadioButton android:gravity="center" android:id="@+id/button_right" android:background="@drawable/hottest_button_right" android:layout_width="wrap_content" android:layout_height="wrap_content" android:button="@null" android:text="@string/hottest_right" android:layout_weight="1.0" style="@style/titleshadow16px" />
+    </RadioGroup>
+</LinearLayout>

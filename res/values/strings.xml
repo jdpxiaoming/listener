@@ -1,5 +1,27 @@
 <resources>
 
-    <string name="app_name">englishlearn</string>
+    <string name="app_name">听霸</string>
+    <!-- NAVIGATION TEXT  -->
+    <string name="str_nav_title">听霸</string>
+    <string name="str_nav_frient">找好友</string>
+    <string name="str_nav_me">我</string>
+    <string name="str_nav_find">发现</string>
+    <string name="str_nav_record">排行榜</string>
+    <string name="str_nav_game">游戏中心</string>
+    <string name="str_nav_pk">比赛</string>
+    <string name="str_nav_home">首页</string>
 
+    <!-- top nav text -->
+    <string name="str_nav_friends">朋友们</string>
+    <string name="str_nav_local_city">苏州</string>
+    <string name="str_nav_china">全国</string>
+    
+    <string name="hottest_left">左按钮</string>
+    <string name="hottest_middle">中间键</string>
+    <string name="hottest_right">右按钮</string>
+    
+    <string name="nav">导航</string>
+    <string name="default_area">苏州</string>
+    
+    
 </resources>

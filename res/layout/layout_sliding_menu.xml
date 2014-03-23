@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+               xmlns:android="http://schemas.android.com/apk/res/android"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+                >
+
+<com.lewen.listener.view.SlideHolder
+    			android:id="@+id/slideHolder"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    >
+<!-- <ScrollView
+	        android:layout_width="300dp"
+	        android:layout_height="fill_parent"
+	        android:scrollbars="none"
+	        >
+        <LinearLayout
+		            android:layout_width="300dp"
+		            android:layout_height="fill_parent"
+		            android:orientation="vertical"
+		            >
+		            	<LinearLayout 
+								    		android:id="@+id/linearMonthInfoOfSlidingMenue"
+								    		android:layout_width="fill_parent"
+								    		android:layout_height="45dp"
+								    		android:orientation="horizontal"
+								    		android:gravity="center"
+								    		>
+										<TextView 
+										    		android:layout_width="wrap_content"
+										    		android:layout_height="wrap_content"
+										    		android:text="@string/str_nav_title"
+										    		android:textSize="17sp"
+										    		android:textColor="#FFFFFF"
+										    		android:textStyle="bold"
+										    		/>
+					    			
+								</LinearLayout>
+           				<LinearLayout 
+								    		android:id="@+id/linearYanchuOfSlidingMenue"
+								    		android:layout_width="fill_parent"
+								    		android:layout_height="45dp"
+								    		android:orientation="horizontal"
+								    		android:gravity="center"
+								    		>
+										<TextView 
+										    		android:layout_width="wrap_content"
+										    		android:layout_height="wrap_content"
+										    		android:text="@string/str_nav_frient"
+										    		android:textSize="17sp"
+										    		android:textColor="#FFFFFF"
+										    		android:textStyle="bold"
+										    		/>
+					    			
+								</LinearLayout>
+								<LinearLayout 
+								    		android:id="@+id/linearDianYingOfSlidingMenue"
+								    		android:layout_width="fill_parent"
+								    		android:layout_height="45dp"
+								    		android:orientation="horizontal"
+								    		android:gravity="center"
+								    		>
+										<TextView 
+										    		android:layout_width="wrap_content"
+										    		android:layout_height="wrap_content"
+										    		android:text="@string/str_nav_me"
+										    		android:textSize="17sp"
+										    		android:textColor="#FFFFFF"
+										    		android:textStyle="bold"
+										    		/>
+					    			
+								</LinearLayout>
+								<LinearLayout 
+								    		android:id="@+id/linearHuiZhanOfSlidingMenue"
+								    		android:layout_width="fill_parent"
+								    		android:layout_height="45dp"
+								    		android:orientation="horizontal"
+								    		android:gravity="center"
+								    		>
+										<TextView 
+										    		android:layout_width="wrap_content"
+										    		android:layout_height="wrap_content"
+										    		android:text="@string/str_nav_find"
+										    		android:textSize="17sp"
+										    		android:textColor="#FFFFFF"
+										    		android:textStyle="bold"
+										    		/>
+					    			
+								</LinearLayout>
+								<LinearLayout 
+								    		android:id="@+id/linearPeiXunOfSlidingMenue"
+								    		android:layout_width="fill_parent"
+								    		android:layout_height="45dp"
+								    		android:orientation="horizontal"
+								    		android:gravity="center"
+								    		>
+										<TextView 
+										    		android:layout_width="wrap_content"
+										    		android:layout_height="wrap_content"
+										    		android:text="@string/str_nav_pk"
+										    		android:textSize="17sp"
+										    		android:textColor="#FFFFFF"
+										    		android:textStyle="bold"
+										    		/>
+					    			
+								</LinearLayout>
+								<LinearLayout 
+								    		android:id="@+id/linearMeiShuOfSlidingMenue"
+								    		android:layout_width="fill_parent"
+								    		android:layout_height="45dp"
+								    		android:orientation="horizontal"
+								    		android:gravity="center"
+								    		>
+										<TextView 
+										    		android:layout_width="wrap_content"
+										    		android:layout_height="wrap_content"
+										    		android:text="@string/str_nav_record"
+										    		android:textSize="17sp"
+										    		android:textColor="#FFFFFF"
+										    		android:textStyle="bold"
+										    		/>
+					    			
+								</LinearLayout>
+								
+						<LinearLayout 
+								    		android:id="@+id/linearYiTanOfSlidingMenue"
+								    		android:layout_width="fill_parent"
+								    		android:layout_height="45dp"
+								    		android:orientation="horizontal"
+								    		android:gravity="center"
+								    		>
+										<TextView 
+										    		android:layout_width="wrap_content"
+										    		android:layout_height="wrap_content"
+										    		android:text="@string/str_nav_game"
+										    		android:textSize="17sp"
+										    		android:textColor="#FFFFFF"
+										    		android:textStyle="bold"
+										    		/>
+					    			
+					</LinearLayout>
+    </LinearLayout>
+    
+    </ScrollView> -->
+    <RelativeLayout 
+        			android:layout_width="wrap_content"
+        			android:layout_height="wrap_content"
+        			>
+        <include 	layout="@layout/left_nav_menu_improve"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				/>
+    </RelativeLayout>
+    <LinearLayout
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="fill_parent" 
+	        	android:orientation="vertical"
+	         	android:background="#FFFFFF"
+	       	 	>
+        
+    <LinearLayout
+	        	android:id="@+id/linearcontent"
+	        	android:layout_width="fill_parent"
+	        	android:layout_height="fill_parent" 
+	        	android:orientation="vertical"
+	         	android:background="#FFFFFF"
+	         	android:layout_weight="1"
+	       	 	>
+    </LinearLayout>	  
+	<include 	layout="@layout/footer"
+						android:layout_width="fill_parent"
+						android:layout_height="50dp"
+						android:layout_alignParentBottom="true"
+						/>
+        
+    </LinearLayout>	 
+      
+</com.lewen.listener.view.SlideHolder>
+</RelativeLayout>
