@@ -1,12 +1,18 @@
 package com.lewen.listener.fragment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
+import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.adapter.PaperAdapter;
 import com.lewen.listener.util.ImageCacheUtil;
+import com.lewen.listener.view.MyPullToRefreshListView;
 import com.lewen.listener.view.MyViewPager;
 import com.lewen.listener.view.SlideHolder;
 //import com.ssac.expro.kewen.adapter.Adapter4ShowinfoList;
@@ -34,9 +40,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -49,36 +58,36 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
  * @author poe
  */
 @SuppressLint("ValidFragment")
-public class FragementYanChu extends Fragment implements OnClickListener {
+public class FragementYanChu extends Fragment implements OnClickListener ,OnTouchListener{
 
 	private SlideHolder mSlideHolder;//control menue
-//	private List<AD> adList = new ArrayList<AD>();
-//	private List<ShowInfo> showList = new ArrayList<ShowInfo>();
-//	private List<Theatre> theatreList =new ArrayList<Theatre>();
 	private MyViewPager mViewPager;
 	private LayoutInflater lin;
 //	private LinearLayout progressbar;
 	private PagerAdapter adapter;
 	private int toId = 0;
-//	private int PageSize = 10,PageSize2=10;
-//	private int PageIndex = 1,PageIndex2=1;// 从1开始
-//	// gallery
-//	private int flag;
-//	private int postion = 0;
 	private Context mContext;
-//	private Timer timer;
-//	//listview
-//	private ListView listview;
-//	private BaseAdapter listAdapter;
-//	//剧院活动
-//	private ListView listView2;
-//	private BaseAdapter listAdapter2;
-	
 	//progressbar
 	private LinearLayout progressbar1,progressbar2;
 	private RadioGroup mRadioGroup;
 	private int[] idsTabbar=new int[]{R.id.button_left,R.id.button_middle,R.id.button_right};
-	
+
+	//CITY LIST
+	private MyPullToRefreshListView listview;
+	private String[] mStrings = {"poe 's test 1",
+			"爱上一个魔鬼的天使", "伤心太平洋", "流浪的猫", "度娘一夜情",
+			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
+			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
+			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
+			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
+			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
+			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
+			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
+			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
+			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
+			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler" , "!! test" 
+			};
+	private BaseAdapter adapter4LIST;
 
 	public FragementYanChu(Context mContext,SlideHolder mSlideHolder) {
 		super();
@@ -210,6 +219,30 @@ public class FragementYanChu extends Fragment implements OnClickListener {
 //				startActivity(intent);
 //				}
 //		});
+		
+		listview = (MyPullToRefreshListView)views.get(1).findViewById(R.id.listview);
+		
+		listview.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				// TODO Auto-generated method stub
+				String label = DateUtils.formatDateTime(mContext.getApplicationContext(), System.currentTimeMillis(),
+						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+
+				// Update the LastUpdatedLabel
+				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+
+				// Do work to refresh the list here.
+//				new GetDataTask().execute();
+			}
+		});
+		
+		
+		adapter4LIST = new Myadapter(Arrays.asList(mStrings),mContext);
+		listview.setAdapter(adapter4LIST);
+		listview.getRefreshableView().setDivider(null);
+//		listview.sett
 //		//listview2
 //		listView2= (ListView) views.get(1).findViewById(R.id.listviewOfTheatreActivies);
 //		progressbar2 = (LinearLayout) views.get(1).findViewById(R.id.progressbarOfTheatreActivies);
@@ -280,31 +313,6 @@ public class FragementYanChu extends Fragment implements OnClickListener {
 //			}
 //		},  10*1000, 2500);
 //	 }
-	  
-	 /**
-	  * tabbar choose then change the textcolor
-	  * @param position
-	  */
-//	@SuppressWarnings("deprecation")
-//	private void updateTextColorBefore(int position) {
-//
-//		switch (position) {
-//
-//		case 0:
-//			txt_show_info.setBackgroundResource(R.drawable.yanchu_backtop);
-//			txt_show_activities.setBackgroundDrawable(null);
-//			break;
-//		case 1:
-//			txt_show_info.setBackgroundDrawable(null);
-//			txt_show_activities.setBackgroundResource(R.drawable.yanchu_backtop);
-//			break;
-//		}
-//		if(listAdapter2==null){
-//			task4TheatreActivities ts=new task4TheatreActivities();
-//			ts.execute();
-//		}
-//		mViewPager.setCurrentItem(position);
-//	}
 
 	@Override
 	public void onClick(View v) {
@@ -325,7 +333,22 @@ public class FragementYanChu extends Fragment implements OnClickListener {
 		default:
 			break;
 		}
-//		updateTextColorBefore(toId);
+	}
+
+
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		// TODO Auto-generated method stub
+		 switch (event.getAction()) {
+		    case MotionEvent.ACTION_MOVE:
+		        mViewPager.requestDisallowInterceptTouchEvent(true);
+		        break;
+		    case MotionEvent.ACTION_UP:
+		    case MotionEvent.ACTION_CANCEL:
+		    	mViewPager.requestDisallowInterceptTouchEvent(false);
+		        break;
+		    }
+		return false;
 	}
 
 //	private class task4YanchuZX extends AsyncTask<String, String, String> {
@@ -392,128 +415,5 @@ public class FragementYanChu extends Fragment implements OnClickListener {
 //			progressbar1.setVisibility(View.GONE);
 //		}
 //	}
-//	
-//	//load more...
-//	private class task4YanchuZX2 extends AsyncTask<String, String, String> {
-//
-//		private List<ShowInfo> sList;
-//		@Override
-//		protected void onPreExecute() {
-//			// TODO Auto-generated method stub
-//			super.onPreExecute();
-//		}
-//
-//		@Override
-//		protected String doInBackground(String... params) {
-//			try {
-//				sList = XmlToListService.GetShowInfo(HttpUtil
-//						.sendGetRequest( Constants.YANCHU_ZIXUN + PageSize
-//								+ "/" + PageIndex));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				Log.e("poe", "sax解析出错！"+e.getMessage());
-//				PageIndex--;
-//			}
-//			return null;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(String result) {
-//			// TODO Auto-generated method stub
-//			super.onPostExecute(result);
-//			// 处理结果
-//			if(sList!=null&&sList.size()>0){
-//				showList.addAll(sList);
-//				listAdapter=new Adapter4ShowinfoList(mContext, showList,new lastIndexLoad() {
-//					
-//					@Override
-//					public void loadData() {
-//						// TODO Auto-generated method stub
-//						PageIndex++;
-//						task4YanchuZX2 ts = new task4YanchuZX2();
-//						ts.execute();
-//					}
-//				});
-//				listview.setAdapter(listAdapter);
-//			}
-//		}
-//	}
-//
-//	
-//	private class task4TheatreActivities extends AsyncTask<String, String, String> {
-//		
-//		private List<Theatre> tlist=new ArrayList<Theatre>();
-//		@Override
-//		protected void onPreExecute() {
-//			super.onPreExecute();
-//			ExproApplication.throwTipLong("正在努力的为您加载数据...");
-//			progressbar2.setVisibility(View.VISIBLE);
-//		}
-//
-//		@Override
-//		protected String doInBackground(String... params) {
-//			// TODO Auto-generated method stub
-//
-//			try {
-//				tlist = XmlToListService.GetTheatre(HttpUtil
-//						.sendGetRequest( Constants.JUYUAN_ACTIVITIES + PageSize2
-//								+ "/" + PageIndex2));
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//				Log.e("poe", "sax解析出错！"+e.getMessage());
-//				if(PageIndex2>1){
-//					PageIndex2--;
-//				}
-//			}
-//
-//			return null;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(String result) {
-//			// TODO Auto-generated method stub
-//			super.onPostExecute(result);
-//			// 处理结果
-//			if(tlist!=null&&tlist.size()>0){
-//				 theatreList.addAll(tlist);
-//				 
-//					listAdapter2=new Adapter4TheatreActivitesList(mContext, theatreList,new lastIndexLoad4Activities() {
-//						
-//						@Override
-//						public void loadData() {
-//							// TODO Auto-generated method stub
-//							
-//							PageIndex2++;
-//							task4TheatreActivities ts =new task4TheatreActivities();
-//							ts.execute();
-//						}
-//					});
-//					listView2.setAdapter(listAdapter2);
-//			}
-//			
-//			progressbar2.setVisibility(View.GONE);
-//		}
-//	}
-//	class DefaultGestureDetector extends
-//			GestureDetector.SimpleOnGestureListener {
-//		int mFlag;
-//		DefaultGestureDetector() {
-//		}
-//		
-//		public boolean onDown(MotionEvent paramMotionEvent) {
-//			this.mFlag = FragementYanChu.this.flag;
-//			return false;
-//		}
-//		public boolean onFling(MotionEvent paramMotionEvent1,
-//				MotionEvent paramMotionEvent2, float paramFloat1,
-//				float paramFloat2) {
-//			postion = (int) FragementYanChu.this.mGallery.getSelectedItemId();
-//			return false;
-//		}
-//	}
+	
 }

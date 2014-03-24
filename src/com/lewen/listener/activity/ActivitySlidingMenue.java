@@ -1,6 +1,9 @@
 package com.lewen.listener.activity;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lewen.listener.R;
 import com.lewen.listener.bean.Task;
 import com.lewen.listener.bean.TaskType;
@@ -17,6 +20,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -30,6 +35,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 	private Context c;
 	//footer nav
 	private ImageView mImageViewNav,mImageViewSign,mImageViewNews;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +44,6 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.layout_sliding_menu);
 		c = this;
-
-		// if (!MainService.isrun) {
-		// Intent it = new Intent(this, MainService.class);
-		// this.startService(it);
-		// }
 
 		init();
 	}
@@ -53,34 +54,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		mSlideHolder = (SlideHolder) findViewById(R.id.slideHolder);
 		mSlideHolder.setAllowInterceptTouch(false);
 		mSlideHolder.setEnabled(false);
-		/*
-		 * // 底部导航 lin_home = (LinearLayout) findViewById(R.id.linearHOme);
-		 * lin_yetai = (LinearLayout) findViewById(R.id.linearYetai); lin_vip =
-		 * (LinearLayout) findViewById(R.id.linearVip); lin_more =
-		 * (LinearLayout) findViewById(R.id.linearMore);
-		 * lin_search=(LinearLayout)findViewById(R.id.linearSearch);
-		 * 
-		 * lin_home.setOnClickListener(this);
-		 * lin_yetai.setOnClickListener(this); lin_vip.setOnClickListener(this);
-		 * lin_more.setOnClickListener(this);
-		 * lin_search.setOnClickListener(this);
-		 */
-
-		// 下面点击button的效果
-//		lin_yc = (LinearLayout) findViewById(R.id.linearYanchuOfSlidingMenue);
-//		lin_dy = (LinearLayout) findViewById(R.id.linearDianYingOfSlidingMenue);
-//		lin_hz = (LinearLayout) findViewById(R.id.linearHuiZhanOfSlidingMenue);
-//		lin_news = (LinearLayout) findViewById(R.id.linearMonthInfoOfSlidingMenue);
-//		lin_msg = (LinearLayout) findViewById(R.id.linearMeiShuOfSlidingMenue);
-//		lin_yt = (LinearLayout) findViewById(R.id.linearYiTanOfSlidingMenue);
-
-//		lin_hz.setOnClickListener(this);
-//		lin_news.setOnClickListener(this);
-//		lin_msg.setOnClickListener(this);
-//		lin_yt.setOnClickListener(this);
-//		lin_yc.setOnClickListener(this);
-//		lin_dy.setOnClickListener(this);
-//		
+		
 		mImageViewNav	=	(ImageView) findViewById(R.id.imgbtnLeftOfFooter);
 		mImageViewNav.setOnClickListener(this);
 		

@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 
 
 public class MyViewPager extends ViewPager{
-
+	private float xDistance, yDistance, xLast, yLast; 
 	public MyViewPager(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		// TODO Auto-generated constructor stub
@@ -19,9 +19,25 @@ public class MyViewPager extends ViewPager{
 	}
 
 	@Override
-	public boolean onInterceptTouchEvent(MotionEvent arg0) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		 switch (ev.getAction()) {  
+         case MotionEvent.ACTION_DOWN:  
+             xDistance = yDistance = 0f;  
+             xLast = ev.getX();  
+             yLast = ev.getY();  
+             break;  
+         case MotionEvent.ACTION_MOVE:  
+             final float curX = ev.getX();  
+             final float curY = ev.getY();             
+             xDistance += Math.abs(curX - xLast);  
+             yDistance += Math.abs(curY - yLast);  
+             xLast = curX;  
+             yLast = curY;  
+             if(xDistance > yDistance){  
+                 return false;  
+             }    
+     }  
+     return super.onInterceptTouchEvent(ev);  
 	}
 
 	@Override
@@ -30,4 +46,13 @@ public class MyViewPager extends ViewPager{
 		// TODO Auto-generated method stub
 		super.postInvalidateDelayed(delayMilliseconds, left, top, right, bottom);
 	}
+	
+	 @Override  
+	    public boolean dispatchTouchEvent(MotionEvent ev) {  
+	          
+	        //让父类不拦截触摸事件就可以了。  
+	        this.getParent().requestDisallowInterceptTouchEvent(true);   
+	        return super.dispatchTouchEvent(ev);  
+	     
+	    }  
 }
