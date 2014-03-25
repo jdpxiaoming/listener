@@ -3,37 +3,19 @@ package com.lewen.listener.fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Timer;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
 import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.adapter.PaperAdapter;
 import com.lewen.listener.util.ImageCacheUtil;
+import com.lewen.listener.util.LoggerUtil;
+import com.lewen.listener.util.ToastUtil;
+import com.lewen.listener.view.MyListView;
 import com.lewen.listener.view.MyPullToRefreshListView;
 import com.lewen.listener.view.MyViewPager;
 import com.lewen.listener.view.SlideHolder;
-//import com.ssac.expro.kewen.adapter.Adapter4ShowinfoList;
-//import com.ssac.expro.kewen.adapter.Adapter4ShowinfoList.lastIndexLoad;
-//import com.ssac.expro.kewen.adapter.Adapter4TheatreActivitesList;
-//import com.ssac.expro.kewen.adapter.Adapter4TheatreActivitesList.lastIndexLoad4Activities;
-//import com.ssac.expro.kewen.adapter.ImageAdapter4GalleryTheatre;
-//import com.ssac.expro.kewen.adapter.PaperAdapter;
-//import com.ssac.expro.kewen.bean.AD;
-//import com.ssac.expro.kewen.bean.Constants;
-//import com.ssac.expro.kewen.bean.ShowInfo;
-//import com.ssac.expro.kewen.bean.Theatre;
-//import com.ssac.expro.kewen.service.MainService;
-//import com.ssac.expro.kewen.service.XmlToListService;
-//import com.ssac.expro.kewen.sinaweibo.SinaAcitivity;
-//import com.ssac.expro.kewen.util.HttpUtil;
-//import com.ssac.expro.kewen.util.ImageCacheUtil;
-//import com.ssac.expro.kewen.view.MyViewPager;
-//import com.ssac.expro.kewen.view.NumberDotImageView;
-//import com.ssac.expro.kewen.view.SlideHolder;
-//import com.ssac.expro.kewen.view.SlowFlipGallery;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -47,8 +29,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
@@ -60,10 +44,11 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 @SuppressLint("ValidFragment")
 public class FragementYanChu extends Fragment implements OnClickListener ,OnTouchListener{
 
+	protected static final String Tag = FragementYanChu.class.toString();
 	private SlideHolder mSlideHolder;//control menue
+	private boolean MSLIDINGTAG=false;
 	private MyViewPager mViewPager;
 	private LayoutInflater lin;
-//	private LinearLayout progressbar;
 	private PagerAdapter adapter;
 	private int toId = 0;
 	private Context mContext;
@@ -72,6 +57,9 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 	private RadioGroup mRadioGroup;
 	private int[] idsTabbar=new int[]{R.id.button_left,R.id.button_middle,R.id.button_right};
 
+	//FRIENDS LIST
+	private MyListView myListView;
+	
 	//CITY LIST
 	private MyPullToRefreshListView listview;
 	private String[] mStrings = {"poe 's test 1",
@@ -184,12 +172,24 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 					toId = arg0;
 					mRadioGroup.check(idsTabbar[toId]);
 				}
-//				updateTextColorBefore(toId);
+				
+				MSLIDINGTAG = false;
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				// TODO Auto-generated method stub
+				System.out.println("["+arg0+"]"+"["+arg1+"]"+"["+arg2+"]");
+				
+				if(arg0+arg1+arg2==0.0){
+					if(MSLIDINGTAG){
+						System.out.println("划不动了，请展示SlidingMenue");
+						mSlideHolder.toggle();
+						MSLIDINGTAG = false;
+					}
+					
+					MSLIDINGTAG = true;
+				}
 			}
 
 			@Override
@@ -198,15 +198,20 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 			}
 		});
 
-//		listview = (ListView) views.get(0).findViewById(R.id.listviewOfShowInfo);
+		myListView = (MyListView) views.get(0).findViewById(R.id.listViewOfFriends);
 //		progressbar1 = (LinearLayout) views.get(0).findViewById(R.id.progressbarOfShowInfo);
+		ArrayAdapter<String> mAdapter =  
+				new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, Arrays.asList(mStrings));
 		
-//		listview.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
+		myListView.setAdapter(mAdapter);	
+		myListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				LoggerUtil.i(Tag, "item clicked!");
+				ToastUtil.showToastShort( "clicked!+ on  " +arg2,mContext);
+				// TODO Auto-generated method stub
 //				ShowInfo sinfo=showList.get(arg2);
 //				Intent intent =new Intent(mContext,TheatreYanchuDetail.class);
 //				intent.putExtra("filmID",sinfo.getDramaID() );
@@ -217,11 +222,11 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 //				intent.putExtra("price", sinfo.getPrice());
 //				
 //				startActivity(intent);
-//				}
-//		});
+				}
+		});
 		
 		listview = (MyPullToRefreshListView)views.get(1).findViewById(R.id.listview);
-		
+		listview.getRefreshableView().setSelector(R.drawable.item_selector);
 		listview.setOnRefreshListener(new OnRefreshListener<ListView>() {
 			
 			@Override

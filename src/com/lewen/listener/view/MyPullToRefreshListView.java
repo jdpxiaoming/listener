@@ -33,27 +33,12 @@ public class MyPullToRefreshListView extends PullToRefreshListView {
 	}
 
 	 private float xDistance, yDistance, xLast, yLast;  
-	 
-	@Override
-	public boolean onInterceptHoverEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		 switch (ev.getAction()) {
-		    case MotionEvent.ACTION_MOVE:
-		        this.getParent().requestDisallowInterceptTouchEvent(true);
-		        break;
-		    case MotionEvent.ACTION_UP:
-		    case MotionEvent.ACTION_CANCEL:
-		    	this.getParent().requestDisallowInterceptTouchEvent(false);
-		        break;
-		    }
-		return super.onInterceptHoverEvent(ev);
-	}
 	
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		
 		// TODO Auto-generated method stub
-		 requestDisallowInterceptTouchEvent(true);   
+//		getParent().requestDisallowInterceptTouchEvent(true);   
 		 
 		return super.dispatchTouchEvent(ev);
 	}

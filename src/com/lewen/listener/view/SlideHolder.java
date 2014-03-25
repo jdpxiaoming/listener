@@ -18,6 +18,7 @@ package com.lewen.listener.view;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -725,6 +726,33 @@ public class SlideHolder extends FrameLayout {
 			postInvalidate();
 		}
 		
+	}
+	
+	private float xDistance, yDistance, xLast, yLast; 
+	
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+		
+		 switch (ev.getAction()) {  
+         case MotionEvent.ACTION_DOWN:  
+             xDistance = yDistance = 0f;  
+             xLast = ev.getX();  
+             yLast = ev.getY();  
+             break;  
+         case MotionEvent.ACTION_MOVE:  
+             final float curX = ev.getX();  
+             final float curY = ev.getY();             
+             xDistance += Math.abs(curX - xLast);  
+             yDistance += Math.abs(curY - yLast);  
+             xLast = curX;  
+             yLast = curY;  
+             if(xDistance < yDistance){  
+                 return false;  
+             } 
+		 }
+             
+		return super.onInterceptTouchEvent(ev);
 	}
 	
 	public static interface OnSlideListener {

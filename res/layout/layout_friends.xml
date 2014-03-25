@@ -4,6 +4,11 @@
     android:layout_height="fill_parent"
     android:background="@drawable/default_home_bg"
     android:orientation="horizontal" >
+    <com.lewen.listener.view.MyListView
+        android:id="@+id/listViewOfFriends"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
 
     <TextView
         android:layout_width="wrap_content"

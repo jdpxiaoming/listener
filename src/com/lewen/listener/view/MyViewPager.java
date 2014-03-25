@@ -1,6 +1,7 @@
 package com.lewen.listener.view;
 
 import android.content.Context;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -33,11 +34,11 @@ public class MyViewPager extends ViewPager{
              yDistance += Math.abs(curY - yLast);  
              xLast = curX;  
              yLast = curY;  
-             if(xDistance > yDistance){  
+             if(xDistance < yDistance){  
                  return false;  
              }    
      }  
-     return super.onInterceptTouchEvent(ev);  
+		 return super.onInterceptTouchEvent(ev);
 	}
 
 	@Override
@@ -47,12 +48,12 @@ public class MyViewPager extends ViewPager{
 		super.postInvalidateDelayed(delayMilliseconds, left, top, right, bottom);
 	}
 	
-	 @Override  
-	    public boolean dispatchTouchEvent(MotionEvent ev) {  
-	          
-	        //让父类不拦截触摸事件就可以了。  
-	        this.getParent().requestDisallowInterceptTouchEvent(true);   
-	        return super.dispatchTouchEvent(ev);  
-	     
-	    }  
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent arg0) {
+		// TODO Auto-generated method stub
+//		int i=MotionEventCompat.ACTION_MASK;
+		return super.onTouchEvent(arg0);
+	}
+	
 }
