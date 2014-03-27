@@ -29,7 +29,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 
 	private SlideHolder mSlideHolder;
 	// private LinearLayout lin_home, lin_yetai, lin_vip, lin_search, lin_more;
-	private LinearLayout lin_yc, lin_dy, lin_hz, lin_news, lin_msg, lin_yt;
+	private LinearLayout lin_area_layer, lin_dy, lin_hz, lin_news, lin_msg, lin_yt;
 	private String from = "yanchu";
 	private Context c;
 	//footer nav
@@ -54,6 +54,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		mSlideHolder.setAllowInterceptTouch(false);
 		mSlideHolder.setEnabled(false);
 		
+		//footer
 		mImageViewNav	=	(ImageView) findViewById(R.id.imgbtnLeftOfFooter);
 		mImageViewNav.setOnClickListener(this);
 		
@@ -63,7 +64,9 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		mImageViewNews	=	(ImageView) findViewById(R.id.imgbtnRightOfFooter);
 		mImageViewNews.setOnClickListener(this);
 		
-		// 默认去加载 演出
+		// nav icon on left
+		lin_area_layer	= (LinearLayout) findViewById(R.id.area_layer);
+		lin_area_layer.setOnClickListener(this);
 		// 通知服务获取ad数据
 		loadFragment(from);
 	}
@@ -163,20 +166,20 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 
 	}
 
+	Intent intent = new Intent();
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
-//		Intent intent = new Intent();
-//		intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+		intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 		switch (v.getId()) {
 		 case R.id.imgbtnLeftOfFooter:
 			 mSlideHolder.toggle();
 		 break;
-		// case R.id.linearYetai:
-		// intent.setClass(this, Activity_Yetai.class);
-		// startActivity(intent);
-		// finish();
-		// break;
+		 case R.id.area_layer:
+		 intent.setClass(this, CityList.class);
+		 startActivity(intent);
+		 finish();
+		 break;
 		// case R.id.linearSearch:
 		// intent.setClass(this, Activity_Yetai.class);
 		// startActivity(intent);
