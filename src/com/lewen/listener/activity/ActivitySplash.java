@@ -14,7 +14,7 @@ public class ActivitySplash extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-			Intent localIntent = new Intent(ActivitySplash.this.getApplicationContext(), ActivitySlidingMenue.class);
+			Intent localIntent = new Intent(ActivitySplash.this.getApplicationContext(), ActivityLogin.class);
 			localIntent.putExtra("tag", "splash");
 			startActivity(localIntent);
 			overridePendingTransition(R.anim.bg_slide_down_in, R.anim.bg_slide_down_out);
@@ -33,6 +33,7 @@ public class ActivitySplash extends Activity {
 		setContentView(R.layout.layout_splash);
 		
 		handler.sendMessageDelayed(handler.obtainMessage(), 700L);
+		
 	}
 
 }

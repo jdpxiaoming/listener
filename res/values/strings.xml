@@ -23,5 +23,19 @@
     <string name="nav">导航</string>
     <string name="default_area">苏州</string>
     
+    <!-- login -->
+     <string name="cancel">取消</string>
+     <string name="loginfirst">请先登录</string>
+     <string name="qqlogin">QQ登录</string>
+     <string name="sinalogin">微博登录</string>
+    <string name="renrenlogin">人人网登录</string>
+    <string name="account">唱吧账号</string>
+    <string name="new_passwd">新密码</string>
+    <string name="confirm_passwd">确认密码</string>
+    <string name="youremail">你的邮箱</string>
+    <string name="password">密　　码</string>
+    <string name="login">登录</string>
+    <string name="register_name_digits">._-@0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
+    <string name="register_name_hint_text">你的邮箱</string>
     
 </resources>
