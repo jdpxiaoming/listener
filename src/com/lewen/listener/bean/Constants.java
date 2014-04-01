@@ -13,5 +13,11 @@ public class Constants {
 	public static final String SCOPE = "email,direct_messages_read,direct_messages_write," +
 					"friendships_groups_read,friendships_groups_write,statuses_to_me_read," +
 						"follow_app_official_microblog";
-			
+	
+	
+	public static final String RENREN_APP_ID = "266425";
+	public static final String RENREN_API_KEY = "2c7696ed99b34d8091d79a97737a3028";
+	public static final String RENREN_SECRET_KEY = "48784ab4ed0e4068aae4f0ce9d34ceea";
+	
+	
 }

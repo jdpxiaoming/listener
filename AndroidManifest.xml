@@ -23,11 +23,14 @@
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- renren -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+<uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
     
     <application
         android:name=".TBApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo1"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
@@ -74,6 +77,10 @@
                 <data android:scheme="tencent222222" /><!-- 100380359 100381104 222222 -->
             </intent-filter>
         </activity>
+        
+        <!-- renren -->
+        <activity android:name="com.renn.rennsdk.oauth.OAuthActivity"
+					android:configChanges="orientation|navigation|keyboardHidden"/>
     </application>
 
 </manifest>
