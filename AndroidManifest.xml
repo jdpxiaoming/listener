@@ -81,6 +81,15 @@
         <!-- renren -->
         <activity android:name="com.renn.rennsdk.oauth.OAuthActivity"
 					android:configChanges="orientation|navigation|keyboardHidden"/>
+        <!-- 广点通 ：banner -->
+        <service android:name="com.qq.e.comm.DownloadService" android:exported="false"></service>
+		<activity android:name="com.qq.e.ads.AdActivity" android:theme="@android:style/Theme.Translucent">
+		</activity>
+		<!-- 接入应用墙时，需要添加activity以及service声明： 
+		<activity android:name="com.qq.e.ads.GdtBrowserActivity"></activity>
+		<activity android:name="com.qq.e.appwall.AppwallActivity" android:configChanges="keyboard|keyboardHidden|orientation" />
+		<service android:name="com.qq.e.comm.DownloadService" android:exported="false"></service>
+    -->
     </application>
 
 </manifest>
