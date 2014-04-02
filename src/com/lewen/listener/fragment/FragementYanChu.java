@@ -3,12 +3,14 @@ package com.lewen.listener.fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
 import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.adapter.PaperAdapter;
+import com.lewen.listener.bean.Constants;
 import com.lewen.listener.util.ImageCacheUtil;
 import com.lewen.listener.util.LoggerUtil;
 import com.lewen.listener.util.ToastUtil;
@@ -16,7 +18,12 @@ import com.lewen.listener.view.MyListView;
 import com.lewen.listener.view.MyPullToRefreshListView;
 import com.lewen.listener.view.MyViewPager;
 import com.lewen.listener.view.SlideHolder;
+import com.qq.e.ads.AdRequest;
+import com.qq.e.ads.AdSize;
+import com.qq.e.ads.AdView;
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -28,9 +35,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
@@ -199,11 +208,13 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		});
 
 		myListView = (MyListView) views.get(0).findViewById(R.id.listViewOfFriends);
+		addADHead(myListView);
 //		progressbar1 = (LinearLayout) views.get(0).findViewById(R.id.progressbarOfShowInfo);
 		ArrayAdapter<String> mAdapter =  
 				new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, Arrays.asList(mStrings));
-		
 		myListView.setAdapter(mAdapter);	
+		
+		
 		myListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -247,77 +258,17 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		adapter4LIST = new Myadapter(Arrays.asList(mStrings),mContext);
 		listview.setAdapter(adapter4LIST);
 		listview.getRefreshableView().setDivider(null);
-//		listview.sett
-//		//listview2
-//		listView2= (ListView) views.get(1).findViewById(R.id.listviewOfTheatreActivies);
-//		progressbar2 = (LinearLayout) views.get(1).findViewById(R.id.progressbarOfTheatreActivies);
-//		listView2.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-//					long arg3) {
-//				// TODO Auto-generated method stub
-//				Theatre  sinfo=theatreList.get(arg2);
-//				Intent intent =new Intent(mContext,TheatreActivitiesDetail.class);
-//				intent.putExtra("contentID",sinfo.getContentID() );
-//				intent.putExtra("img", sinfo.getTitleImage());
-//				intent.putExtra("title", sinfo.getContentTitle());
-//				intent.putExtra("time", sinfo.getBeginTime());
-//				
-//				startActivity(intent);
-//				}
-//		});
-//		task4YanchuZX ts1 = new task4YanchuZX();
-//		ts1.execute();
 	}
-//	 //给 gallery 放数据。
-//	  public void fillGallery() {
-//		  
-//	    this.mImageAdapter = new ImageAdapter4GalleryTheatre(mContext,adList);
-//	    this.mGallery.setAdapter(this.mImageAdapter);
-//	    final int i = adList.size();
-//	    
-//	    timer = new Timer();
-//	    mGallery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
-//	    {
-//	      public void onItemSelected(AdapterView<?> paramAdapterView, View paramView, int paramInt, long paramLong)
-//	      {
-//	    	  FragementYanChu.this.mDotImageView.refresh(i, paramInt);
-//	      }
-//
-//		@Override
-//		public void onNothingSelected(AdapterView<?> arg0) {
-//			// TODO Auto-generated method stub
-//		}
-//	    });
-//	    this.mGallery.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//	    {
-//	      public void onItemClick(AdapterView<?> paramAdapterView, View paramView, int paramInt, long paramLong)
-//	      {
-//	        if (paramInt == -1 + MainService.adList.size()){
-////	        	jumpActivity();
-//	        	ExproApplication.throwTips("go over!");
-//	        }
-//	      }
-//	    });
-//	    
-//	    this.mGallery.setOnTouchListener(new View.OnTouchListener()
-//	    {
-//	      public boolean onTouch(View paramView, MotionEvent paramMotionEvent)
-//	      {
-//	        return FragementYanChu.this.gestureDetector.onTouchEvent(paramMotionEvent);
-//	      }
-//	    });
-//	    
-//	    timer.schedule(new TimerTask() {
-//			@Override
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				postion++;
-//				handler.sendEmptyMessage(0);
-//			}
-//		},  10*1000, 2500);
-//	 }
+
+	private void addADHead(MyListView myListView2) {
+		final AdView adview = new AdView((Activity) mContext, AdSize.BANNER,  Constants.GDT_APPID, Constants.GDT_BANNERPOSID);
+	    AbsListView.LayoutParams layout =
+	        new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+	    adview.setLayoutParams(layout);
+	    myListView2.addHeaderView(adview);
+	    adview.fetchAd(new AdRequest());
+	}
+
 
 	@Override
 	public void onClick(View v) {
