@@ -162,7 +162,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 			break;
 		}
 
-		 mSlideHolder.toggle();
+//		 mSlideHolder.toggle();
 
 	}
 
@@ -178,7 +178,6 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		 case R.id.area_layer:
 		 intent.setClass(this, CityList.class);
 		 startActivity(intent);
-		 finish();
 		 break;
 		// case R.id.linearSearch:
 		// intent.setClass(this, Activity_Yetai.class);
