@@ -2,7 +2,6 @@ package com.lewen.listener.activity;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.lewen.listener.R;
 import com.lewen.listener.bean.Task;
 import com.lewen.listener.bean.TaskType;

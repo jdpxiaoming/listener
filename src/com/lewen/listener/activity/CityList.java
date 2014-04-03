@@ -103,9 +103,16 @@ public class CityList extends Activity {
 		handler = new Handler();
 		overlayThread = new OverlayThread();
 //		initOverlay();
-		setAdapter(mCityNames);
 		mCityLit.setOnItemClickListener(new CityListOnItemClick());
 
+		//add the head and footer
+		View headView = LayoutInflater.from(this).inflate(R.layout.city_list_header, null);
+		mCityLit.addHeaderView(headView);
+		
+		View footView = LayoutInflater.from(this).inflate(R.layout.city_list_footer, null);
+		mCityLit.addFooterView(footView);
+		
+		setAdapter(mCityNames);
 	}
 
 	private ArrayList<CityModel> getSelectCityNames(String con) {

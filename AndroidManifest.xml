@@ -25,7 +25,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- renren -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <!-- 这个权限用于获取wifi的获取权限,wifi信息会用来进行网络定位-->
+<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
 <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
     
     <application
         android:name=".TBApplication"
@@ -34,6 +37,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
+</service>
+
         <activity android:name=".activity.ActivitySplash"
             		android:theme="@android:style/Theme.Black.NoTitleBar"
             		>

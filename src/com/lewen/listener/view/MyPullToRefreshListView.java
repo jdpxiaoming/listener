@@ -3,7 +3,6 @@ package com.lewen.listener.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class MyPullToRefreshListView extends PullToRefreshListView {

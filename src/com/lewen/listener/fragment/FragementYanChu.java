@@ -3,7 +3,6 @@ package com.lewen.listener.fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
