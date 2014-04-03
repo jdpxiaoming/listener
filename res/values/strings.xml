@@ -38,4 +38,10 @@
     <string name="register_name_digits">._-@0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
     <string name="register_name_hint_text">你的邮箱</string>
     
+    
+    <string name="locating">正在定位…</string>
+    <string name="search_district_footer">每个区域都是完全分离的，独立计算榜单，不会相互包含(如广州和广东是两个完全不同的榜单)，更多城市陆续开放中，敬请期待</string>
+    <string name="selectcity">选择你要进入的区域</string>
+    <string name="search_district">地区名、拼音首字母</string>
+    
 </resources>

@@ -26,4 +26,34 @@
     <color name="poe_dot_home_color">#dbdbdb</color>
     <color name="poe_dot_home_color_selector">#fc6e02</color>
     
+    
+    <!--  -->
+    <color name="transparent">#00000000</color>
+    <color name="listview_hint_color">#fffbf8f3</color>
+    <color name="text_num_gray">#ff333333</color>
+    <color name="dialog_title_blue">#ff9cccf7</color>
+    <color name="title_level_1">#ff50453d</color>
+    <color name="title_level_1_1">#ffa36b57</color>
+    <color name="title_level_2">#ff867e77</color>
+    <color name="title_level_3">#ffb9b9b9</color>
+    <color name="dark_slate_gray">#ff2f4f4f</color>
+    <color name="gray_2">#ffafafaf</color>
+    <color name="gray_1">#ffc0c0c0</color>
+    <color name="gray_3">#ffb5aea8</color>
+    <color name="white">#ffffffff</color>
+    <color name="red">#ffff0000</color>
+    <color name="black">#ff000000</color>
+    <color name="commons_btn_font_text_color">#ff0077dc</color>
+    <color name="blue">#ffccddff</color>
+    <color name="grey">#ff58616d</color>
+    <color name="darkgrey">#ff404040</color>
+    <color name="toasterro">#ff9fd524</color>
+    <color name="lightgrey">#ff888888</color>
+    <color name="semitransparent">#80000000</color>
+    <color name="lightransparent">#a0000000</color>
+    <color name="navpage">#ffe1e8eb</color>
+    <color name="commons_listview_item_color">#ffc3d5e1</color>
+    <color name="about_text_color">#ff848383</color>
+    <color name="message_unread_title_color">#ff304e62</color>
+    <color name="message_unread_subject_color">#ff6e8391</color>
 </resources>

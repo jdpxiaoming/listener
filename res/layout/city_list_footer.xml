@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/city_footer"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/listview_item_selector"
+    android:gravity="center_horizontal"
+    android:padding="25.0dip"
+    android:text="@string/search_district_footer"
+    android:textColor="@color/gray_2"
+    android:textSize="16.0dip" />

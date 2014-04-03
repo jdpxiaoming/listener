@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gps_position"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/listview_item_selector"
+    android:padding="5.0dip" >
+
+    <TextView
+        android:id="@+id/gps_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="19.0dip"
+        android:layout_marginLeft="5.0dip"
+        android:layout_marginTop="17.0dip"
+        android:textColor="@color/title_level_1"
+        android:textSize="18.0dip" />
+
+    <TextView
+        android:id="@+id/gps_tip"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="19.0dip"
+        android:layout_marginLeft="5.0dip"
+        android:layout_marginTop="17.0dip"
+        android:layout_toRightOf="@id/gps_location"
+        android:text="@string/locating"
+        android:textColor="@color/gray_1"
+        android:textSize="13.0dip" />
+
+</RelativeLayout>

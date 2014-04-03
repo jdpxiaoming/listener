@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="0.0dip"
+    android:background="@drawable/all_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/navigatebar"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@drawable/title_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8.0dip"
+        android:paddingRight="8.0dip"
+        android:paddingTop="6.0dip" >
+
+        <Button
+            android:id="@+id/gobackbt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_bar_button"
+            android:paddingLeft="6.0dip"
+            android:paddingRight="6.0dip"
+            android:text="@string/cancel"
+            android:textColor="#ffffffff"
+            android:textSize="14.0dip" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/titleshadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8.0dip"
+            android:gravity="center"
+            android:text="@string/selectcity"
+            android:textColor="#ffffffff" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/search_text"
+        style="@style/dark_grey_14px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navigatebar"
+        android:layout_gravity="left|center"
+        android:background="@drawable/friend_search_bg"
+        android:hint="@string/search_district"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:paddingLeft="35.0dip"
+        android:paddingRight="8.0dip"
+        android:singleLine="true" />
+
+    <com.changba.widget.IndexableListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/search_text"
+        android:divider="@null"
+        android:fadingEdge="none"
+        android:fadingEdgeLength="0.0dip"
+        android:scrollbars="none" />
+
+    <ListView
+        android:id="@+id/searchList"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/search_text"
+        android:footerDividersEnabled="false"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/floatLayer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/search_text"
+        android:orientation="vertical"
+        android:background="#b0000000"
+        android:gravity="center_horizontal"
+        android:visibility="invisible" 
+        />
+
+    <ProgressBar
+        android:id="@+id/load_more"
+        android:layout_width="46.0dip"
+        android:layout_height="46.0dip"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/costum_progress_bar"
+        android:padding="3.0dip" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navigatebar"
+        android:contentDescription="@null"
+        android:src="@drawable/title_bar_shadow" />
+
+</RelativeLayout>

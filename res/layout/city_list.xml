@@ -2,19 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@drawable/all_bg"
+    >
+<RelativeLayout
+        android:id="@+id/navigatebar"
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip"
+        android:background="@drawable/title_bar"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="8.0dip"
+        android:paddingRight="8.0dip"
+        android:paddingTop="6.0dip" >
 
-    <EditText
+        <Button
+            android:id="@+id/gobackbt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_bar_button"
+            android:paddingLeft="4.0dip"
+            android:paddingRight="4.0dip"
+            android:text="@string/cancel"
+            android:textColor="#ffffffff"
+            android:textSize="14.0dip" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/titleshadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8.0dip"
+            android:gravity="center"
+            android:text="@string/selectcity"
+            android:textColor="#ffffffff" />
+    </RelativeLayout>
+     <EditText
         android:id="@+id/et"
-        android:layout_width="match_parent"
+        style="@style/dark_grey_14px"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="请输入省市中文名称或拼音首字母" />
-
-    <Button
+        android:layout_below="@+id/navigatebar"
+        android:layout_gravity="left|center"
+        android:background="@drawable/friend_search_bg"
+        android:hint="@string/search_district"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:paddingLeft="35.0dip"
+        android:paddingRight="8.0dip"
+        android:singleLine="true" />
+ <!--    <Button
         android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="搜索" />
+        android:text="搜索" /> -->
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -32,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:background="#E8E8E8"
                 android:cacheColorHint="#00000000"
+                android:footerDividersEnabled="false"
                 android:scrollbars="none" />
 
             <com.lewen.listener.view.MyLetterListView

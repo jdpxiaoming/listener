@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import com.lewen.listener.R;
 import com.lewen.listener.bean.CityModel;
 import com.lewen.listener.db.DBManager;
 import com.lewen.listener.view.MyLetterListView;
 import com.lewen.listener.view.MyLetterListView.OnTouchingLetterChangedListener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -19,16 +17,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,7 +39,7 @@ import android.widget.Toast;
  * 
  */
 public class CityList extends Activity {
-	private BaseAdapter adapter;
+	private ListAdapter adapter;
 	private ListView mCityLit;
 	private TextView overlay;
 	private MyLetterListView letterListView;
@@ -51,7 +49,6 @@ public class CityList extends Activity {
 	private OverlayThread overlayThread;
 	private SQLiteDatabase database;
 	private ArrayList<CityModel> mCityNames;
-	private Button btn;
 	private EditText et;
 
 	@Override
@@ -59,17 +56,36 @@ public class CityList extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.city_list);
 
-		btn = (Button) findViewById(R.id.btn);
 		et = (EditText) findViewById(R.id.et);
 		overlay = (TextView) findViewById(R.id.overlay);
-		btn.setOnClickListener(new OnClickListener() {
+//		btn.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				String content = et.getText().toString().trim();
+//				mCityNames.clear();
+//				mCityNames = getSelectCityNames(content);
+//				setAdapter(mCityNames);
+//
+//			}
+//		});
+		et.addTextChangedListener(new TextWatcher() {
+			
 			@Override
-			public void onClick(View v) {
-				String content = et.getText().toString().trim();
-				mCityNames.clear();
-				mCityNames = getSelectCityNames(content);
-				setAdapter(mCityNames);
-
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// TODO Auto-generated method stub
+				adapter.Filter(s);
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
 			}
 		});
 
@@ -182,11 +198,12 @@ public class CityList extends Activity {
 	private class ListAdapter extends BaseAdapter {
 		private LayoutInflater inflater;
 		private List<CityModel> list;
+		private List<CityModel> searchList ;//满足搜索条件的集合
 
 		public ListAdapter(Context context, List<CityModel> list) {
 
 			this.inflater = LayoutInflater.from(context);
-			this.list = list;
+			this.list = this.searchList = list;
 			alphaIndexer = new HashMap<String, Integer>();
 			sections = new String[list.size()];
 
@@ -206,14 +223,41 @@ public class CityList extends Activity {
 
 		}
 
+		//String content = et.getText().toString().trim();
+//		mCityNames.clear();
+//		mCityNames = getSelectCityNames(content);
+//		setAdapter(mCityNames);
+		
+		//过滤文字匹配的条件
+		public void Filter(CharSequence cs){
+			
+			if(null!=cs){
+				
+				searchList=new ArrayList<CityModel>();
+				
+				//筛选
+				for(int i=0;i<list.size();i++){
+					
+					if(list.get(i).getCityName().contains(cs)){
+						
+						searchList.add(list.get(i));
+						
+					}
+				}
+				
+			}
+			
+			//刷新adapter
+			this.notifyDataSetChanged();
+		}
 		@Override
 		public int getCount() {
-			return list.size();
+			return searchList.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			return list.get(position);
+			return searchList.get(position);
 		}
 
 		@Override
@@ -234,9 +278,9 @@ public class CityList extends Activity {
 				holder = (ViewHolder) convertView.getTag();
 			}
 
-			holder.name.setText(list.get(position).getCityName());
-			String currentStr = list.get(position).getNameSort();
-			String previewStr = (position - 1) >= 0 ? list.get(position - 1)
+			holder.name.setText(searchList.get(position).getCityName());
+			String currentStr = searchList.get(position).getNameSort();
+			String previewStr = (position - 1) >= 0 ? searchList.get(position - 1)
 					.getNameSort() : " ";
 			if (!previewStr.equals(currentStr)) {
 				holder.alpha.setVisibility(View.VISIBLE);
