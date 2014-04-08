@@ -1,12 +1,10 @@
 package com.lewen.listener.activity;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import com.lewen.listener.R;
 import com.lewen.listener.bean.Task;
 import com.lewen.listener.bean.TaskType;
 import com.lewen.listener.fragment.FragementYanChu;
-//import com.lewen.listener.fragment.FragementYanChu;
 import com.lewen.listener.view.SlideHolder;
 import android.content.Context;
 import android.content.Intent;

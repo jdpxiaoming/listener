@@ -40,7 +40,7 @@ public class ActivitySplash extends Activity {
 		setContentView(R.layout.layout_splash);
 		
 		handler.sendMessageDelayed(handler.obtainMessage(), 700L);
-		showAd();
+//		showAd();
 	}
 
 	private void showAd() {
