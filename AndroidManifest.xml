@@ -6,75 +6,93 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    
-	<uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> 
-    <!-- mta系统的权限< -->
-    <!--
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    -->
-    <!-- SDK2.1新增获取用户位置信息  -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- SDK2.1新增获取用户位置信息 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- renren -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <!-- 这个权限用于获取wifi的获取权限,wifi信息会用来进行网络定位-->
-<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
-<uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
-<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
-    
+    <!-- 这个权限用于获取wifi的获取权限,wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" >
+    </uses-permission>
+    <!-- 允许应用读取低级别的系统日志文件 -->
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+ <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_LOGS" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <application
         android:name=".TBApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo1"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        
-        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
-</service>
+        <meta-data android:name="com.baidu.lbsapi.API_KEY" 
+            android:value="luseCmGqYyWj5Gb7fWhBFicx"/> 
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+        </service>
 
-        <activity android:name=".activity.ActivitySplash"
-            		android:theme="@android:style/Theme.Black.NoTitleBar"
-            		>
-            	<intent-filter >
-            	    
-            	    <action android:name="android.intent.action.MAIN"/>
-            	    
-            	    <category android:name="android.intent.category.LAUNCHER"/>
-            	</intent-filter>
+        <activity
+            android:name=".activity.ActivitySplash"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        
         <activity
             android:name=".activity.ActivitySlidingMenue"
-            android:screenOrientation="portrait" 
-            >
+            android:screenOrientation="portrait" >
         </activity>
-        
         <activity
             android:name=".activity.CityList"
-            android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.Black.NoTitleBar"
-            >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        
         <activity
             android:name=".activity.ActivityLogin"
-            android:screenOrientation="portrait" 
-            android:theme="@android:style/Theme.Black.NoTitleBar"
-            >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        
         <activity android:name="com.tencent.connect.avatar.ImageActivity" />
-        <activity android:name="com.tencent.connect.common.AssistActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
@@ -85,22 +103,30 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="tencent222222" /><!-- 100380359 100381104 222222 -->
+                <data android:scheme="tencent222222" />
+ <!-- 100380359 100381104 222222 -->
             </intent-filter>
         </activity>
-        
+
         <!-- renren -->
-        <activity android:name="com.renn.rennsdk.oauth.OAuthActivity"
-					android:configChanges="orientation|navigation|keyboardHidden"/>
+        <activity
+            android:name="com.renn.rennsdk.oauth.OAuthActivity"
+            android:configChanges="orientation|navigation|keyboardHidden" />
         <!-- 广点通 ：banner -->
-        <service android:name="com.qq.e.comm.DownloadService" android:exported="false"></service>
-		<activity android:name="com.qq.e.ads.AdActivity" android:theme="@android:style/Theme.Translucent">
-		</activity>
-		<!-- 接入应用墙时，需要添加activity以及service声明： 
+        <service
+            android:name="com.qq.e.comm.DownloadService"
+            android:exported="false" >
+        </service>
+
+        <activity
+            android:name="com.qq.e.ads.AdActivity"
+            android:theme="@android:style/Theme.Translucent" >
+        </activity>
+        <!--
+        接入应用墙时，需要添加activity以及service声明： 
 		<activity android:name="com.qq.e.ads.GdtBrowserActivity"></activity>
 		<activity android:name="com.qq.e.appwall.AppwallActivity" android:configChanges="keyboard|keyboardHidden|orientation" />
-		<service android:name="com.qq.e.comm.DownloadService" android:exported="false"></service>
-    -->
+		<service android:name="com.qq.e.comm.DownloadService" android:exported="false"></service>        -->
     </application>
 
 </manifest>

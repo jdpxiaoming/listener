@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.lewen.listener.R;
+import com.lewen.listener.TBApplication;
 import com.lewen.listener.bean.CityModel;
 import com.lewen.listener.db.DBManager;
 import com.lewen.listener.view.MyLetterListView;
@@ -19,18 +20,24 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.baidu.location.LocationClientOption;
+//如果使用地理围栏功能，需要import如下类
+import com.baidu.location.LocationClientOption.LocationMode;
 
 /**
  * 城市列表
@@ -50,7 +57,8 @@ public class CityList extends Activity {
 	private SQLiteDatabase database;
 	private ArrayList<CityModel> mCityNames;
 	private EditText et;
-
+	private Button btnBack;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,16 +66,6 @@ public class CityList extends Activity {
 
 		et = (EditText) findViewById(R.id.et);
 		overlay = (TextView) findViewById(R.id.overlay);
-//		btn.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				String content = et.getText().toString().trim();
-//				mCityNames.clear();
-//				mCityNames = getSelectCityNames(content);
-//				setAdapter(mCityNames);
-//
-//			}
-//		});
 		et.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -91,6 +89,17 @@ public class CityList extends Activity {
 
 		mCityLit = (ListView) findViewById(R.id.city_list);
 		letterListView = (MyLetterListView) findViewById(R.id.cityLetterListView);
+		btnBack	=	(Button) findViewById(R.id.gobackbt);
+		btnBack.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				TBApplication.App.mLocationClient.stop();
+				finish();
+			}
+		});
+		
 		DBManager dbManager = new DBManager(this);
 		dbManager.openDateBase();
 		dbManager.closeDatabase();
@@ -113,8 +122,30 @@ public class CityList extends Activity {
 		mCityLit.addFooterView(footView);
 		
 		setAdapter(mCityNames);
+		
+		setLocationOption();
+		TextView textLocation = (TextView) headView.findViewById(R.id.gps_tip);
+		 
+		TBApplication.App.mLocationResult =textLocation;
 	}
-
+	//设置Option
+		private void setLocationOption() {
+			try {
+				LocationClientOption option = new LocationClientOption();
+				option.setLocationMode(LocationMode.Hight_Accuracy);
+				option.setCoorType("gcj02");
+				option.setScanSpan(1000);
+				option.setNeedDeviceDirect(false);
+				option.setIsNeedAddress(true);
+				TBApplication.App.mLocationClient.setLocOption(option);
+//				mLocationInit = true;
+				TBApplication.App.mLocationClient.start();
+				TBApplication.App.mLocationClient.requestLocation();
+			} catch (Exception e) {
+				e.printStackTrace();
+//				mLocationInit = false;
+			}
+		}
 	private ArrayList<CityModel> getSelectCityNames(String con) {
 		ArrayList<CityModel> names = new ArrayList<CityModel>();
 		//判断查询的内容是不是汉字
@@ -177,8 +208,8 @@ public class CityList extends Activity {
 				long arg3) {
 			CityModel cityModel = (CityModel) mCityLit.getAdapter()
 					.getItem(pos);
-			Toast.makeText(CityList.this, cityModel.getCityName(),
-					Toast.LENGTH_SHORT).show();
+			if(null!=cityModel)
+			Toast.makeText(CityList.this, cityModel.getCityName(),Toast.LENGTH_SHORT).show();
 		}
 
 	}
@@ -238,7 +269,8 @@ public class CityList extends Activity {
 		//过滤文字匹配的条件
 		public void Filter(CharSequence cs){
 			
-			if(null!=cs){
+			String s =cs.toString().trim();
+			if(null!=s&&s.length()>0){
 				
 				searchList=new ArrayList<CityModel>();
 				
@@ -339,6 +371,15 @@ public class CityList extends Activity {
 
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			TBApplication.App.mLocationClient.stop();
+			this.finish();
+		}
+		
+		return true;
+	}
 	// 设置overlay不可见
 	private class OverlayThread implements Runnable {
 
@@ -348,5 +389,4 @@ public class CityList extends Activity {
 		}
 
 	}
-
 }
