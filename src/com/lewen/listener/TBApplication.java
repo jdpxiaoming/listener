@@ -3,8 +3,10 @@ package com.lewen.listener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.lewen.listener.bean.Person;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -31,6 +33,7 @@ public class TBApplication extends Application {
 	public LocationClient mLocationClient;
 	private MyLocationListener mMyLocationListener;
 	public TextView mLocationResult;
+	public static Person	 person;
 	
 	@Override
 	public void onCreate() {

@@ -88,6 +88,11 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
+        <activity
+            android:name=".activity.ActivityPersonalInfo"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
         <activity android:name="com.tencent.connect.avatar.ImageActivity" />
         <activity
             android:name="com.tencent.connect.common.AssistActivity"

@@ -27,10 +27,11 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 	private SlideHolder mSlideHolder;
 	// private LinearLayout lin_home, lin_yetai, lin_vip, lin_search, lin_more;
 	private LinearLayout lin_area_layer, lin_dy, lin_hz, lin_news, lin_msg, lin_yt;
+	private ImageView mImageViewMyself;
 	private String from = "yanchu";
 	private Context c;
 	//footer nav
-	private ImageView mImageViewNav,mImageViewSign,mImageViewNews;
+	private ImageView mImageViewNav,mImageViewSing,mImageViewNews;
 	
 
 	@Override
@@ -55,8 +56,8 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		mImageViewNav	=	(ImageView) findViewById(R.id.imgbtnLeftOfFooter);
 		mImageViewNav.setOnClickListener(this);
 		
-		mImageViewSign	=	(ImageView) findViewById(R.id.imgbtnCenterOfFooter);
-		mImageViewSign.setOnClickListener(this);
+		mImageViewSing	=	(ImageView) findViewById(R.id.imgbtnCenterOfFooter);
+		mImageViewSing.setOnClickListener(this);
 		
 		mImageViewNews	=	(ImageView) findViewById(R.id.imgbtnRightOfFooter);
 		mImageViewNews.setOnClickListener(this);
@@ -64,6 +65,10 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		// nav icon on left
 		lin_area_layer	= (LinearLayout) findViewById(R.id.area_layer);
 		lin_area_layer.setOnClickListener(this);
+		
+		//我
+		mImageViewMyself	=	(ImageView) findViewById(R.id.nav_bt_myself);
+		mImageViewMyself.setOnClickListener(this);
 		// 通知服务获取ad数据
 		loadFragment(from);
 	}
@@ -176,11 +181,10 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		 intent.setClass(this, CityList.class);
 		 startActivity(intent);
 		 break;
-		// case R.id.linearSearch:
-		// intent.setClass(this, Activity_Yetai.class);
-		// startActivity(intent);
-		// finish();
-		// break;
+		 case R.id.nav_bt_myself:
+		 intent.setClass(this, ActivityPersonalInfo.class);
+		 startActivity(intent);
+		 break;
 		// case R.id.linearVip:
 		// intent.setClass(this, Activity_VIP.class);
 		// startActivity(intent);
