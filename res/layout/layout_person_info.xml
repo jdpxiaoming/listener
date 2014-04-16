@@ -18,4 +18,29 @@
 	    		android:padding="10dp"
 	    		android:text="qq用户名"
 	    		/>
+	
+	<TextView 
+	    		android:id="@+id/textInvite"
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="fill_parent"
+	    		android:text="邀请"
+	    		android:layout_marginTop="10dp"
+	    		style="@style/text_long_button"
+	    		/>
+	<TextView 
+	    		android:id="@+id/textPK"
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="fill_parent"
+	    		android:layout_marginTop="10dp"
+	    		android:text="挑战"
+	    		style="@style/text_long_button"
+	    		/>
+	<TextView 
+	    		android:id="@+id/textShow"
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="fill_parent"
+	    		android:layout_marginTop="10dp"
+	    		android:text="炫耀"
+	    		style="@style/text_long_button"
+	    		/>
 </LinearLayout>

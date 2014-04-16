@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">听霸</string>
-    <!-- NAVIGATION TEXT  -->
+    <!-- NAVIGATION TEXT -->
     <string name="str_nav_title">听霸</string>
     <string name="str_nav_frient">找好友</string>
     <string name="str_nav_me">我</string>
@@ -15,19 +15,17 @@
     <string name="str_nav_friends">朋友们</string>
     <string name="str_nav_local_city">苏州</string>
     <string name="str_nav_china">全国</string>
-    
     <string name="hottest_left">朋友们</string>
     <string name="hottest_middle">贵州</string>
     <string name="hottest_right">全国</string>
-    
     <string name="nav">导航</string>
     <string name="default_area">苏州</string>
-    
+
     <!-- login -->
-     <string name="cancel">取消</string>
-     <string name="loginfirst">请先登录</string>
-     <string name="qqlogin">QQ登录</string>
-     <string name="sinalogin">微博登录</string>
+    <string name="cancel">取消</string>
+    <string name="loginfirst">请先登录</string>
+    <string name="qqlogin">QQ登录</string>
+    <string name="sinalogin">微博登录</string>
     <string name="renrenlogin">人人网登录</string>
     <string name="account">唱吧账号</string>
     <string name="new_passwd">新密码</string>
@@ -37,11 +35,32 @@
     <string name="login">登录</string>
     <string name="register_name_digits">._-@0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLIMNOPQRSTUVWXYZ</string>
     <string name="register_name_hint_text">你的邮箱</string>
-    
-    
     <string name="locating">正在定位…</string>
     <string name="search_district_footer">每个区域都是完全分离的，独立计算榜单，不会相互包含(如广州和广东是两个完全不同的榜单)，更多城市陆续开放中，敬请期待</string>
     <string name="selectcity">选择你要进入的区域</string>
     <string name="search_district">地区名、拼音首字母</string>
-    
+
+    <!-- QQ -->
+    <string name="invite_dialog_tittle">请输入Invite参数</string>
+    <string name="source">source:</string>
+    <string name="source_hint">Input Source</string>
+    <string name="picurl">picurl:</string>
+    <string name="picurl_hint">Input Picture Url</string>
+    <string name="desc">desc:</string>
+    <string name="desc_hint">Input description</string>
+    <string name="commit">Commit</string>
+    <string name="openid_hint">Input openid</string>
+    <string name="openid">receiver:</string>
+    <string name="act">act:</string>
+    <string name="pk_brag_dialog_tittle">请输入挑战炫耀参数</string>
+    <string name="title">title:</string>
+    <string name="title_hint">Input story title</string>
+    <string name="options">act:</string>
+    <string name="options1">挑战</string>
+    <string name="options2">炫耀</string>
+    <string name="img">img:</string>
+    <string name="img_hint">请输入图片URL</string>
+    <string name="msg">msg:</string>
+    <string name="msg_hint">请输入msg</string>
+
 </resources>
