@@ -16,8 +16,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -27,6 +26,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 	private SlideHolder mSlideHolder;
 	// private LinearLayout lin_home, lin_yetai, lin_vip, lin_search, lin_more;
 	private LinearLayout lin_area_layer, lin_dy, lin_hz, lin_news, lin_msg, lin_yt;
+	private ImageButton imgButtonSetting;
 	private ImageView mImageViewMyself;
 	private String from = "yanchu";
 	private Context c;
@@ -65,6 +65,10 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		// nav icon on left
 		lin_area_layer	= (LinearLayout) findViewById(R.id.area_layer);
 		lin_area_layer.setOnClickListener(this);
+		
+		//system set
+		imgButtonSetting	=	(ImageButton) findViewById(R.id.nav_bt_setting);
+		imgButtonSetting.setOnClickListener(this);
 		
 		//我
 		mImageViewMyself	=	(ImageView) findViewById(R.id.nav_bt_myself);
@@ -181,6 +185,10 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		 intent.setClass(this, CityList.class);
 		 startActivity(intent);
 		 break;
+		 case R.id.nav_bt_setting:
+			 intent.setClass(this, ActivitySet.class);
+			 startActivity(intent);
+			 break;
 		 case R.id.nav_bt_myself:
 		 intent.setClass(this, ActivityPersonalInfo.class);
 		 startActivity(intent);

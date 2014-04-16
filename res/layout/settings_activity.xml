@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/all_bg"
+    android:fadingEdge="none"
+    android:fadingEdgeLength="0.0dip"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="200.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="12.0dip"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/uptable" >
+
+                <Button
+                    android:id="@+id/btn_goto_appstore"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_top"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="唱吧帮助中心" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@drawable/list_arrow_normal" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/midtable" >
+
+                <Button
+                    android:id="@+id/btn_feedback"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_middle"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="意见反馈" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@drawable/list_arrow_normal" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/midtable" >
+
+                <Button
+                    android:id="@+id/btn_agreement"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_middle"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="免责声明和版权声明" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@drawable/list_arrow_normal" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/bottomtable" >
+
+                <Button
+                    android:id="@+id/btn_aboutme"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_bottom"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="关于唱吧" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@drawable/list_arrow_normal" />
+
+                <TextView
+                    android:id="@+id/new_tv"
+                    style="@style/message_circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="12.0dip"
+                    android:text="@string/new_tv" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="200.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="8.0dip"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/uptable" >
+
+                <Button
+                    android:id="@+id/btn_clear"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_top"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="清空缓存" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@drawable/list_arrow_normal" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/midtable" >
+
+                <Button
+                    android:id="@+id/btn_game_model"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_middle"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="智能降噪" />
+
+                <ImageView
+                    android:id="@+id/img_game_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:src="@drawable/check_box_normal" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/midtable" >
+
+                <Button
+                    android:id="@+id/btn_checkrecord"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_middle"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="智能对齐伴奏" />
+
+                <ImageView
+                    android:id="@+id/img_checkrecord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:src="@drawable/check_box_normal" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/bottomtable" >
+
+                <Button
+                    android:id="@+id/btn_fast_upload_mode"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_settings_bottom"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="快速上传模式" />
+
+                <ImageView
+                    android:id="@+id/img_fast_upload_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:src="@drawable/check_box_normal" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/record_tips"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginTop="3.0dip" >
+
+            <TextView
+                android:id="@+id/rtips"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingBottom="3.0dip"
+                android:text="@string/check_record"
+                android:textColor="#ff999999" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="8.0dip"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/complete_table" >
+
+                <Button
+                    android:id="@+id/buffer_mode"
+                    style="@style/dark_grey_14px"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/button_search_friend_by_nickname"
+                    android:gravity="left|center"
+                    android:paddingLeft="15.0dip"
+                    android:text="缓冲听歌模式" />
+
+                <ImageView
+                    android:id="@+id/img_buffermode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginRight="15.0dip"
+                    android:src="@drawable/check_box_normal" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/record_tips"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20.0dip"
+            android:layout_marginRight="20.0dip"
+            android:layout_marginTop="5.0dip" >
+
+            <TextView
+                android:id="@+id/rtips"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:paddingBottom="3.0dip"
+                android:text="仅你无法正常听歌时，再开启此选项"
+                android:textColor="#ff999999" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/hottest16px"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="10.0dip"
+            android:layout_marginTop="8.0dip"
+            android:background="@drawable/button_sign_in"
+            android:text="登录" />
+    </LinearLayout>
+
+</ScrollView>

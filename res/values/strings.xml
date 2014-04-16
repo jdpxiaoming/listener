@@ -62,5 +62,8 @@
     <string name="img_hint">请输入图片URL</string>
     <string name="msg">msg:</string>
     <string name="msg_hint">请输入msg</string>
-
+    
+    <!-- set -->
+	<string name="new_tv">新</string>
+	<string name="check_record">合成录音后，如果发现伴奏和你的声音不同步或有延迟，建议你请开启这个选项</string>
 </resources>
