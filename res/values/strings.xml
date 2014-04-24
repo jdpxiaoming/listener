@@ -20,6 +20,12 @@
     <string name="hottest_right">全国</string>
     <string name="nav">导航</string>
     <string name="default_area">苏州</string>
+    
+    <!-- 听世界 -->
+    <string name="str_listen_word">猜单词</string>
+    <string name="str_listen_picture">猜图片</string>
+    <string name="str_listen_world">听世界</string>
+    
 
     <!-- login -->
     <string name="cancel">取消</string>

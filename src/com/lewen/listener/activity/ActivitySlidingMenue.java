@@ -181,6 +181,9 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		 case R.id.imgbtnLeftOfFooter:
 			 mSlideHolder.toggle();
 		 break;
+		 case R.id.imgbtnCenterOfFooter:
+			 
+			 break;
 		 case R.id.area_layer:
 		 intent.setClass(this, CityList.class);
 		 startActivity(intent);
@@ -197,37 +200,6 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		// intent.setClass(this, Activity_VIP.class);
 		// startActivity(intent);
 		// finish();
-		// break;
-		// case R.id.linearMore:
-		// intent.setClass(this, Activity_More.class);
-		// startActivity(intent);
-		// finish();
-		// break;
-		// // 子选项的跳转
-		// case R.id.linearYanchuOfSlidingMenue:
-		// from="yanchu";
-		// loadFragment(from);
-		// break;
-		// case R.id.linearDianYingOfSlidingMenue:
-		// from="dianying";
-		// loadFragment(from);
-		// break;
-		// case R.id.linearHuiZhanOfSlidingMenue:
-		// from= "huizhan";
-		// loadFragment(from);
-		// break;
-		// case R.id.linearMonthInfoOfSlidingMenue:
-		// from="news";
-		// loadFragment(from);
-		// break;
-		// case R.id.linearMeiShuOfSlidingMenue:
-		// from="meishu";
-		// loadFragment(from);
-		// break;
-		// case R.id.linearYiTanOfSlidingMenue:
-		// from="yitan";
-		// loadFragment(from);
-		// break;
 		default:
 			break;
 		}
