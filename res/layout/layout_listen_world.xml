@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/blue"
+    >
+	
+	<TextView 
+	    		android:id="@+id/textWord"
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="fill_parent"
+	    		android:text="@string/str_listen_word"
+	    		android:layout_marginTop="30dp"
+	    		style="@style/text_long_button"
+	    		/>
+	<TextView 
+	    		android:id="@+id/textPicture"
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="fill_parent"
+	    		android:layout_marginTop="30dp"
+	    		android:text="@string/str_listen_picture"
+	    		style="@style/text_long_button"
+	    		/>
+	<TextView 
+	    		android:id="@+id/textWorld"
+	    		android:layout_height="wrap_content"
+	    		android:layout_width="fill_parent"
+	    		android:layout_marginTop="30dp"
+	    		android:text="@string/str_listen_world"
+	    		style="@style/text_long_button"
+	    		/>
+</LinearLayout>
