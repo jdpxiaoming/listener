@@ -10,12 +10,13 @@
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:gravity="center"         
-        android:text=" \n \n微信，是一个生活方式" 
+        android:text=" \n \n听霸，是一个生活方式" 
         android:layout_alignParentTop="true"
         android:layout_marginTop="35dp"
         android:textSize="22sp"
         android:textColor="#fff" 
         />
+    
     <Button
               android:id="@+id/startBtn"
               android:layout_width="120dp"
