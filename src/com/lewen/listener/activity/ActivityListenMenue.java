@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.lewen.listener.R;
 import com.lewen.listener.activity.parent.BaseActivity;
 
-public class ActivityListenWorld extends BaseActivity {
+public class ActivityListenMenue extends BaseActivity {
 	
 	private TextView mTextViewWord,mTextViewPicture,mTextViewWorld;
 	
@@ -15,7 +15,7 @@ public class ActivityListenWorld extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.layout_listen_world);
+		setContentView(R.layout.layout_listen_menue);
 		
 		init();
 	}
