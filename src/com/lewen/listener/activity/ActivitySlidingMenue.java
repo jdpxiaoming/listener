@@ -25,14 +25,14 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 
 	private SlideHolder mSlideHolder;
 	// private LinearLayout lin_home, lin_yetai, lin_vip, lin_search, lin_more;
-	private LinearLayout lin_area_layer, lin_dy, lin_hz, lin_news, lin_msg, lin_yt;
+	private LinearLayout lin_area_layer, lin_dy, lin_hz, lin_news, lin_msg,
+			lin_yt;
 	private ImageButton imgButtonSetting;
 	private ImageView mImageViewMyself;
 	private String from = "yanchu";
 	private Context c;
-	//footer nav
-	private ImageView mImageViewNav,mImageViewSing,mImageViewNews;
-	
+	// footer nav
+	private ImageView mImageViewNav, mImageViewSing, mImageViewNews;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +51,27 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		mSlideHolder = (SlideHolder) findViewById(R.id.slideHolder);
 		mSlideHolder.setAllowInterceptTouch(false);
 		mSlideHolder.setEnabled(false);
-		
-		//footer
-		mImageViewNav	=	(ImageView) findViewById(R.id.imgbtnLeftOfFooter);
+
+		// footer
+		mImageViewNav = (ImageView) findViewById(R.id.imgbtnLeftOfFooter);
 		mImageViewNav.setOnClickListener(this);
-		
-		mImageViewSing	=	(ImageView) findViewById(R.id.imgbtnCenterOfFooter);
+
+		mImageViewSing = (ImageView) findViewById(R.id.imgbtnCenterOfFooter);
 		mImageViewSing.setOnClickListener(this);
-		
-		mImageViewNews	=	(ImageView) findViewById(R.id.imgbtnRightOfFooter);
+
+		mImageViewNews = (ImageView) findViewById(R.id.imgbtnRightOfFooter);
 		mImageViewNews.setOnClickListener(this);
-		
+
 		// nav icon on left
-		lin_area_layer	= (LinearLayout) findViewById(R.id.area_layer);
+		lin_area_layer = (LinearLayout) findViewById(R.id.area_layer);
 		lin_area_layer.setOnClickListener(this);
-		
-		//system set
-		imgButtonSetting	=	(ImageButton) findViewById(R.id.nav_bt_setting);
+
+		// system set
+		imgButtonSetting = (ImageButton) findViewById(R.id.nav_bt_setting);
 		imgButtonSetting.setOnClickListener(this);
-		
-		//我
-		mImageViewMyself	=	(ImageView) findViewById(R.id.nav_bt_myself);
+
+		// 我
+		mImageViewMyself = (ImageView) findViewById(R.id.nav_bt_myself);
 		mImageViewMyself.setOnClickListener(this);
 		// 通知服务获取ad数据
 		loadFragment(from);
@@ -168,38 +168,36 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 			break;
 		}
 
-//		 mSlideHolder.toggle();
+		// mSlideHolder.toggle();
 
 	}
 
 	Intent intent = new Intent();
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
 		switch (v.getId()) {
-		 case R.id.imgbtnLeftOfFooter:
-			 mSlideHolder.toggle();
-		 break;
-		 case R.id.imgbtnCenterOfFooter:
-			 
-			 break;
-		 case R.id.area_layer:
-		 intent.setClass(this, CityList.class);
-		 startActivity(intent);
-		 break;
-		 case R.id.nav_bt_setting:
-			 intent.setClass(this, ActivitySet.class);
-			 startActivity(intent);
-			 break;
-		 case R.id.nav_bt_myself:
-		 intent.setClass(this, ActivityPersonalInfo.class);
-		 startActivity(intent);
-		 break;
-		// case R.id.linearVip:
-		// intent.setClass(this, Activity_VIP.class);
-		// startActivity(intent);
-		// finish();
+		case R.id.imgbtnLeftOfFooter:
+			mSlideHolder.toggle();
+			break;
+		case R.id.imgbtnCenterOfFooter:
+			intent.setClass(this, ActivityListenMenue.class);
+			startActivity(intent);
+			break;
+		case R.id.area_layer:
+			intent.setClass(this, CityList.class);
+			startActivity(intent);
+			break;
+		case R.id.nav_bt_setting:
+			intent.setClass(this, ActivitySet.class);
+			startActivity(intent);
+			break;
+		case R.id.nav_bt_myself:
+			intent.setClass(this, ActivityPersonalInfo.class);
+			startActivity(intent);
+			break;
 		default:
 			break;
 		}

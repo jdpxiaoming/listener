@@ -72,4 +72,6 @@
     <!-- set -->
 	<string name="new_tv">新</string>
 	<string name="check_record">合成录音后，如果发现伴奏和你的声音不同步或有延迟，建议你请开启这个选项</string>
+	
+	<string name="question1"><a href=""><u>Maybe you should</u>on my face</a></string>
 </resources>

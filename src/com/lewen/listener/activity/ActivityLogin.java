@@ -30,7 +30,7 @@ import com.weibo.sdk.android.WeiboException;
 
 public class ActivityLogin extends BaseActivity implements OnClickListener{
 
-	private Button btnLogin;
+	private Button btnLogin,btnQQ;
 	public static QQAuth mQQAuth;
 	private Tencent mTencent;
 	public static String mAppid="101050174";
@@ -57,6 +57,9 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 
 	private void initView() {
 		// TODO Auto-generated method stub
+		btnLogin	=	(Button) findViewById(R.id.loginbt);
+		btnLogin.setOnClickListener(this);
+		
 		btnLogin	=	(Button) findViewById(R.id.loginqqbt);
 		btnLogin.setOnClickListener(this);
 		
@@ -99,6 +102,14 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 			
 		case R.id.loginrenrenbt:
 			doRenrenLogin();
+			break;
+			
+		case R.id.loginbt:
+			Intent localIntent = new Intent(ActivityLogin.this.getApplicationContext(), ActivitySlidingMenue.class);
+			localIntent.putExtra("tag", "splash");
+			startActivity(localIntent);
+			overridePendingTransition(R.anim.bg_slide_down_in, R.anim.bg_slide_down_out);
+		    finish();
 			break;
 		default:
 			break;

@@ -1,5 +1,6 @@
 package com.lewen.listener.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,19 +38,23 @@ public class ActivityListenMenue extends BaseActivity {
 		@Override
 		public void onClick(View v) {
 
+			Intent intent =new Intent();
 			switch (v.getId()) {
 			case R.id.textWord://猜单词
-				
+				intent.setClass(ActivityListenMenue.this, ActivityListenWord.class);
 				break;
 			case R.id.textWorld://听世界
-				
+				intent.setClass(ActivityListenMenue.this, ActivityListenWorld.class);
 				break;
 			case R.id.textPicture://猜图片
-				
+				intent.setClass(ActivityListenMenue.this, ActivityListenPicture.class);
 				break;
 			default:
 				break;
 			}
+			
+			startActivity(intent);
+			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		}
 	};
 }

@@ -37,53 +37,29 @@
             android:layout_centerInParent="true"
             android:layout_marginBottom="8.0dip"
             android:gravity="center"
-            android:text="@string/str_listen_word"
+            android:text="@string/str_listen_picture"
             android:textColor="#ffffffff" />
     </RelativeLayout>
 
-    <ImageView 
-        		android:layout_width="fill_parent"
-        		android:layout_height="140dp"
-        		android:src="@drawable/xiongmao1"
-        		android:scaleType="fitXY"
-        		/>
-    <TextView 
-	    		android:id="@+id/textQuestion"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		style="@style/text_long_button_guess_word_question"
-	    		/>
-    
-    <TextView 
-	    		android:id="@+id/textA"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:text="is"
-	    		android:layout_marginTop="30dp"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
-	<TextView 
-	    		android:id="@+id/textB"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:layout_marginTop="30dp"
-	    		android:text="book"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
-	<TextView 
-	    		android:id="@+id/textC"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:layout_marginTop="30dp"
-	    		android:text="chew"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
-	<TextView 
-	    		android:id="@+id/textD"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:layout_marginTop="30dp"
-	    		android:text="are"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/city_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <ListView
+                android:id="@+id/city_list"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#E8E8E8"
+                android:cacheColorHint="#00000000"
+                android:footerDividersEnabled="false"
+                android:scrollbars="none" />
+            
+        </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>

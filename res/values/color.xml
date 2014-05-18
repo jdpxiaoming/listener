@@ -44,4 +44,10 @@
     <color name="about_text_color">#ff848383</color>
     <color name="message_unread_title_color">#ff304e62</color>
     <color name="message_unread_subject_color">#ff6e8391</color>
+    
+    <!-- 猜单词背景色 -->
+    <color name="guess_bg">#288bc1</color>
+    <color name="guess_item_normal">#a4d3f8</color>
+    <color name="guess_item_selected">#009933</color>
+    
 </resources>
