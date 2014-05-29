@@ -51,6 +51,17 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    
+    
+    <!-- xunfei -->
+    <uses-permission
+		android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission
+		android:name="android.permission.READ_PHONE_STATE" />
+	<uses-permission 
+		android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission 
+		android:name="android.permission.READ_CONTACTS"/>
     <application
         android:name=".TBApplication"
         android:allowBackup="true"
@@ -102,6 +113,14 @@
             </intent-filter>
             
         </activity>
+        
+        <activity
+			android:name=".activity.TtsDemoActivity"
+			android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|fontScale"
+			android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+           
+        </activity>
+        
         <activity
             android:name=".activity.ActivityPersonalInfo"
             android:screenOrientation="portrait"

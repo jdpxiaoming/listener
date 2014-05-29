@@ -74,4 +74,29 @@
 	<string name="check_record">合成录音后，如果发现伴奏和你的声音不同步或有延迟，建议你请开启这个选项</string>
 	
 	<string name="question1"><a href=""><u>Maybe you should</u>on my face</a></string>
+	
+	<string
+		name="poster">讯飞语音 沟通无限</string>
+	<string
+		name="text_tts_demo">语音合成</string>
+	<string
+		name="text_tts_source">科大讯飞作为中国最大的智能语音技术提供商，在智能语音技术领域有着长期的研究积累，并在中文语音合成、语音识别、口语评测等多项技术上拥有国际领先的成果。科大讯飞是我国唯一以语音技术为产业化方向的“国家863计划成果产业化基地”、“国家规划布局内重点软件企业”、“国家火炬计划重点高新技术企业”、“国家高技术产业化示范工程”，并被信息产业部确定为中文语音交互技术标准工作组组长单位，牵头制定中文语音技术标准。
+	</string>
+	<string 
+	    name="text_tts_cancel">停止</string>
+	<string 
+	    name="text_tts_clear">清空</string>
+	<string 
+	    name="text_tts_suspend">暂停</string>
+	<string 
+	    name="text_tts_resume">继续</string>
+	<string
+		name="text_tts">合成</string>
+	<string
+		name="tts_toast_format"
+		formatted="false">当前缓冲进度为%d%%，播放进度为%d%%</string>
+	
+	<string
+		name="app_id">537b6cb9</string>
+	
 </resources>

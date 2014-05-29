@@ -86,4 +86,6 @@
 	    		android:text="are"
 	    		style="@style/text_long_button_guess_word"
 	    		/>
+	
+	<include layout="@layout/footer"/>
 </LinearLayout>
