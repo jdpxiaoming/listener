@@ -41,51 +41,86 @@
             android:textColor="#ffffffff" />
     </RelativeLayout>
 
-    <ImageView 
-        		android:layout_width="fill_parent"
-        		android:layout_height="140dp"
-        		android:src="@drawable/xiongmao1"
-        		android:scaleType="fitXY"
-        		/>
-    <TextView 
-	    		android:id="@+id/textQuestion"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		style="@style/text_long_button_guess_word_question"
-	    		/>
-    
-    <TextView 
-	    		android:id="@+id/textA"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:text="is"
-	    		android:layout_marginTop="30dp"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
-	<TextView 
-	    		android:id="@+id/textB"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:layout_marginTop="30dp"
-	    		android:text="book"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
-	<TextView 
-	    		android:id="@+id/textC"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:layout_marginTop="30dp"
-	    		android:text="chew"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
-	<TextView 
-	    		android:id="@+id/textD"
-	    		android:layout_height="wrap_content"
-	    		android:layout_width="fill_parent"
-	    		android:layout_marginTop="30dp"
-	    		android:text="are"
-	    		style="@style/text_long_button_guess_word"
-	    		/>
-	
-	<include layout="@layout/footer"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="140dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/xiongmao1" />
+
+        <TextView
+            android:id="@+id/textQuestion"
+            style="@style/text_long_button_guess_word_question"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Maybe you should _ on my face" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textA"
+                style="@style/text_long_button_guess_word"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="what" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textB"
+                style="@style/text_long_button_guess_word"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="is" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textC"
+                style="@style/text_long_button_guess_word"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="chew" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/textD"
+                style="@style/text_long_button_guess_word"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="are" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        layout="@layout/footer_guess" />
+
 </LinearLayout>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent" >
+    <TabHost
+        android:id="@+id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#ffffffff"
+            android:orientation="vertical" >
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="0.0dip"
+                android:layout_weight="1.0" />
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.0"
+                android:visibility="gone" />
+
+            <RadioGroup
+                android:id="@+id/main_radio"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:gravity="center_vertical" 
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/radio_button0"
+                    style="@style/main_tab_bottom" 
+                    android:layout_marginTop="2.0dip"
+                    android:drawableTop="@drawable/icon_tis"
+                    android:tag="radio_button0"
+                    android:text="提示" />
+
+                <RadioButton
+                    android:id="@+id/radio_button1"
+                    style="@style/main_tab_bottom"
+                    android:drawableTop="@drawable/icon_chongt"
+                    android:tag="radio_button1"
+                    android:text="重听" />
+
+                <RadioButton
+                    android:id="@+id/radio_button2"
+                    style="@style/main_tab_bottom"
+                    android:layout_marginTop="2.0dip"
+                    android:drawableTop="@drawable/ico_yizhangwo"
+                    android:tag="radio_button2"
+                    android:text="已掌握" />
+            </RadioGroup>
+        </LinearLayout>
+    </TabHost>
+
+    <LinearLayout
+        android:id="@+id/alltips"
+        android:layout_width="fill_parent"
+        android:layout_height="78dp"
+        android:layout_alignParentBottom="true"
+        android:background="#00000000"
+        android:orientation="horizontal" >
+
+        <LinearLayout 
+            	android:layout_width="match_parent"
+            	android:layout_height="match_parent"
+            	android:layout_weight="1"
+            	android:gravity="center"
+            	>
+            	<TextView
+			            android:id="@+id/newtip1"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            style="@style/main_tab_tips"
+			            android:layout_marginLeft="30dp"
+			            android:visibility="gone"
+			            />
+        </LinearLayout>
+        <LinearLayout 
+            	android:layout_width="match_parent"
+            	android:layout_height="match_parent"
+            	android:layout_weight="1"
+            	android:gravity="center"
+            	>
+            	<TextView
+			            android:id="@+id/newtip2"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            style="@style/main_tab_tips"
+			            android:layout_marginLeft="30dp"
+			            android:visibility="gone"
+			            />
+        </LinearLayout>
+        <LinearLayout 
+            	android:layout_width="match_parent"
+            	android:layout_height="match_parent"
+            	android:layout_weight="1"
+            	android:gravity="center"
+            	>
+            	<TextView
+			            android:id="@+id/newtip3"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            style="@style/main_tab_tips"
+			            android:layout_marginLeft="30dp"
+			            android:visibility="gone"
+			            />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
