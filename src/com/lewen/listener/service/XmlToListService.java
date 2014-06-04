@@ -7,6 +7,7 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 
 import com.lewen.listener.bean.Question;
+import com.lewen.listener.bean.Question.LISTENERTYPE;
 
 import android.util.Xml;
 
@@ -73,25 +74,42 @@ public class XmlToListService {
 				String name = parser.getName();
 				if("main".equals(name)){
 					newInfo = new Question();
+					newInfo.setType(LISTENERTYPE.word);
 				}
 				if(newInfo!=null){
 					
 					if("id".equals(name))
 						newInfo.setId(parser.nextText());
+					
 					if("title".equals(name)){
 						newInfo.setAnswer(parser.nextText());
 					}
-//					if("parent".equals(name)){
-//						newInfo.setParent_id(parser.nextText());
-//					}
-//					if("type".equals(name)){
-//						newInfo.setType(parser.nextText());
-//					}
+					
+					if("answer".equals(name)){
+						if(parser.getAttributeValue(0).equals("答案")){
+							newInfo.setAnswer(parser.nextText());
+						}else{
+							//问题的难度
+						}
+					}
+					
+					if("a".equals(name)){
+						newInfo.setSelectedA(parser.nextText());
+					}
+					if("b".equals(name)){
+						newInfo.setSelectedB(parser.nextText());
+					}
+					if("c".equals(name)){
+						newInfo.setSelectedC(parser.nextText());
+					}
+					if("d".equals(name)){
+						newInfo.setSelectedD(parser.nextText());
+					}
 					
 				}
 				break;
 			case XmlPullParser.END_TAG:
-				if("node".equals(parser.getName())){
+				if("main".equals(parser.getName())){
 					news.add(newInfo);
 					newInfo = null;
 				}

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/all_bg"
-    android:orientation="vertical" >
+    >
 
     <RelativeLayout
         android:id="@+id/navigatebar"
@@ -40,18 +40,26 @@
             android:text="@string/str_listen_word"
             android:textColor="#ffffffff" />
     </RelativeLayout>
-
+	<include
+	        android:id="@+id/footer"
+	        android:layout_width="match_parent"
+	        android:layout_height="85dp"
+	        layout="@layout/footer_guess" 
+	        android:layout_alignParentBottom="true"
+	        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:layout_above="@id/footer"
+        android:layout_below="@id/navigatebar"
+         >
 
         <ImageView
             android:layout_width="fill_parent"
             android:layout_height="140dp"
             android:scaleType="fitXY"
-            android:src="@drawable/xiongmao1" />
+            android:src="@drawable/chew" />
 
         <TextView
             android:id="@+id/textQuestion"
@@ -60,6 +68,48 @@
             android:layout_height="wrap_content"
             android:text="Maybe you should _ on my face" />
 
+        
+        <RelativeLayout
+		        android:id="@+id/relativeResult"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:visibility="gone"
+		        >
+        		<TextView 
+        		    		android:id="@+id/textTipsAnswer"
+        		    		android:layout_width="match_parent"
+        		    		android:layout_height="50dp"
+        		    		android:layout_alignParentBottom="true"
+        		    		android:text="chew"
+        		    		android:textSize="20sp"
+        		    		android:textColor="@color/black"
+        		    		android:background="#DDDDDD"
+        		    		android:gravity="center"
+        		    		/>
+        		<TextView 
+        		    		android:id="@+id/textTipsRightAnserDes"
+        		    		android:layout_width="match_parent"
+        		    		android:layout_height="match_parent"
+        		    		android:layout_above="@id/textTipsAnswer"
+        		    		android:padding="10dp"
+        		    		android:textSize="26sp"
+        		    		android:gravity="center"
+        		    		android:textColor="@color/black"
+        		    		android:text="vt.咀嚼；嚼碎；深思 \n =use the teeth to crush  or grind"
+        		    		/>
+        		
+        		<ImageView 
+        		    		android:id="@+id/imgTipsRightOrWrong"
+        		    		android:layout_width="wrap_content"
+        		    		android:layout_height="wrap_content"
+        		    		android:src="@drawable/icon_right"
+        		    		android:layout_alignParentRight="true"
+        		    		android:layout_alignParentBottom="true"
+        		    		android:padding="20dp"
+        		    		android:scaleType="centerInside"
+        		    		/>
+     </RelativeLayout>
+     
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -71,7 +121,7 @@
                 style="@style/text_long_button_guess_word"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="what" />
+                android:text="is" />
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +135,7 @@
                 style="@style/text_long_button_guess_word"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="is" />
+                android:text="book" />
         </LinearLayout>
 
         <LinearLayout
@@ -113,14 +163,8 @@
                 style="@style/text_long_button_guess_word"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:text="are" />
         </LinearLayout>
     </LinearLayout>
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
-        layout="@layout/footer_guess" />
-
-</LinearLayout>
+    
+</RelativeLayout>

@@ -3,12 +3,11 @@ package com.lewen.listener.bean;
 public class Question {
 
 	public static enum LISTENERTYPE{word,picture,video};
-	
 	private LISTENERTYPE type;//提醒类型
 	private String id;	//题目编号 
 	private String question;
 	private String answer;//答案、 选项
-	
+	private String answerDes;//问题难易程度 1难，2易
 	private String selectedA;//A选项
 	private String selectedB;
 	private String selectedC;
@@ -22,6 +21,13 @@ public class Question {
 	}
 	public LISTENERTYPE getType() {
 		return type;
+	}
+	
+	public String getAnswerDes() {
+		return answerDes;
+	}
+	public void setAnswerDes(String answerDes) {
+		this.answerDes = answerDes;
 	}
 	public void setType(LISTENERTYPE type) {
 		this.type = type;
