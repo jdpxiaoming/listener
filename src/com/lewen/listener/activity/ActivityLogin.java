@@ -188,6 +188,7 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 									mPerson.setUserName(json.getString("nickname"));
 									mPerson.setGender(json.getString("gender"));
 									TBApplication.person = mPerson;
+									
 								} catch (JSONException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -230,14 +231,14 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 
 		@Override
 		public void onComplete(Object response) {
-			System.out.println(response.toString());
-			ToastUtil.showToastShort("登录成功",ActivityLogin.this);
-			Intent localIntent = new Intent(ActivityLogin.this.getApplicationContext(), ActivitySlidingMenue.class);
-			localIntent.putExtra("tag", "splash");
-			startActivity(localIntent);
-			overridePendingTransition(R.anim.bg_slide_down_in, R.anim.bg_slide_down_out);
-		    finish();
-		    overridePendingTransition(R.anim.do_nothing_animate, R.anim.splashfadeout);
+//			System.out.println(response.toString());
+//			ToastUtil.showToastShort("登录成功",ActivityLogin.this);
+//			Intent localIntent = new Intent(ActivityLogin.this.getApplicationContext(), ActivitySlidingMenue.class);
+//			localIntent.putExtra("tag", "splash");
+//			startActivity(localIntent);
+//			overridePendingTransition(R.anim.bg_slide_down_in, R.anim.bg_slide_down_out);
+//		    finish();
+//		    overridePendingTransition(R.anim.do_nothing_animate, R.anim.splashfadeout);
 			doComplete((JSONObject)response);
 		}
 

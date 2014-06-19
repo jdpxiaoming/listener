@@ -67,8 +67,8 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		lin_area_layer.setOnClickListener(this);
 
 		// system set
-		imgButtonSetting = (ImageButton) findViewById(R.id.nav_bt_setting);
-		imgButtonSetting.setOnClickListener(this);
+//		imgButtonSetting = (ImageButton) findViewById(R.id.nav_bt_setting);
+//		imgButtonSetting.setOnClickListener(this);
 
 		// 我
 		mImageViewMyself = (ImageView) findViewById(R.id.nav_bt_myself);
@@ -190,10 +190,10 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 			intent.setClass(this, CityList.class);
 			startActivity(intent);
 			break;
-		case R.id.nav_bt_setting:
-			intent.setClass(this, ActivitySet.class);
-			startActivity(intent);
-			break;
+//		case R.id.nav_bt_setting:
+//			intent.setClass(this, ActivitySet.class);
+//			startActivity(intent);
+//			break;
 		case R.id.nav_bt_myself:
 			intent.setClass(this, ActivityPersonalInfo.class);
 			startActivity(intent);
