@@ -95,7 +95,7 @@
         		    		android:textSize="26sp"
         		    		android:gravity="center"
         		    		android:textColor="@color/black"
-        		    		android:text="vt.咀嚼；嚼碎；深思 \n =use the teeth to crush  or grind"
+        		    		android:text="vt.use the teeth to crush  or grind \n =咀嚼；嚼碎；深思 "
         		    		/>
         		
         		<ImageView 

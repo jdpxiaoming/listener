@@ -42,11 +42,14 @@ public class MediaPlayerUtil {
 	}
 
 
-	public void clear() {
+	public synchronized void clear() {
 		// TODO Auto-generated method stub
-		mediaplayer.stop();
-		mediaplayer.release();
-		mediaplayer = null;
+		if(mediaplayer!=null){
+			
+			mediaplayer.stop();
+			mediaplayer.release();
+			mediaplayer = null;
+		}
 	}
 	
 	

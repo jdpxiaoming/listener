@@ -1,19 +1,31 @@
 package com.lewen.listener.activity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
 import com.lewen.listener.activity.parent.BaseActivity;
+import com.lewen.listener.bean.AuthReply;
 import com.lewen.listener.bean.Constants;
 import com.lewen.listener.bean.Person;
+import com.lewen.listener.http.HttpUtil;
+import com.lewen.listener.service.XmlToListService;
 import com.lewen.listener.util.ToastUtil;
 import com.renn.rennsdk.RennClient;
 import com.renn.rennsdk.RennClient.LoginListener;
@@ -146,12 +158,52 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		mWeibo.anthorize(ActivityLogin.this, new AuthDialogListener());
 	}
+	
+	private Handler mhandler ;
 
 	private void doQQLogin() {
 		IUiListener listener = new BaseUiListener() {
 			@Override
 			protected void doComplete(JSONObject values) {
 				System.out.println(values.toString());
+				
+				//解析 openid 和 expirek_time
+				try {
+					final AuthReply ar  = XmlToListService.GetAuth(values.toString());
+					if(null!=ar){
+						new Thread(new Runnable() {
+							
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+							/*	HashMap<String, Object> params =new HashMap<String, Object>();
+								params.put("openid", ar.getOpenID());
+								params.put("source", "qq");
+								params.put("expired_in", ar.getExpire_time());
+								
+								HttpUtil.sendPostRequest(params, "
+								http://ting.joysw.cn/index.php/api/index/test");
+							*/
+								
+								NameValuePair pair1 = new BasicNameValuePair("openid", ar.getOpenID());
+						         NameValuePair pair2 = new BasicNameValuePair("source", "qq");
+						         NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
+
+						         List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+						         pairList.add(pair1);
+						         pairList.add(pair2);
+						         pairList.add(pair3);
+						         
+						         HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
+						         HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/index/test");
+							}
+						}).start();
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				updateUserInfo();
 			}
 		};
@@ -210,6 +262,8 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 //	                    Constants.HTTP_GET, requestListener, null);
 			mInfo = new UserInfo(this, mQQAuth.getQQToken());
 			mInfo.getUserInfo(listener);
+			
+			
 		}
 	}	
 	//respone :{"ret":0,"pay_token":"9DEBA12D7A2CB4D91B1C479199F57C9A","pf":"desktop_m_qq-10000144-android-10000144-xxxx","openid":"5D81D416455D15BC36B0AA6C3252BC1A","expires_in":7776000,"pfkey":"b7acd38a96c89a26c2c118e454342e93","msg":"sucess","access_token":"FD037441B82A929790D680C9B84D016B"}

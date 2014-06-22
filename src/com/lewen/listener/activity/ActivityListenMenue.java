@@ -4,13 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.lewen.listener.R;
 import com.lewen.listener.activity.parent.BaseActivity;
 
 public class ActivityListenMenue extends BaseActivity {
 	
-	private TextView mTextViewWord,mTextViewPicture,mTextViewWorld;
+//	private TextView mTextViewWord,mTextViewPicture,mTextViewWorld;
+	
+	private ImageButton imgBtn ;
+	private ImageView	imgWorld,imgPicture;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +29,14 @@ public class ActivityListenMenue extends BaseActivity {
 
 	private void init() {
 		
-		mTextViewWord	=	(TextView) findViewById(R.id.textWord);
-		mTextViewPicture=	(TextView) findViewById(R.id.textPicture);
-		mTextViewWorld	=	(TextView) findViewById(R.id.textWorld);
+		imgBtn		=	(ImageButton) findViewById(R.id.imgbtnBack);
+		imgWorld	=	(ImageView) findViewById(R.id.imgGuessWorldOfListenMenue);
+		imgPicture	=	(ImageView) findViewById(R.id.imgGuessPictureOfListenMenue);
 		
-		mTextViewWord.setOnClickListener(clickListener);
-		mTextViewPicture.setOnClickListener(clickListener);
-		mTextViewWorld.setOnClickListener(clickListener);
+		
+		imgBtn.setOnClickListener(clickListener);
+		imgWorld.setOnClickListener(clickListener);
+		imgPicture.setOnClickListener(clickListener);
 		
 	}
 
@@ -40,21 +47,22 @@ public class ActivityListenMenue extends BaseActivity {
 
 			Intent intent =new Intent();
 			switch (v.getId()) {
-			case R.id.textWord://猜单词
+			case R.id.imgbtnBack://猜单词
+				finish();
+				break;
+			case R.id.imgGuessWorldOfListenMenue://听单词
 				intent.setClass(ActivityListenMenue.this, ActivityListenWord.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 				break;
-			case R.id.textWorld://听世界
-				intent.setClass(ActivityListenMenue.this, ActivityListenWorld.class);
-				break;
-			case R.id.textPicture://猜图片
+			case R.id.imgGuessPictureOfListenMenue://猜图片
 				intent.setClass(ActivityListenMenue.this, ActivityListenPicture.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 				break;
 			default:
 				break;
 			}
-			
-			startActivity(intent);
-			overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 		}
 	};
 }

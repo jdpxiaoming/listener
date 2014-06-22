@@ -36,12 +36,6 @@ public class ActivityListenPicture extends BaseActivity {
 			case R.id.gobackbt://
 				finish();
 				break;
-			case R.id.textWorld://听世界
-				
-				break;
-			case R.id.textPicture://猜图片
-				
-				break;
 			default:
 				break;
 			}

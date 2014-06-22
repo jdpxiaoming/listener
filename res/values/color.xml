@@ -33,6 +33,7 @@
     <color name="black">#ff000000</color>
     <color name="commons_btn_font_text_color">#ff0077dc</color>
     <color name="blue">#ffccddff</color>
+    <color name="blue_dark">#3dc0d2</color>
     <color name="grey">#ff58616d</color>
     <color name="darkgrey">#ff404040</color>
     <color name="toasterro">#ff9fd524</color>

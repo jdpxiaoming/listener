@@ -2,16 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp" 
-    android:background="@drawable/tab_bar"
+    android:background="@drawable/tb_bg_bottom"
     >
     
     <ImageView 
         		android:id="@+id/imgbtnLeftOfFooter"
-        		android:src="@drawable/button_navigation"
+        		android:background="@drawable/button_navigation"
         		android:layout_centerVertical="true"
         		android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
-        		android:layout_margin="5dp"
         		android:scaleType="fitStart"
         		/>
     <ImageView 
@@ -28,9 +27,8 @@
         		android:id="@+id/imgbtnCenterOfFooter"
         		android:src="@drawable/button_singing"
         		android:layout_centerInParent="true"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:layout_margin="5dp"
+        		android:layout_width="100dp"
+        		android:layout_height="fill_parent"
         		android:scaleType="centerInside"
         		/>
 

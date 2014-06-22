@@ -4,8 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 
+import com.lewen.listener.bean.AuthReply;
 import com.lewen.listener.bean.Question;
 import com.lewen.listener.bean.Question.LISTENERTYPE;
 
@@ -125,87 +128,22 @@ public class XmlToListService {
 	 * @param str
 	 * @return
 	 * @throws Exception
-	 *//*
-	public static List<channelOnLine> GetVideoAddress(String str)throws Exception{
+	 */
+	public static AuthReply GetAuth(String str)throws Exception{
 		if(str==null||"".equals(str))
 			return null;
-		List<channelOnLine> lists=new ArrayList<channelOnLine>();
-		channelOnLine talkpic = null;
-		XmlPullParser parser = Xml.newPullParser();
-		InputStream  inputStream   =   new   ByteArrayInputStream(str.getBytes());
-		parser.setInput(inputStream, "utf-8");
-		int eventType = parser.getEventType();
-		while(eventType!=XmlPullParser.END_DOCUMENT){
-			switch (eventType) {
-			case XmlPullParser.START_DOCUMENT:
-				break;
-			case XmlPullParser.START_TAG:
-				String name = parser.getName();
-				if("channel".equals(name)){
-					talkpic = new channelOnLine();
-				}
-				if(talkpic!=null){
-					if("device_name".equals(name))
-						talkpic.setDevice_name(parser.nextText());
-					if("device_type".equals(name)){
-						talkpic.setDevice_type(parser.nextText());
-					}
-					if ("userName".equals(name)) {
-						talkpic.setUserName(parser.nextText());
-					}
-					if("userPsw".equals(name)){
-						talkpic.setUserPsw(parser.nextText());
-					}
-					if("device_ipAddr".equals(name)){
-						talkpic.setDevice_ipAddr(parser.nextText());
-					}
-					if("player_Addr".equals(name)){
-						talkpic.setPlayer_Addr(parser.nextText());
-					}
-					if("device_portNo".equals(name)){
-						talkpic.setDevice_portNo(parser.nextText());
-					}
-					if("channelNo".equals(name)){
-						talkpic.setChannelNo(parser.nextText());
-					}
-					if("channelName".equals(name)){
-						talkpic.setChannelName(parser.nextText());
-					}
-					if("playerAddrType".equals(name)){
-						talkpic.setPlayerAddrType(parser.nextText());
-					}
-					if("device_id".equals(name)){
-						talkpic.setDevice_id(parser.nextText());
-					}
-					if("channelId".equals(name)){
-						talkpic.setChannelId(parser.nextText());
-					}
-					if("parise".equals(name)){
-						talkpic.setPraise(parser.nextText());
-					}
-					if("watchNum".equals(name)){
-						talkpic.setWatch(parser.nextText());
-					}
-					if("historyWatch".equals(name)){
-						talkpic.setHistory_watch(parser.nextText());
-					}
-				}
-				break;
-			case XmlPullParser.END_TAG:
-				if("channel".equals(parser.getName())){
-//					talkpic = new channelOnLine();
-					lists.add(talkpic);
-				}
-				break;
-			}
-			eventType = parser.next();
+		AuthReply talkpic = null;
+		JSONObject	 json = new JSONObject(str);
+		if(json!=null){
+			talkpic	=	new AuthReply();
+			talkpic.setOpenID(json.getString("openid").toString());
+			talkpic.setExpire_time(json.getString("expires_in").toString());
 		}
-		
-		return lists;
+		return talkpic;
 	}
 	
 	
-	 * 解析失败返回NUll
+	 /* 解析失败返回NUll
 	 
 	public static history_video  GetPlayVideoHistory(String str)throws Exception{
 		if(str==null||"".equals(str))
@@ -325,7 +263,7 @@ public class XmlToListService {
 	}
 	
 	
-	*//**
+	/**
 	 * 获取在线用列表
 	 * @param str
 	 * @return

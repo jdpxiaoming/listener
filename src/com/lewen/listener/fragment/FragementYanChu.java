@@ -3,6 +3,7 @@ package com.lewen.listener.fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
@@ -10,6 +11,7 @@ import com.lewen.listener.TBApplication;
 import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.adapter.PaperAdapter;
 import com.lewen.listener.bean.Constants;
+import com.lewen.listener.bean.Queue;
 import com.lewen.listener.util.ImageCacheUtil;
 import com.lewen.listener.util.LoggerUtil;
 import com.lewen.listener.util.ToastUtil;
@@ -69,19 +71,12 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 	private MyListView myListView;
 	
 	//CITY LIST
-	private MyPullToRefreshListView listview;
+	private MyPullToRefreshListView listview,listviewCountry;
 	private String[] mStrings = {"poe 's test 1",
 			"爱上一个魔鬼的天使", "伤心太平洋", "流浪的猫", "度娘一夜情",
 			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
 			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
-			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
-			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
-			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
-			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
-			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
-			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
-			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
-			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler" , "!! test" 
+			"Acorn", "Adelost", "Affidelice au Chablis"
 			};
 	private BaseAdapter adapter4LIST;
 
@@ -163,7 +158,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		List<View> views = new ArrayList<View>();
 		views.add(lin.inflate(R.layout.layout_friends, null));
 		views.add(lin.inflate(R.layout.layout_city, null));
-		views.add(lin.inflate(R.layout.layout_country, null));
+		views.add(lin.inflate(R.layout.layout_city, null));
 
 		adapter = new PaperAdapter(views);
 
@@ -206,6 +201,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 			}
 		});
 
+		//朋友们
 		myListView = (MyListView) views.get(0).findViewById(R.id.listViewOfFriends);
 		addADHead(myListView);
 //		progressbar1 = (LinearLayout) views.get(0).findViewById(R.id.progressbarOfShowInfo);
@@ -222,19 +218,10 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 				LoggerUtil.i(Tag, "item clicked!");
 				ToastUtil.showToastShort( "clicked!+ on  " +arg2,mContext);
 				// TODO Auto-generated method stub
-//				ShowInfo sinfo=showList.get(arg2);
-//				Intent intent =new Intent(mContext,TheatreYanchuDetail.class);
-//				intent.putExtra("filmID",sinfo.getDramaID() );
-//				intent.putExtra("img", sinfo.getTitleImage());
-//				intent.putExtra("title", sinfo.getDramaName());
-//				intent.putExtra("type", sinfo.getDramaType());
-//				intent.putExtra("time", sinfo.getShowTime());
-//				intent.putExtra("price", sinfo.getPrice());
-//				
-//				startActivity(intent);
 				}
 		});
 		
+		//本市
 		listview = (MyPullToRefreshListView)views.get(1).findViewById(R.id.listview);
 		listview.getRefreshableView().setSelector(R.drawable.item_selector);
 		listview.setOnRefreshListener(new OnRefreshListener<ListView>() {
@@ -254,9 +241,40 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		});
 		
 		
-		adapter4LIST = new Myadapter(Arrays.asList(mStrings),mContext);
+		List<Queue> listDatas = new ArrayList<Queue>();
+		
+		for(int i=0;i<mStrings.length;i++){
+			
+			Queue que  = new Queue("", mStrings[i], (float) 4.0);
+			listDatas.add(que);
+		}
+		
+		adapter4LIST = new Myadapter(listDatas,mContext);
 		listview.setAdapter(adapter4LIST);
 		listview.getRefreshableView().setDivider(null);
+		
+		
+		//全国
+		listviewCountry = (MyPullToRefreshListView)views.get(2).findViewById(R.id.listview);
+		listviewCountry.getRefreshableView().setSelector(R.drawable.item_selector);
+		listviewCountry.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				// TODO Auto-generated method stub
+				String label = DateUtils.formatDateTime(mContext.getApplicationContext(), System.currentTimeMillis(),
+						DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_ABBREV_ALL);
+
+				// Update the LastUpdatedLabel
+				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
+
+				// Do work to refresh the list here.
+//				new GetDataTask().execute();
+			}
+		});
+		listviewCountry.setAdapter(adapter4LIST);
+		listviewCountry.getRefreshableView().setDivider(null);
+		
 	}
 
 	private void addADHead(MyListView myListView2) {

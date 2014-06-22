@@ -3,7 +3,10 @@ package com.lewen.listener.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.crypto.spec.PSource;
+
 import com.lewen.listener.R;
+import com.lewen.listener.bean.Queue;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,26 +17,26 @@ import android.widget.TextView;
 
 public class Myadapter extends BaseAdapter {
 	
-	private List<String> datas;
+	private List<Queue> datas;
 
-	private List<List<String>> cache= new ArrayList<List<String>>();
+	private List<List<Queue>> cache= new ArrayList<List<Queue>>();
 	
 	private Context mContext;
 	
-	 public Myadapter(List<String> datas, Context mContext){
+	 public Myadapter(List<Queue> datas, Context mContext){
 		this.datas = datas;
 		this.mContext = mContext;
 		this.cache = doSplite(datas);
 	}
 	
-	private List<List<String>> doSplite(List<String> datas2) {
+	private List<List<Queue>> doSplite(List<Queue> datas2) {
 		// TODO Auto-generated method stub
-		List<List<String>> mList =new ArrayList<List<String>>();
+		List<List<Queue>> mList =new ArrayList<List<Queue>>();
 		
 		if(datas2==null||datas2.size()==0){
 		}else{
 			
-			List<String> list = new ArrayList<String>();
+			List<Queue> list = new ArrayList<Queue>();
 			list.add(datas2.get(0));
 			mList.add(list);
 			
@@ -58,9 +61,9 @@ public class Myadapter extends BaseAdapter {
 	 * @param max		每项数据的最大值
 	 * @param datas2    数据源List<String>
 	 */
-	private void addNote(List<List<String>> mList, int startPos,int max, List<String> datas2) {
+	private void addNote(List<List<Queue>> mList, int startPos,int max, List<Queue> datas2) {
 		// TODO Auto-generated method stub
-		List<String> list2=new ArrayList<String>();
+		List<Queue> list2=new ArrayList<Queue>();
 		
 		for(int i=startPos;i<datas2.size();i++){
 			
@@ -69,7 +72,7 @@ public class Myadapter extends BaseAdapter {
 				list2.add(datas2.get(i));
 				
 				if(i==datas2.size()-1||list2.size()==max){
-					
+					/*
 					if(i==datas2.size()-1&&list2.size()<max){
 						
 						int j = list2.size();
@@ -77,9 +80,9 @@ public class Myadapter extends BaseAdapter {
 							list2.add("");
 							j++;
 						}
-					}
+					}*/
 					mList.add(list2);
-					list2 =new ArrayList<String>();
+					list2 =new ArrayList<Queue>();
 				}
 			}
 		}
@@ -107,9 +110,18 @@ public class Myadapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
-		List<String> mValue = cache.get(position);
+		List<Queue> mValue = cache.get(position);
+		int tag =mValue.size();
 		
-		switch (mValue.size()) {
+		if(position == cache.size()-1){
+			if(position>1&&position<10){
+				tag = 2;
+			}else if(position>=10){
+				tag = 3;
+			}
+		}
+		
+		switch (tag) {
 		case 1:
 			 if(convertView==null||convertView.findViewById(R.id.text1OfItemOne)==null){
 				 convertView	=	LayoutInflater.from(mContext).inflate(R.layout.item_list_one, null);
@@ -117,7 +129,7 @@ public class Myadapter extends BaseAdapter {
 			     convertView.setTag(R.id.text1OfItemOne, convertView.findViewById(R.id.text1OfItemOne));
 			 }
 			
-			 ((TextView)convertView.getTag(R.id.text1OfItemOne)).setText(mValue.get(0));
+			 ((TextView)convertView.getTag(R.id.text1OfItemOne)).setText(mValue.get(0).getName());
 			 
 			break;
 		case 2:
@@ -128,8 +140,11 @@ public class Myadapter extends BaseAdapter {
 				convertView.setTag(R.id.text2OfItemTwo, convertView.findViewById(R.id.text2OfItemTwo));
 			}
 			
-			((TextView)convertView.getTag(R.id.text1OfItemTwo)).setText(mValue.get(0));
-			((TextView)convertView.getTag(R.id.text2OfItemTwo)).setText(mValue.get(1));
+			((TextView)convertView.getTag(R.id.text1OfItemTwo)).setText(mValue.get(0).getName());
+			
+			if(mValue.size()>1){
+				((TextView)convertView.getTag(R.id.text2OfItemTwo)).setText(mValue.get(1).getName());
+			}
 			
 			break;
 		case 3:
@@ -141,9 +156,16 @@ public class Myadapter extends BaseAdapter {
 				convertView.setTag(R.id.text3OfItemThree, convertView.findViewById(R.id.text3OfItemThree));
 			}
 			
-			((TextView)convertView.getTag(R.id.text1OfItemThree)).setText(mValue.get(0));
-			((TextView)convertView.getTag(R.id.text2OfItemThree)).setText(mValue.get(1));
-			((TextView)convertView.getTag(R.id.text3OfItemThree)).setText(mValue.get(2));
+			((TextView)convertView.getTag(R.id.text1OfItemThree)).setText(mValue.get(0).getName());
+			
+			if(mValue.size()>=2){
+				
+				((TextView)convertView.getTag(R.id.text2OfItemThree)).setText(mValue.get(1).getName());
+			}
+			if(mValue.size()>2){
+				
+				((TextView)convertView.getTag(R.id.text3OfItemThree)).setText(mValue.get(2).getName());
+			}
 			
 			break;
 
