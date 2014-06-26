@@ -158,11 +158,11 @@ public class Myadapter extends BaseAdapter {
 			
 			((TextView)convertView.getTag(R.id.text1OfItemThree)).setText(mValue.get(0).getName());
 			
-			if(mValue.size()>=2){
+			if(mValue.size()==2){
 				
 				((TextView)convertView.getTag(R.id.text2OfItemThree)).setText(mValue.get(1).getName());
 			}
-			if(mValue.size()>2){
+			if(mValue.size()==3){
 				
 				((TextView)convertView.getTag(R.id.text3OfItemThree)).setText(mValue.get(2).getName());
 			}

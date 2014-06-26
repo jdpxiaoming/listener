@@ -24,11 +24,8 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		OnClickListener {
 
 	private SlideHolder mSlideHolder;
-	// private LinearLayout lin_home, lin_yetai, lin_vip, lin_search, lin_more;
-	private LinearLayout lin_area_layer, lin_dy, lin_hz, lin_news, lin_msg,
-			lin_yt;
-	private ImageButton imgButtonSetting;
-	private ImageView mImageViewMyself;
+	private LinearLayout lin_area_layer;
+	private ImageView mImageViewMyself,mImageViewShopping,mImageViewSetting,mImageViewScore,mImageViewHome;
 	private String from = "yanchu";
 	private Context c;
 	// footer nav
@@ -71,7 +68,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 //		imgButtonSetting.setOnClickListener(this);
 
 		// 我
-		mImageViewMyself = (ImageView) findViewById(R.id.nav_bt_myself);
+		mImageViewMyself = (ImageView) findViewById(R.id.nav_bt_user_info);
 		mImageViewMyself.setOnClickListener(this);
 		// 通知服务获取ad数据
 		loadFragment(from);
@@ -91,30 +88,15 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 				// TODO Auto-generated method stub
 				HashMap<String, Object> hm = new HashMap<String, Object>();
 				Task ts = null;
-				// 1.演出
+				// 1.首页
 				if ("splash".equals(from)) {
-					ts = new Task(TaskType.GET_YANCHU, hm);
-				} else
+					ts = new Task(TaskType.GET_HOME, hm);
+				}
+				/*else
 				// 2.电影
 				if ("dianying".equals(from)) {
 					ts = new Task(TaskType.GET_DIANYING, hm);
-				} else
-				// 3.会展
-				if ("huizhan".equals(from)) {
-					ts = new Task(TaskType.GET_HUIZHAN, hm);
-				} else
-				// 4.每月易迅
-				if ("news".equals(from)) {
-					ts = new Task(TaskType.GET_NEWS, hm);
-				} else
-				// 5.金鸡湖美术馆
-				if ("meishuguan".equals(from)) {
-					ts = new Task(TaskType.GET_MEISHUGUAN, hm);
-				} else
-				// 6.金鸡湖艺坛
-				if ("yitan".equals(from)) {
-					ts = new Task(TaskType.GET_YITAN, hm);
-				}
+				} */
 
 				if (ts != null)
 					refresh(ts.getTaskID());
@@ -134,36 +116,11 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 	private void loadFram(int key, FragmentTransaction transaction) {
 		Fragment frag;
 		switch (key) {
-		case TaskType.GET_YANCHU:
+		case TaskType.GET_HOME:
 			frag = new FragementYanChu(c, mSlideHolder);
 			transaction.replace(R.id.linearcontent, frag);
 			transaction.commit();
 			break;
-		// case TaskType.GET_DIANYING:
-		// frag = new FragementFilm(c,mSlideHolder);
-		// transaction.replace(R.id.linearcontent, frag);
-		// transaction.commit();
-		// break;
-		// case TaskType.GET_HUIZHAN:
-		// frag = new FragementHuiZhan(c,mSlideHolder);
-		// transaction.replace(R.id.linearcontent, frag);
-		// transaction.commit();
-		// break;
-		// case TaskType.GET_NEWS:// news art info
-		// frag = new FragementNews(c,mSlideHolder);
-		// transaction.replace(R.id.linearcontent, frag);
-		// transaction.commit();
-		// break;
-		// case TaskType.GET_MEISHUGUAN:
-		// frag = new FragementMeiShuGuan(c,mSlideHolder);
-		// transaction.replace(R.id.linearcontent, frag);
-		// transaction.commit();
-		// break;
-		// case TaskType.GET_YITAN:
-		// frag = new FragementYiTan(c,mSlideHolder);
-		// transaction.replace(R.id.linearcontent, frag);
-		// transaction.commit();
-		// break;
 		default:
 			break;
 		}
@@ -190,11 +147,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 			intent.setClass(this, CityList.class);
 			startActivity(intent);
 			break;
-//		case R.id.nav_bt_setting:
-//			intent.setClass(this, ActivitySet.class);
-//			startActivity(intent);
-//			break;
-		case R.id.nav_bt_myself:
+		case R.id.nav_bt_user_info:
 			intent.setClass(this, ActivityPersonalInfo.class);
 			startActivity(intent);
 			break;

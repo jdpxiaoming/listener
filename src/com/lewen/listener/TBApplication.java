@@ -3,6 +3,7 @@ package com.lewen.listener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.bean.Person;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -113,6 +114,7 @@ public class TBApplication extends Application {
 		try {
 			if (mLocationResult != null)
 				mLocationResult.setText(str);
+			pushPreferenceData("city", str);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -76,7 +76,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 			"爱上一个魔鬼的天使", "伤心太平洋", "流浪的猫", "度娘一夜情",
 			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu",
 			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
-			"Acorn", "Adelost", "Affidelice au Chablis"
+			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu"
 			};
 	private BaseAdapter adapter4LIST;
 
