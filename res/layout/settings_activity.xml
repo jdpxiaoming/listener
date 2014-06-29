@@ -13,6 +13,29 @@
         android:layout_height="fill_parent"
         android:orientation="vertical" >
 
+         <RelativeLayout 
+        		android:layout_width="match_parent"
+        		android:layout_height="55dp"
+        		android:background="@drawable/bg_top_guess"
+        			>
+        
+        		<ImageButton 
+        		    		android:id="@+id/imgbtnBack"
+        		    		android:layout_width="55dp"
+        		    		android:layout_height="fill_parent"
+        		    		android:background="@drawable/tb_back_normal"
+        		    		android:scaleType="centerInside"
+        		    		/>
+        		<TextView 
+        		    		android:layout_width="wrap_content"
+        		    		android:layout_height="wrap_content"
+        		    		android:textSize="23sp"
+        		    		android:textColor="@color/white"
+        		    		android:layout_centerInParent="true"
+        		    		android:text="设置"
+        		    		/>
+    </RelativeLayout>
+    
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="200.0dip"
@@ -21,30 +44,33 @@
             android:layout_marginTop="12.0dip"
             android:orientation="vertical" >
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
-                android:background="@drawable/uptable" >
-
-                <Button
-                    android:id="@+id/btn_goto_appstore"
-                    style="@style/dark_grey_14px"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/button_settings_top"
-                    android:gravity="left|center"
-                    android:paddingLeft="15.0dip"
-                    android:text="唱吧帮助中心" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center"
-                    android:layout_marginRight="15.0dip"
-                    android:background="@drawable/list_arrow_normal" />
-            </FrameLayout>
-
+                android:background="@drawable/uptable" 
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                >
+				<ImageView 
+				    		android:layout_width="wrap_content"
+				    		android:layout_height="wrap_content"
+				    		android:src="@drawable/icon_setting_music"
+				    		android:padding="10dp"
+				    		/>
+				<TextView 
+				    		android:layout_width="fill_parent"
+				    		android:layout_height="wrap_content"
+				    		android:layout_weight="1"
+				    		android:text="音效"
+				    		android:textColor="@color/black"
+				    		android:textSize="17sp"
+				    		/>
+				<com.lewen.listener.view.SwitchButton
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	/>
+            </LinearLayout>
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

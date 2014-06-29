@@ -16,49 +16,6 @@ import android.util.Xml;
 
 public class XmlToListService {
 	
-	/*public static rsp_login GetLogin(String str)throws Exception{
-		if(str==null||"".equals(str))
-			return null;
-		rsp_login rsp = null;
-		XmlPullParser parser = Xml.newPullParser();
-		InputStream  inputStream   =   new   ByteArrayInputStream(str.getBytes());
-		parser.setInput(inputStream, "utf-8");
-		int eventType = parser.getEventType();
-		while(eventType!=XmlPullParser.END_DOCUMENT){
-			switch (eventType) {
-			case XmlPullParser.START_DOCUMENT:
-				rsp = new rsp_login();
-				break;
-			case XmlPullParser.START_TAG:
-				String tag = parser.getName();
-				if(rsp!=null){
-					if ("type".equals(tag)) {
-						rsp.setType(parser.nextText());
-					} else if ("cmd".equals(tag)) {
-						rsp.setCmd(parser.nextText());
-					} else if ("userId".equals(tag)) {
-						rsp.setUserId(parser.nextText());
-					} else if ("roleId".equals(tag)) {
-						rsp.setRoleId(parser.nextText());
-					} else if ("userLoginRet".equals(tag)) {
-						rsp.setUserLoginRet(parser.nextText());
-					} else if ("ierrorCode".equals(tag)) {
-						rsp.setIerrorCode(parser.nextText());
-					} else if ("menuShow".equals(tag)) {
-						rsp.setMenuShow(parser.nextText());
-					} else if ("err".equals(tag)) {
-						rsp.setErr(parser.nextText());
-					} 
-				}
-				break;
-			case XmlPullParser.END_TAG:
-				break;
-			}
-			eventType = parser.next();
-		}
-		return rsp;
-	}*/
-	
 	public static List<Question> GetQuestionList(String str)throws Exception{
 		if(str==null||"".equals(str))
 			return null;

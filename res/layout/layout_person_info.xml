@@ -3,29 +3,287 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@drawable/default_home_bg"
+    android:background="@drawable/tb_bg_personal"
     >
-   <ImageView 
-       		android:id="@+id/imgHeadOfPersionalInfo"
-       		android:layout_width="wrap_content"
-       		android:layout_height="wrap_content"
-       		android:scaleType="centerInside"
-       		/>
-	<TextView 
-	    		android:id="@+id/textNameOfPersionalInfo"
-	    		android:layout_width="wrap_content"
-	    		android:layout_height="wrap_content"
-	    		android:padding="10dp"
-	    		android:text="qq用户名"
-	    		/>
-	
-	<TextView 
+    
+     <RelativeLayout 
+        		android:layout_width="match_parent"
+        		android:layout_height="55dp"
+        		android:background="@drawable/bg_top_guess"
+        			>
+        
+        		<ImageButton 
+        		    		android:id="@+id/imgbtnBack"
+        		    		android:layout_width="55dp"
+        		    		android:layout_height="fill_parent"
+        		    		android:background="@drawable/tb_back_normal"
+        		    		android:scaleType="centerInside"
+        		    		/>
+        		<TextView 
+        		    		android:layout_width="wrap_content"
+        		    		android:layout_height="wrap_content"
+        		    		android:textSize="23sp"
+        		    		android:textColor="@color/white"
+        		    		android:layout_centerInParent="true"
+        		    		android:text="我的资料"
+        		    		/>
+        		<TextView 
+        		    		android:id="@+id/txtSaveOfPersional"
+        		    		android:layout_width="wrap_content"
+        		    		android:layout_height="wrap_content"
+        		    		android:textSize="23sp"
+        		    		android:textColor="@color/white"
+        		    		android:layout_alignParentRight="true"
+        		    		android:layout_centerVertical="true"
+        		    		android:text="保存"
+        		    		android:padding="5dp"
+        		    		/>
+    </RelativeLayout>
+    
+     <ScrollView 
+         		android:layout_width="match_parent"
+         		android:layout_height="wrap_content"
+         		android:scrollbars="none"
+         		>
+         <LinearLayout 
+             			android:layout_width="match_parent"
+             			android:layout_height="wrap_content"
+             			android:orientation="vertical"
+             			>
+              <LinearLayout 
+             			android:layout_width="match_parent"
+             			android:layout_height="wrap_content"
+             			android:orientation="horizontal"
+             			>
+             
+                  <LinearLayout 
+             			android:layout_width="match_parent"
+             			android:layout_height="100dp"
+             			android:orientation="horizontal"
+             			android:layout_weight="3"
+             			android:gravity="center"
+             			>
+             			<ImageView 
+					       		android:id="@+id/imgHeadOfPersionalInfo"
+					       		android:layout_width="wrap_content"
+					       		android:layout_height="wrap_content"
+					       		android:scaleType="centerInside"
+					       		/>
+        	 	</LinearLayout>
+        	 	<LinearLayout 
+             			android:layout_width="match_parent"
+             			android:layout_height="100dp"
+             			android:orientation="vertical"
+             			android:layout_weight="1"
+             			android:paddingLeft="10dp"
+             			android:gravity="center_vertical"
+             			>
+             			<TextView 
+             			    		android:id="@+id/textNameOfPersionalInfo"
+             			    		android:layout_width="wrap_content"
+             			    		android:layout_height="wrap_content"
+             			    		android:text="孙燕姿"
+             			    		android:textColor="@color/black"
+             			    		android:textSize="22sp"
+             			    		/>
+             			<LinearLayout 
+             			    		android:layout_width="match_parent"
+             			    		android:layout_height="wrap_content"
+             			    		android:orientation="horizontal"
+             			    			>
+             			    		<TextView 
+		             			    		android:layout_width="wrap_content"
+		             			    		android:layout_height="wrap_content"
+		             			    		android:text="22岁"
+		             			    		android:textColor="@color/black"
+		             			    		android:textSize="15sp"
+		             			    		/>
+             			    		<TextView 
+		             			    		android:layout_width="wrap_content"
+		             			    		android:layout_height="wrap_content"
+		             			    		android:text="香港九龙"
+		             			    		android:textColor="@color/black"
+		             			    		android:textSize="15sp"
+		             			    		android:paddingLeft="20dp"
+		             			    		/>
+             			</LinearLayout>
+             			<LinearLayout 
+             			    		android:layout_width="match_parent"
+             			    		android:layout_height="wrap_content"
+             			    		android:orientation="horizontal"
+             			    		android:gravity="bottom"
+             			    			>
+             			    		<ImageView 
+		             			    		android:layout_width="30dp"
+		             			    		android:layout_height="30dp"
+		             			    		android:src="@drawable/icon_level"
+		             			    		/>
+             			    		<TextView 
+		             			    		android:layout_width="wrap_content"
+		             			    		android:layout_height="wrap_content"
+		             			    		android:text="2"
+		             			    		android:textSize="15sp"
+		             			    		android:gravity="center"
+		             			    		android:padding="5dp"
+		             			    		android:background="@drawable/icon_star_red"
+		             			    		/>
+             			    		<LinearLayout 
+             			    		    			android:layout_width="100dp"
+             			    		    			android:layout_height="wrap_content"
+             			    		    			android:background="@drawable/tb_bg_person_experinse"
+             			    		    			>
+             			    		    <LinearLayout 
+             			    		        		android:layout_width="wrap_content"
+             			    		        		android:layout_height="wrap_content"
+             			    		        		android:background="@drawable/tb_bg_experince_achive"
+             			    		        		/>
+             			    		</LinearLayout>
+             			</LinearLayout>
+             			
+             	</LinearLayout>
+        	 </LinearLayout>
+        	 <!-- 内部 -->
+        	 <LinearLayout 
+        	     			android:layout_width="match_parent"
+        	     			android:layout_height="wrap_content"	
+        	     			android:background="@drawable/preference_single_item"
+        	     			android:orientation="horizontal"
+        	     			android:layout_marginBottom="10dp"
+        	     			>
+        	     <TextView 
+        	         		android:layout_width="wrap_content"
+        	         		android:layout_height="wrap_content"
+        	         		android:text="密码"
+        	         		android:padding="10dp"
+        	         		android:textSize="17sp"
+        	         		android:textColor="@color/black"
+        	         		/>
+        	     <EditText 
+        	         		android:layout_width="match_parent"
+        	         		android:layout_height="wrap_content"
+        	         		android:textSize="22sp"
+        	         		android:inputType="textPassword"
+        	         		android:text="123456"
+        	         		android:background="@null"
+        	         		android:padding="10dp"
+        	         		android:gravity="right"
+        	         		/>
+        	 </LinearLayout>
+        	 <LinearLayout 
+        	     			android:layout_width="match_parent"
+        	     			android:layout_height="wrap_content"	
+        	     			android:background="@drawable/preference_single_item"
+        	     			android:orientation="horizontal"
+        	     			android:layout_marginBottom="10dp"
+        	     			>
+        	     <TextView 
+        	         		android:layout_width="wrap_content"
+        	         		android:layout_height="wrap_content"
+        	         		android:text="电邮（用户名）"
+        	         		android:padding="10dp"
+        	         		android:textSize="17sp"
+        	         		android:textColor="@color/black"
+        	         		/>
+        	     <EditText 
+        	         		android:layout_width="match_parent"
+        	         		android:layout_height="wrap_content"
+        	         		android:textSize="22sp"
+        	         		android:inputType="textEmailAddress"
+        	         		android:text="123456"
+        	         		android:background="@null"
+        	         		android:padding="10dp"
+        	         		android:gravity="right"
+        	         		/>
+        	 </LinearLayout>
+        	 <LinearLayout 
+        	     			android:layout_width="match_parent"
+        	     			android:layout_height="wrap_content"	
+        	     			android:background="@drawable/preference_single_item"
+        	     			android:orientation="horizontal"
+        	     			android:layout_marginBottom="10dp"
+        	     			>
+        	     <TextView 
+        	         		android:layout_width="wrap_content"
+        	         		android:layout_height="wrap_content"
+        	         		android:text="性别"
+        	         		android:padding="10dp"
+        	         		android:textSize="17sp"
+        	         		android:textColor="@color/black"
+        	         		/>
+        	     <EditText 
+        	         		android:layout_width="match_parent"
+        	         		android:layout_height="wrap_content"
+        	         		android:textSize="22sp"
+        	         		android:inputType="text"
+        	         		android:text="女"
+        	         		android:background="@null"
+        	         		android:padding="10dp"
+        	         		android:gravity="right"
+        	         		/>
+        	 </LinearLayout>
+        	 <LinearLayout 
+        	     			android:layout_width="match_parent"
+        	     			android:layout_height="wrap_content"	
+        	     			android:background="@drawable/preference_single_item"
+        	     			android:orientation="horizontal"
+        	     			android:layout_marginBottom="10dp"
+        	     			>
+        	     <TextView 
+        	         		android:layout_width="wrap_content"
+        	         		android:layout_height="wrap_content"
+        	         		android:text="生日"
+        	         		android:padding="10dp"
+        	         		android:textSize="17sp"
+        	         		android:textColor="@color/black"
+        	         		/>
+        	     <EditText 
+        	         		android:layout_width="match_parent"
+        	         		android:layout_height="wrap_content"
+        	         		android:textSize="22sp"
+        	         		android:inputType="text"
+        	         		android:text="1987-8-11"
+        	         		android:background="@null"
+        	         		android:padding="10dp"
+        	         		android:gravity="right"
+        	         		/>
+        	 </LinearLayout>
+        	 <LinearLayout 
+        	     			android:layout_width="match_parent"
+        	     			android:layout_height="wrap_content"	
+        	     			android:background="@drawable/preference_single_item"
+        	     			android:orientation="horizontal"
+        	     			android:layout_marginBottom="10dp"
+        	     			>
+        	     <TextView 
+        	         		android:layout_width="wrap_content"
+        	         		android:layout_height="wrap_content"
+        	         		android:text="学校"
+        	         		android:padding="10dp"
+        	         		android:textSize="17sp"
+        	         		android:textColor="@color/black"
+        	         		/>
+        	     <EditText 
+        	         		android:layout_width="match_parent"
+        	         		android:layout_height="wrap_content"
+        	         		android:textSize="22sp"
+        	         		android:inputType="text"
+        	         		android:text="香港大学"
+        	         		android:background="@null"
+        	         		android:padding="10dp"
+        	         		android:gravity="right"
+        	         		/>
+        	 </LinearLayout>
+        	 
+        	 <!-- test qq link function  -->
+        	 <TextView 
 	    		android:id="@+id/textInvite"
 	    		android:layout_height="wrap_content"
 	    		android:layout_width="fill_parent"
 	    		android:text="邀请"
 	    		android:layout_marginTop="10dp"
 	    		style="@style/text_long_button"
+	    		android:textColor="@color/black"
+	    		android:background="@drawable/preference_single_item"
 	    		/>
 	<TextView 
 	    		android:id="@+id/textPK"
@@ -34,6 +292,8 @@
 	    		android:layout_marginTop="10dp"
 	    		android:text="挑战"
 	    		style="@style/text_long_button"
+	    		android:textColor="@color/black"
+	    		android:background="@drawable/preference_single_item"
 	    		/>
 	<TextView 
 	    		android:id="@+id/textShow"
@@ -42,5 +302,11 @@
 	    		android:layout_marginTop="10dp"
 	    		android:text="炫耀"
 	    		style="@style/text_long_button"
+	    		android:textColor="@color/black"
+	    		android:background="@drawable/preference_single_item"
 	    		/>
+	
+         </LinearLayout>
+     </ScrollView>
+	
 </LinearLayout>

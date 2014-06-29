@@ -1,13 +1,16 @@
 package com.lewen.listener.activity;
 
 import java.util.HashMap;
+
 import com.lewen.listener.R;
 import com.lewen.listener.bean.Task;
 import com.lewen.listener.bean.TaskType;
 import com.lewen.listener.fragment.FragementYanChu;
 import com.lewen.listener.view.SlideHolder;
+
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -16,7 +19,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -25,7 +27,8 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 
 	private SlideHolder mSlideHolder;
 	private LinearLayout lin_area_layer;
-	private ImageView mImageViewMyself,mImageViewShopping,mImageViewSetting,mImageViewScore,mImageViewHome;
+	private ImageView mImageViewMyself,	mImageViewShopping,mImageViewSetting,
+	mImageViewScore,mImageViewHome,	mImageViewActive,mImageViewNearBy,mImageViewWebsite;
 	private String from = "yanchu";
 	private Context c;
 	// footer nav
@@ -64,12 +67,25 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		lin_area_layer.setOnClickListener(this);
 
 		// system set
-//		imgButtonSetting = (ImageButton) findViewById(R.id.nav_bt_setting);
-//		imgButtonSetting.setOnClickListener(this);
-
-		// 我
-		mImageViewMyself = (ImageView) findViewById(R.id.nav_bt_user_info);
+		mImageViewWebsite	=	(ImageView) findViewById(R.id.nav_bt_website);
+		mImageViewMyself 	= 	(ImageView) findViewById(R.id.nav_bt_user_info);
+		mImageViewActive	=	(ImageView) findViewById(R.id.nav_bt_activie);
+		mImageViewNearBy	=	(ImageView) findViewById(R.id.nav_bt_nearby);
+		mImageViewScore		=	(ImageView) findViewById(R.id.nav_bt_score);
+		mImageViewShopping	=	(ImageView) findViewById(R.id.nav_bt_shopping);
+		mImageViewSetting	=	(ImageView) findViewById(R.id.nav_bt_setting);
+		mImageViewHome		=	(ImageView) findViewById(R.id.nav_bt_home);
+		
+		
+		
 		mImageViewMyself.setOnClickListener(this);
+		mImageViewWebsite.setOnClickListener(this);
+		mImageViewActive.setOnClickListener(this);
+		mImageViewNearBy.setOnClickListener(this);
+		mImageViewScore.setOnClickListener(this);
+		mImageViewShopping.setOnClickListener(this);
+		mImageViewSetting.setOnClickListener(this);
+		mImageViewHome.setOnClickListener(this);
 		// 通知服务获取ad数据
 		loadFragment(from);
 	}
@@ -126,7 +142,6 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		}
 
 		// mSlideHolder.toggle();
-
 	}
 
 	Intent intent = new Intent();
@@ -149,6 +164,18 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 			break;
 		case R.id.nav_bt_user_info:
 			intent.setClass(this, ActivityPersonalInfo.class);
+			startActivity(intent);
+			break;
+		case R.id.nav_bt_website:
+			Uri uri = Uri.parse("http://www.baidu.com");  
+            intent = new Intent(Intent.ACTION_VIEW, uri);  
+            startActivity(intent);  
+			break;
+		case R.id.nav_bt_home:
+			mSlideHolder.toggle();
+			break;
+		case R.id.nav_bt_setting:
+			intent.setClass(this, ActivitySet.class);
 			startActivity(intent);
 			break;
 		default:

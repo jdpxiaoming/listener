@@ -26,7 +26,8 @@ import com.tencent.tauth.Tencent;
 public class ActivityPersonalInfo extends BaseActivity {
 
 //	private String mAppID ="222222";
-	private ImageView icon;
+	private ImageView icon,imgBack;
+	private TextView	txtSave;
 	private TextView txtName;
 	private Bitmap bitmap;
 	
@@ -60,6 +61,8 @@ public class ActivityPersonalInfo extends BaseActivity {
 		
 		icon	=	(ImageView) findViewById(R.id.imgHeadOfPersionalInfo);
 		txtName	=	(TextView) findViewById(R.id.textNameOfPersionalInfo);
+		imgBack	=	(ImageView) findViewById(R.id.imgbtnBack);
+		txtSave	=	(TextView) findViewById(R.id.txtSaveOfPersional);
 		
 		textInvite	=	(TextView) findViewById(R.id.textInvite);
 		textPK		=	(TextView) findViewById(R.id.textPK);
@@ -84,6 +87,23 @@ public class ActivityPersonalInfo extends BaseActivity {
 		
 		mTencent = Tencent.createInstance(Constants.QQ_APP_ID, this);
 		mLiteners = new LongSparseArray<IUiListener>(10);
+		
+		imgBack.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
+		txtSave.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				finish();
+			}
+		});
 	}
 	
 	OnClickListener clickListener = new OnClickListener() {
