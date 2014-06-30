@@ -4,14 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
-
 import com.lewen.listener.bean.AuthReply;
 import com.lewen.listener.bean.Question;
 import com.lewen.listener.bean.Question.LISTENERTYPE;
-
 import android.util.Xml;
 
 public class XmlToListService {
@@ -81,7 +78,7 @@ public class XmlToListService {
 	}
 	
 	/**
-	 * 获取指定点的播放地址
+	 * 获取QQ授权的返回结果
 	 * @param str
 	 * @return
 	 * @throws Exception

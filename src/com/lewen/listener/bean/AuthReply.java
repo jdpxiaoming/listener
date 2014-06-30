@@ -2,6 +2,9 @@ package com.lewen.listener.bean;
 
 public class AuthReply {
 
+	/**
+	 * 开放id
+	 */
 	private String openID;
 	private String expire_time;
 	

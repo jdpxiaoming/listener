@@ -20,6 +20,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
 
 import android.util.Log;
 
@@ -96,13 +97,6 @@ public class HttpUtil {
 	
 	public static String sendPost(List<NameValuePair> pairList,String baseURL){
 		String result = null;
-		/* NameValuePair pair1 = new BasicNameValuePair("username", name);
-         NameValuePair pair2 = new BasicNameValuePair("age", age);
-
-         List<NameValuePair> pairList = new ArrayList<NameValuePair>();
-         pairList.add(pair1);
-         pairList.add(pair2);
-*/
          try
          {
              HttpEntity requestHttpEntity = new UrlEncodedFormEntity(
@@ -129,11 +123,14 @@ public class HttpUtil {
                      String line = "";
                      while (null != (line = reader.readLine()))
                      {
-                         result += line;
+                         result += line!=null?line:"";
 
                      }
 
+                     //{"status":1,"data":{"uid":"7350","salt":"2EuYkz"}}
                      System.out.println(result);
+                     JSONObject object = new JSONObject(result);
+                     
                  }
                  catch (Exception e)
                  {
