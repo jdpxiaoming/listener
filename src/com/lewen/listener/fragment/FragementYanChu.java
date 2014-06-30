@@ -3,7 +3,6 @@ package com.lewen.listener.fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
@@ -22,10 +21,10 @@ import com.lewen.listener.view.SlideHolder;
 import com.qq.e.ads.AdRequest;
 import com.qq.e.ads.AdSize;
 import com.qq.e.ads.AdView;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
@@ -48,7 +47,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 /**
- * 演出
+ * 贵州，本市
  * @author poe
  */
 @SuppressLint("ValidFragment")
@@ -221,7 +220,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 				}
 		});
 		
-		//本市
+		//本市,suzhou
 		listview = (MyPullToRefreshListView)views.get(1).findViewById(R.id.listview);
 		listview.getRefreshableView().setSelector(R.drawable.item_selector);
 		listview.setOnRefreshListener(new OnRefreshListener<ListView>() {
@@ -236,7 +235,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
 				// Do work to refresh the list here.
-//				new GetDataTask().execute();
+				new GetDataTask().execute();
 			}
 		});
 		
@@ -269,11 +268,43 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 				refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
 
 				// Do work to refresh the list here.
-//				new GetDataTask().execute();
+				new GetDataTask().execute();
 			}
 		});
 		listviewCountry.setAdapter(adapter4LIST);
 		listviewCountry.getRefreshableView().setDivider(null);
+		
+	}
+	
+	private class GetDataTask extends AsyncTask<String, Integer, String>{
+
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			super.onPreExecute();
+			
+		}
+
+		@Override
+		protected String doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			try {
+				Thread.sleep(3*1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			
+			listview.onRefreshComplete();
+			listviewCountry.onRefreshComplete();
+		}
 		
 	}
 

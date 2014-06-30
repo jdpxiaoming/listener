@@ -1,14 +1,11 @@
 package com.lewen.listener.activity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
 import com.lewen.listener.activity.parent.BaseActivity;
@@ -161,6 +157,9 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 	
 	private Handler mhandler ;
 
+	/**
+	 * qq开放登录
+	 */
 	private void doQQLogin() {
 		IUiListener listener = new BaseUiListener() {
 			@Override
@@ -176,26 +175,16 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
-							/*	HashMap<String, Object> params =new HashMap<String, Object>();
-								params.put("openid", ar.getOpenID());
-								params.put("source", "qq");
-								params.put("expired_in", ar.getExpire_time());
-								
-								HttpUtil.sendPostRequest(params, "
-								http://ting.joysw.cn/index.php/api/index/test");
-							*/
-								
 								NameValuePair pair1 = new BasicNameValuePair("openid", ar.getOpenID());
-						         NameValuePair pair2 = new BasicNameValuePair("source", "qq");
-						         NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
-
-						         List<NameValuePair> pairList = new ArrayList<NameValuePair>();
-						         pairList.add(pair1);
-						         pairList.add(pair2);
-						         pairList.add(pair3);
+						        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
+						        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
+						        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+						        pairList.add(pair1);
+						        pairList.add(pair2);
+						        pairList.add(pair3);
 						         
-						         HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
-						         HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/index/test");
+						        HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
+//						        HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/index/test");
 							}
 						}).start();
 					}
