@@ -22,6 +22,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
+import com.lewen.listener.TBApplication;
+import com.lewen.listener.adapter.Myadapter;
+
 import android.util.Log;
 
 /**
@@ -96,7 +99,7 @@ public class HttpUtil {
 	
 	
 	public static String sendPost(List<NameValuePair> pairList,String baseURL){
-		String result = null;
+		String result = "";
          try
          {
              HttpEntity requestHttpEntity = new UrlEncodedFormEntity(
@@ -128,8 +131,12 @@ public class HttpUtil {
                      }
 
                      //{"status":1,"data":{"uid":"7350","salt":"2EuYkz"}}
+                     result = result.substring(result.indexOf("{"));
                      System.out.println(result);
                      JSONObject object = new JSONObject(result);
+                     JSONObject data = object.getJSONObject("data");
+                     TBApplication.pushPreferenceData("uid", data.getString("uid"));
+                     TBApplication.pushPreferenceData("salt", data.getString("salt"));
                      
                  }
                  catch (Exception e)

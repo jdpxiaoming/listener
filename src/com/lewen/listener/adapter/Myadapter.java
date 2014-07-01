@@ -171,6 +171,4 @@ public class Myadapter extends BaseAdapter {
 		
 		return convertView;
 	}
-
-	
 }
