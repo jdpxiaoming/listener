@@ -68,6 +68,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 
 	//FRIENDS LIST
 	private MyListView myListView;
+	private LinearLayout linAD;
 	
 	//CITY LIST
 	private MyPullToRefreshListView listview,listviewCountry;
@@ -201,8 +202,9 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		});
 
 		//朋友们
+		linAD		=	(LinearLayout) views.get(0).findViewById(R.id.linAD);
 		myListView = (MyListView) views.get(0).findViewById(R.id.listViewOfFriends);
-		addADHead(myListView);
+		addADHead(linAD);
 //		progressbar1 = (LinearLayout) views.get(0).findViewById(R.id.progressbarOfShowInfo);
 		ArrayAdapter<String> mAdapter =  
 				new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, Arrays.asList(mStrings));
@@ -308,12 +310,13 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		
 	}
 
-	private void addADHead(MyListView myListView2) {
+	private void addADHead(LinearLayout lin) {
 		final AdView adview = new AdView((Activity) mContext, AdSize.BANNER,  Constants.GDT_APPID, Constants.GDT_BANNERPOSID);
 	    AbsListView.LayoutParams layout =
 	        new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 	    adview.setLayoutParams(layout);
-	    myListView2.addHeaderView(adview);
+	    lin.addView(adview);
+//	    myListView2.addHeaderView(adview);
 	    adview.fetchAd(new AdRequest());
 	}
 

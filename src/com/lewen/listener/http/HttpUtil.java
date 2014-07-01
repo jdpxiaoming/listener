@@ -129,15 +129,8 @@ public class HttpUtil {
                          result += line!=null?line:"";
 
                      }
-
                      //{"status":1,"data":{"uid":"7350","salt":"2EuYkz"}}
                      result = result.substring(result.indexOf("{"));
-                     System.out.println(result);
-                     JSONObject object = new JSONObject(result);
-                     JSONObject data = object.getJSONObject("data");
-                     TBApplication.pushPreferenceData("uid", data.getString("uid"));
-                     TBApplication.pushPreferenceData("salt", data.getString("salt"));
-                     
                  }
                  catch (Exception e)
                  {

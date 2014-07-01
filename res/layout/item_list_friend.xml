@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:orientation="horizontal" 
+    >
+    <LinearLayout 
+        			android:layout_width="match_parent"
+        			android:layout_height="match_parent"
+        			android:layout_weight="4"
+        			android:orientation="vertical"
+        			>
+        			<ImageView 
+        			    		android:layout_width="match_parent"
+        			    		android:layout_height="match_parent"
+        			    		android:layout_margin="10dp"
+        			    		android:src="@drawable/woman"
+        			    		android:scaleType=	"fitXY"
+        			    		/>
+    </LinearLayout>
+    <LinearLayout 
+        			android:layout_width="match_parent"
+        			android:layout_height="match_parent"
+        			android:layout_weight="1"
+        			android:orientation="horizontal"
+        			>
+        			<RelativeLayout 
+			        			android:layout_width="match_parent"
+			        			android:layout_height="match_parent"
+			        			android:layout_weight="1"
+			        			>
+			        			<TextView 
+			        			    		android:id="@+id/textNameOfFriendItem"
+			        			    		android:layout_width="wrap_content"
+			        			    		android:layout_height="wrap_content"
+			        			    		android:text="张曼玉"
+			        			    		/>
+			        			<ImageView 
+			        			    		android:id="@+id/imgSexOfFriendItem"
+			        			    		android:layout_width="wrap_content"
+			        			    		android:layout_height="wrap_content"
+			        			    		android:src="@drawable/icon_home_femal"
+			        			    		android:layout_alignParentRight="true"
+			        			    		/>
+			        			
+			        			<TextView 
+			        			    		android:id="@+id/textLevelOfFriendItem"
+			        			    		android:layout_width="wrap_content"
+			        			    		android:layout_height="wrap_content"
+			        			    		android:layout_below="@id/textNameOfFriendItem"
+			        			    		android:text="张曼玉"
+			        			    		/>
+			        			
+			    	</RelativeLayout>
+        			<LinearLayout 
+			        			android:layout_width="match_parent"
+			        			android:layout_height="match_parent"
+			        			android:layout_weight="1"
+			        			android:orientation="vertical"
+			        			android:gravity="center_vertical"
+				        		>
+				        	<TextView 
+				        	    		android:layout_width="match_parent"
+				        	    		android:layout_height="wrap_content"
+				        	    		android:text="应   战"
+				        	    		android:layout_margin="10dp"
+				        	    		style="@style/text_long_button"
+				        	    		android:background="@drawable/blue_to_green"
+				        	    		/>
+			    	</LinearLayout>
+        
+    </LinearLayout>
+	
+</LinearLayout>

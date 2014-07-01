@@ -2,18 +2,23 @@ package com.lewen.listener.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.androidquery.auth.GoogleHandle;
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
 import com.lewen.listener.activity.parent.BaseActivity;
@@ -183,13 +188,32 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 						        pairList.add(pair2);
 						        pairList.add(pair3);
 						         
-						        HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
-//						        HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/index/test");
+						        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
+						        
+						        if(!TextUtils.isEmpty(result)){
+						        	
+						        	System.out.println(result);
+				                    JSONObject object;
+				                     
+									try {
+										
+										object = new JSONObject(result);
+										JSONObject data = object.getJSONObject("data");
+										TBApplication.pushPreferenceData("uid", data.getString("uid"));
+										TBApplication.pushPreferenceData("salt", data.getString("salt"));
+										
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									
+									//执行跳转
+									
+						        }
 							}
 						}).start();
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
@@ -213,10 +237,6 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 				@Override
 				public void onComplete(final Object response) {
 					System.out.println("用户基本信息："+response.toString());
-//					Message msg = new Message();
-//					msg.obj = response;
-//					msg.what = 0;
-//					mHandler.sendMessage(msg);
 					new Thread(){
 
 						@Override
@@ -229,13 +249,12 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 									mPerson.setUserName(json.getString("nickname"));
 									mPerson.setGender(json.getString("gender"));
 									TBApplication.person = mPerson;
-									
+									goNext();
 								} catch (JSONException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
 							}
-							
 						}
 						
 					}.start();
@@ -309,12 +328,7 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 			String token = values.getString("access_token");
 			Log.i("poe", "token:" + token);
 			
-			Intent localIntent = new Intent(ActivityLogin.this.getApplicationContext(), ActivitySlidingMenue.class);
-			localIntent.putExtra("tag", "splash");
-			startActivity(localIntent);
-			overridePendingTransition(R.anim.bg_slide_down_in, R.anim.bg_slide_down_out);
-		    finish();
-		    overridePendingTransition(R.anim.do_nothing_animate, R.anim.splashfadeout);
+			goNext();
 		}
 
 		@Override
@@ -338,4 +352,12 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 	       mTencent.onActivityResult(requestCode, resultCode, data);
 	 }
 	
+	private void goNext() {
+		Intent localIntent = new Intent(ActivityLogin.this.getApplicationContext(), ActivitySlidingMenue.class);
+		localIntent.putExtra("tag", "splash");
+		startActivity(localIntent);
+		overridePendingTransition(R.anim.bg_slide_down_in, R.anim.bg_slide_down_out);
+	    finish();
+	    overridePendingTransition(R.anim.do_nothing_animate, R.anim.splashfadeout);
+	}
 }
