@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +59,15 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 	private Button btnRenren;
 	private RennClient rennClient;
 	
+	private Handler mHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			goNext();
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +80,7 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 	}
 
 	private void initView() {
-		
+		TBApplication.pushPreferenceData("session", null);
 		btnBack		=	(Button) findViewById(R.id.gobackbt);
 		btnBack.setOnClickListener(this);
 		
@@ -167,7 +177,6 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 		mWeibo.anthorize(ActivityLogin.this, new AuthDialogListener());
 	}
 	
-	private Handler mhandler ;
 
 	/**
 	 * qq开放登录
@@ -182,54 +191,61 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 				try {
 					final AuthReply ar  = XmlToListService.GetAuth(values.toString());
 					if(null!=ar){
-					/*	new Thread(new Runnable() {
+					new Thread(new Runnable() {
 							
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								
+								if(TBApplication.getPreferenceData("session")!=null){
+									System.out.println("session有效："+TBApplication.getPreferenceData("session"));
+								}else{
 									
+								NameValuePair pair1 = new BasicNameValuePair("openid", ar.getOpenID());
+						        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
+						        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
+						        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+						        pairList.add(pair1);
+						        pairList.add(pair2);
+						        pairList.add(pair3);
+						         
+						        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
+						        
+						        if(!TextUtils.isEmpty(result)){
+						        	
+						        	System.out.println(result);
+				                    JSONObject object;
+				                     
+									try {
+										
+										object = new JSONObject(result);
+										JSONObject data = object.getJSONObject("data");
+										TBApplication.pushPreferenceData("uid", data.getString("uid"));
+										TBApplication.pushPreferenceData("salt", data.getString("salt"));
+										//save the cookie
+//										CookieSyncManager.getInstance().sync();
+										//save the cookies
+//										System.out.println(Cookie);
+//										mHandler.sendEmptyMessage(0);
+									} catch (JSONException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									
+									mHandler.sendEmptyMessage(0);
+						        	}
+								}
 									//执行跳转
 									
 						        }
-							}
-						}).start();*/
-						NameValuePair pair1 = new BasicNameValuePair("openid", ar.getOpenID());
-				        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
-				        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
-				        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
-				        pairList.add(pair1);
-				        pairList.add(pair2);
-				        pairList.add(pair3);
-				         
-				        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
-				        
-				        if(!TextUtils.isEmpty(result)){
-				        	
-				        	System.out.println(result);
-		                    JSONObject object;
-		                     
-							try {
-								
-								object = new JSONObject(result);
-								JSONObject data = object.getJSONObject("data");
-								TBApplication.pushPreferenceData("uid", data.getString("uid"));
-								TBApplication.pushPreferenceData("salt", data.getString("salt"));
-								//save the cookie
-//								CookieSyncManager.getInstance().sync();
-								//save the cookies
-//								System.out.println(Cookie);
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-				        }
+						}).start();
+						
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-				updateUserInfo();
+//				updateUserInfo();
 			}
 		};
 		//mQQAuth.login(this, "all", listener);
@@ -247,31 +263,14 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 				public void run() {
 					// TODO Auto-generated method stub
 					NameValuePair pair1 = new BasicNameValuePair("uid", TBApplication.getPreferenceData("uid"));
-//			        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
-//			        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
 			        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
 			        pairList.add(pair1);
-//			        pairList.add(pair2);
-//			        pairList.add(pair3);
 			         
 			        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/members/info");
 			        
 			        if(!TextUtils.isEmpty(result)){
 			        	
 			        	System.out.println(result);
-//	                    JSONObject object;
-//	                     
-//						try {
-//							
-//							object = new JSONObject(result);
-//							JSONObject data = object.getJSONObject("data");
-//							TBApplication.pushPreferenceData("uid", data.getString("uid"));
-//							TBApplication.pushPreferenceData("salt", data.getString("salt"));
-//							
-//						} catch (JSONException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
 						//执行跳转
 			        }
 				}

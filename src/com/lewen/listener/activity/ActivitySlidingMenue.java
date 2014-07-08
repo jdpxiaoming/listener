@@ -75,14 +75,12 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 //		        pairList.add(pair2);
 //		        pairList.add(pair3);
 		         
-		        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/members/info");
+		        String result	=	HttpUtil.sendPost(pairList,"http://ting.joysw.cn/index.php/api/members/info");// "http://ting.joysw.cn/index.php/api/members/info");
 		        if(!TextUtils.isEmpty(result)){
 		        	
 		        	System.out.println(result);
 //                    JSONObject object;
-//                     
 //					try {
-//						
 //						object = new JSONObject(result);
 //						JSONObject data = object.getJSONObject("data");
 //						TBApplication.pushPreferenceData("uid", data.getString("uid"));
@@ -94,6 +92,12 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 //					}
 					//执行跳转
 		        }
+		        
+		        List<NameValuePair> pairList2 = new ArrayList<NameValuePair>();
+		        //test money
+		        String result2	=	HttpUtil.sendPost(pairList2,"http://ting.joysw.cn/index.php/api/members/money");
+		        System.out.println(result2);
+		        
 			}
 		}).start();
 	}
