@@ -10,18 +10,18 @@
         		android:background="@drawable/button_navigation"
         		android:layout_centerVertical="true"
         		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
+        		android:layout_height="fill_parent"
         		android:scaleType="fitStart"
         		/>
     <ImageView 
         		android:id="@+id/imgbtnRightOfFooter"
-        		android:src="@drawable/button_more"
+        		android:src="@drawable/more_options_button"
+        		android:background="@drawable/button_more"
         		android:layout_centerVertical="true"
         		android:layout_alignParentRight="true"
-        		android:layout_width="wrap_content"
-        		android:layout_height="wrap_content"
-        		android:layout_margin="5dp"
-        		android:scaleType="fitEnd"
+        		android:layout_width="50dp"
+        		android:layout_height="fill_parent"
+        		android:scaleType="centerInside"
         		/>
     <ImageView 
         		android:id="@+id/imgbtnCenterOfFooter"

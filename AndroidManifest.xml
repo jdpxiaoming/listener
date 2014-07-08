@@ -62,6 +62,7 @@
 		android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission 
 		android:name="android.permission.READ_CONTACTS"/>
+	
     <application
         android:name=".TBApplication"
         android:allowBackup="true"
@@ -80,7 +81,25 @@
             android:name=".activity.ActivitySplash"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
         </activity>
+        
+        
+        <activity
+            android:name=".activity.ActivityLogin"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+            
+          
+            
+        </activity>
+        
+        
         <activity
             android:name=".activity.ActivitySlidingMenue"
             android:screenOrientation="portrait" >
@@ -101,18 +120,6 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         
-        <activity
-            android:name=".activity.ActivityLogin"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" >
-            
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            
-        </activity>
         
         <activity
 			android:name=".activity.TtsDemoActivity"

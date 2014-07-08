@@ -1,11 +1,21 @@
 package com.lewen.listener.activity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.lewen.listener.R;
+import com.lewen.listener.TBApplication;
+import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.bean.Task;
 import com.lewen.listener.bean.TaskType;
 import com.lewen.listener.fragment.FragementYanChu;
+import com.lewen.listener.http.HttpUtil;
 import com.lewen.listener.view.SlideHolder;
 
 import android.content.Context;
@@ -16,6 +26,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -43,6 +54,48 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		c = this;
 
 		init();
+		
+		
+		testCookie();
+	}
+
+	//test get user info by cookies
+	private void testCookie() {
+		// TODO Auto-generated method stub
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				NameValuePair pair1 = new BasicNameValuePair("uid", TBApplication.getPreferenceData("uid"));
+//		        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
+//		        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
+		        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+		        pairList.add(pair1);
+//		        pairList.add(pair2);
+//		        pairList.add(pair3);
+		         
+		        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/members/info");
+		        if(!TextUtils.isEmpty(result)){
+		        	
+		        	System.out.println(result);
+//                    JSONObject object;
+//                     
+//					try {
+//						
+//						object = new JSONObject(result);
+//						JSONObject data = object.getJSONObject("data");
+//						TBApplication.pushPreferenceData("uid", data.getString("uid"));
+//						TBApplication.pushPreferenceData("salt", data.getString("salt"));
+//						
+//					} catch (JSONException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+					//执行跳转
+		        }
+			}
+		}).start();
 	}
 
 	public void init() {

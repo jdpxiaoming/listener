@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.CookieSyncManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -43,7 +44,7 @@ import com.weibo.sdk.android.WeiboException;
 
 public class ActivityLogin extends BaseActivity implements OnClickListener{
 
-	private Button btnLogin,btnQQ;
+	private Button	btnBack,btnLogin,btnQQ;
 	public static QQAuth mQQAuth;
 	private Tencent mTencent;
 	public static String mAppid="101050174";
@@ -69,12 +70,15 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 	}
 
 	private void initView() {
-		// TODO Auto-generated method stub
+		
+		btnBack		=	(Button) findViewById(R.id.gobackbt);
+		btnBack.setOnClickListener(this);
+		
 		btnLogin	=	(Button) findViewById(R.id.loginbt);
 		btnLogin.setOnClickListener(this);
 		
-		btnLogin	=	(Button) findViewById(R.id.loginqqbt);
-		btnLogin.setOnClickListener(this);
+		btnQQ	=	(Button) findViewById(R.id.loginqqbt);
+		btnQQ.setOnClickListener(this);
 		
 		mQQAuth = QQAuth.createInstance(mAppid, ActivityLogin.this.getApplicationContext());
 		mTencent = Tencent.createInstance(mAppid, ActivityLogin.this.getApplicationContext());
@@ -103,7 +107,10 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		
 		switch (v.getId()) {
-		
+		case R.id.gobackbt:
+			
+			finish();
+			break;
 		case R.id.loginqqbt:
 			
 			doQQLogin();
@@ -175,43 +182,48 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 				try {
 					final AuthReply ar  = XmlToListService.GetAuth(values.toString());
 					if(null!=ar){
-						new Thread(new Runnable() {
+					/*	new Thread(new Runnable() {
 							
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
-								NameValuePair pair1 = new BasicNameValuePair("openid", ar.getOpenID());
-						        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
-						        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
-						        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
-						        pairList.add(pair1);
-						        pairList.add(pair2);
-						        pairList.add(pair3);
-						         
-						        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
-						        
-						        if(!TextUtils.isEmpty(result)){
-						        	
-						        	System.out.println(result);
-				                    JSONObject object;
-				                     
-									try {
-										
-										object = new JSONObject(result);
-										JSONObject data = object.getJSONObject("data");
-										TBApplication.pushPreferenceData("uid", data.getString("uid"));
-										TBApplication.pushPreferenceData("salt", data.getString("salt"));
-										
-									} catch (JSONException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
+								
 									
 									//执行跳转
 									
 						        }
 							}
-						}).start();
+						}).start();*/
+						NameValuePair pair1 = new BasicNameValuePair("openid", ar.getOpenID());
+				        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
+				        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
+				        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+				        pairList.add(pair1);
+				        pairList.add(pair2);
+				        pairList.add(pair3);
+				         
+				        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/login/reply");
+				        
+				        if(!TextUtils.isEmpty(result)){
+				        	
+				        	System.out.println(result);
+		                    JSONObject object;
+		                     
+							try {
+								
+								object = new JSONObject(result);
+								JSONObject data = object.getJSONObject("data");
+								TBApplication.pushPreferenceData("uid", data.getString("uid"));
+								TBApplication.pushPreferenceData("salt", data.getString("salt"));
+								//save the cookie
+//								CookieSyncManager.getInstance().sync();
+								//save the cookies
+//								System.out.println(Cookie);
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+				        }
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -225,6 +237,47 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 		
 	}
 
+	
+	//test get user info by cookies
+		private void testCookie() {
+			// TODO Auto-generated method stub
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					NameValuePair pair1 = new BasicNameValuePair("uid", TBApplication.getPreferenceData("uid"));
+//			        NameValuePair pair2 = new BasicNameValuePair("source", "qq");
+//			        NameValuePair pair3 = new BasicNameValuePair("expired_in", ar.getExpire_time());
+			        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+			        pairList.add(pair1);
+//			        pairList.add(pair2);
+//			        pairList.add(pair3);
+			         
+			        String result	=	HttpUtil.sendPost(pairList, "http://ting.joysw.cn/index.php/api/members/info");
+			        
+			        if(!TextUtils.isEmpty(result)){
+			        	
+			        	System.out.println(result);
+//	                    JSONObject object;
+//	                     
+//						try {
+//							
+//							object = new JSONObject(result);
+//							JSONObject data = object.getJSONObject("data");
+//							TBApplication.pushPreferenceData("uid", data.getString("uid"));
+//							TBApplication.pushPreferenceData("salt", data.getString("salt"));
+//							
+//						} catch (JSONException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+						//执行跳转
+			        }
+				}
+			}).start();
+		}
+		
 	private void updateUserInfo() {
 		if (mQQAuth != null && mQQAuth.isSessionValid()) {
 			IUiListener listener = new IUiListener() {

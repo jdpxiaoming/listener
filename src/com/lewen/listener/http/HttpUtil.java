@@ -13,12 +13,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
@@ -100,20 +106,61 @@ public class HttpUtil {
 	
 	public static String sendPost(List<NameValuePair> pairList,String baseURL){
 		String result = "";
+		 HttpClient httpClient  = null;
          try
          {
+        	 
+        	 
+        	 // Create a local instance of cookie store
+             CookieStore cookieStore = new BasicCookieStore();
+
+             // Create local HTTP context
+             HttpClientContext localContext = HttpClientContext.create();
+             // Bind custom cookie store to the local context
+             localContext.setCookieStore(cookieStore);
+
+             
              HttpEntity requestHttpEntity = new UrlEncodedFormEntity(
                      pairList);
              // URL使用基本URL即可，其中不需要加参数
              HttpPost httpPost = new HttpPost(baseURL);
              // 将请求体内容加入请求中
              httpPost.setEntity(requestHttpEntity);
+             if(TBApplication.getPreferenceData("session")!=null){
+             //add the cookie
+             httpPost.addHeader("Pragma", "no-cache");
+             httpPost.addHeader("Cache-Control", "no-cache");
+             httpPost.addHeader("Cookie", TBApplication.getPreferenceData("session"));//"PHPSESSID=gnsuudc2jg39phiu9jik5o83b4");// TBApplication.getPreferenceData("session")
+             }
              // 需要客户端对象来发送请求
-             HttpClient httpClient = new DefaultHttpClient();
+             httpClient = new DefaultHttpClient();
+             
+                 // Pass local context as a parameter
+//                 CloseableHttpResponse response = httpClient.execute(httpget, localContext);
+               
              // 发送请求
-             HttpResponse response = httpClient.execute(httpPost);
-             // 显示响应
-//             showResponseResult(response);
+             HttpResponse response = httpClient.execute(httpPost,localContext);
+//             HttpResponse response = httpClient.execute(httpPost);
+             
+                 System.out.println("----------------------------------------");
+                 System.out.println(response.getStatusLine());
+                 List<Cookie> cookies = cookieStore.getCookies();
+                 for (int i = 0; i < cookies.size(); i++) {
+                     System.out.println("Local cookie: " + cookies.get(i));
+                 }
+             
+//                 EntityUtils.consume(response.getEntity());
+         
+             Header header = response.getFirstHeader("Set-Cookie");
+             if (header != null) {
+            	 String session = header.getValue();
+            	 if(session.contains(";")){
+            		 session = session.substring(0,session.indexOf(";"));
+            	 }
+            	 
+            	 TBApplication.pushPreferenceData("session",session);
+             }
+
              if (null!= response)
              {
             	 
@@ -141,7 +188,7 @@ public class HttpUtil {
          catch (Exception e)
          {
              e.printStackTrace();
-         }
+         } 
 		return result;
 	}
 }
