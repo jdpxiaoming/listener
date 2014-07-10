@@ -3,6 +3,10 @@ package com.lewen.listener.fragment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
@@ -10,7 +14,11 @@ import com.lewen.listener.TBApplication;
 import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.adapter.PaperAdapter;
 import com.lewen.listener.bean.Constants;
+import com.lewen.listener.bean.Friend;
 import com.lewen.listener.bean.Queue;
+import com.lewen.listener.bean.UserInfo;
+import com.lewen.listener.http.HttpUtil;
+import com.lewen.listener.service.JsonService;
 import com.lewen.listener.util.ImageCacheUtil;
 import com.lewen.listener.util.LoggerUtil;
 import com.lewen.listener.util.ToastUtil;
@@ -21,14 +29,18 @@ import com.lewen.listener.view.SlideHolder;
 import com.qq.e.ads.AdRequest;
 import com.qq.e.ads.AdSize;
 import com.qq.e.ads.AdView;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -45,6 +57,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 /**
  * 贵州，本市
@@ -69,6 +82,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 	//FRIENDS LIST
 	private MyListView myListView;
 	private LinearLayout linAD;
+	private UserInfo user;
 	
 	//CITY LIST
 	private MyPullToRefreshListView listview,listviewCountry;
@@ -78,6 +92,10 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 			"Airag", "Airedale", "Aisy Cendre", "Allgauer Emmentaler",
 			"Acorn", "Adelost", "Affidelice au Chablis", "Afuega'l Pitu"
 			};
+	//friend
+	private TextView textLv,textTb,textHbs,textRmb;
+		
+		
 	private BaseAdapter adapter4LIST;
 
 	public FragementYanChu(Context mContext,SlideHolder mSlideHolder) {
@@ -202,6 +220,11 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		});
 
 		//朋友们
+		textLv		=	(TextView) views.get(0).findViewById(R.id.txtLevelOfFriend);
+		textTb		=	(TextView) views.get(0).findViewById(R.id.txtTBOfFriend);
+		textHbs		=	(TextView) views.get(0).findViewById(R.id.txtRedOfFriend);
+		textRmb		=	(TextView) views.get(0).findViewById(R.id.txtRMBOfFriend);
+		
 		linAD		=	(LinearLayout) views.get(0).findViewById(R.id.linAD);
 		myListView = (MyListView) views.get(0).findViewById(R.id.listViewOfFriends);
 		addADHead(linAD);
@@ -276,7 +299,69 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		listviewCountry.setAdapter(adapter4LIST);
 		listviewCountry.getRefreshableView().setDivider(null);
 		
+		getUserInfo();
 	}
+	
+	//test get user info by cookies
+	private void getUserInfo() {
+			// TODO Auto-generated method stub
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					NameValuePair pair1 = new BasicNameValuePair("page", 0+"");
+					NameValuePair pair2 = new BasicNameValuePair("pagesize", 10+"");
+			        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+			        pairList.add(pair1);
+			        pairList.add(pair2);
+			         
+			        String result	=	HttpUtil.sendPost(pairList,Constants.url_get_friends);// "http://ting.joysw.cn/index.php/api/members/info");
+			        if(!TextUtils.isEmpty(result)){
+			        	
+			        	System.out.println(result);
+			        	List<Friend> flist = JsonService.getMyFriends(result);
+			        	if(flist.size()>0){
+			        		System.out.println("success!");
+			        	}
+			        }
+			        
+			        //获取用户的各类财富值、红宝石、听币、rmb
+			        List<NameValuePair> pairList2 = new ArrayList<NameValuePair>();
+			        //test money
+			        String result2	=	HttpUtil.sendPost(pairList2,"http://ting.joysw.cn/index.php/api/members/money");
+			        System.out.println(result2);
+			        user = JsonService.getUserInfoMoney(result2);
+			        if(user!=null){
+			        	mHandler.sendEmptyMessage(100);
+			        }
+				}
+			}).start();
+		}
+
+	
+	private Handler mHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+		
+			switch(msg.what){
+			
+			case 100://friend toper refresh
+				if(user!=null){
+					textLv.setText(user.getUser_level());
+					textTb.setText(user.getUser_tb());
+					textHbs.setText(user.getUser_red());
+					textRmb.setText(user.getUser_rmb());
+				}
+				break;
+			}
+			
+		}
+		
+	};
 	
 	private class GetDataTask extends AsyncTask<String, Integer, String>{
 
@@ -358,69 +443,4 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		return false;
 	}
 
-//	private class task4YanchuZX extends AsyncTask<String, String, String> {
-//
-//		@Override
-//		protected void onPreExecute() {
-//			// TODO Auto-generated method stub
-//			super.onPreExecute();
-//			ExproApplication.throwTips("加载演出资讯...");
-//			progressbar1.setVisibility(View.VISIBLE);
-//		}
-//
-//		@Override
-//		protected String doInBackground(String... params) {
-//			try {
-//				adList = XmlToListService.GetAD(HttpUtil.sendGetRequest(
-//						Constants.YANCHU_AD));
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//				Log.e("poe", "sax解析出错！"+e.getMessage());
-//			}
-//			
-//			try {
-//				showList = XmlToListService.GetShowInfo(HttpUtil
-//						.sendGetRequest( Constants.YANCHU_ZIXUN + PageSize
-//								+ "/" + PageIndex));
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			return null;
-//		}
-//
-//		@Override
-//		protected void onPostExecute(String result) {
-//			// TODO Auto-generated method stub
-//			super.onPostExecute(result);
-////			mSlideHolder.toggle();
-//			// 处理结果
-//			if(adList!=null&&adList.size()>0){
-//				fillGallery();
-//			}else{
-//				Log.i("poe", "获取广告数据失败！");
-//			}
-//			
-//			if(showList!=null&&showList.size()>0){
-//					listAdapter=new Adapter4ShowinfoList(mContext, showList,new lastIndexLoad() {
-//						
-//						@Override
-//						public void loadData() {
-//							// TODO Auto-generated method stub
-//							PageIndex++;
-//							task4YanchuZX2 ts = new task4YanchuZX2();
-//							ts.execute();
-//						}
-//					});
-//					listview.setAdapter(listAdapter);
-//			}
-//			
-//			if(mSlideHolder.isOpened()){
-//				mSlideHolder.toggle();
-//			}
-//			
-//			progressbar1.setVisibility(View.GONE);
-//		}
-//	}
-	
 }

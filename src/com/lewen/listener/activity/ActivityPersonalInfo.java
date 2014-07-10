@@ -1,19 +1,27 @@
 package com.lewen.listener.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.util.LongSparseArray;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
 import com.lewen.listener.activity.parent.BaseActivity;
 import com.lewen.listener.bean.Constants;
+import com.lewen.listener.bean.UserInfo;
+import com.lewen.listener.http.HttpUtil;
 import com.lewen.listener.listener.BaseUIListener;
 import com.lewen.listener.util.Util;
 import com.lewen.listener.view.GetInviteParamsDialog;
@@ -37,6 +45,7 @@ public class ActivityPersonalInfo extends BaseActivity {
 	private LongSparseArray<IUiListener> mLiteners;
 	//邀请、挑战、炫耀
 	private TextView textInvite,textPK,textShow;
+	private UserInfo user;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +55,7 @@ public class ActivityPersonalInfo extends BaseActivity {
 		setContentView(R.layout.layout_person_info);
 		
 		init();
+		
 	}
 
 	private Handler handler =new Handler(){
@@ -53,10 +63,60 @@ public class ActivityPersonalInfo extends BaseActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
-			if(null!=bitmap)
-				icon.setImageBitmap(bitmap);
+			
+			switch(msg.what){
+			case 0:
+				if(null!=bitmap)
+					icon.setImageBitmap(bitmap);
+				break;
+			case 100://update user info
+				
+				
+				break;
+			}
 		}
 	};
+	//test get user info by cookies
+		private void getUserInfo() {
+				// TODO Auto-generated method stub
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						NameValuePair pair1 = new BasicNameValuePair("uid", TBApplication.getPreferenceData("uid"));
+				        List<NameValuePair> pairList = new ArrayList<NameValuePair>();
+				        pairList.add(pair1);
+				         
+				        String result	=	HttpUtil.sendPost(pairList,"http://ting.joysw.cn/index.php/api/members/info");// "http://ting.joysw.cn/index.php/api/members/info");
+				        if(!TextUtils.isEmpty(result)){
+				        	
+				        	System.out.println(result);
+				        }
+				        JSONObject object;
+				        //"data":{"rmb":"0","jf":"5","tb":"10000",
+				        //"hbs":"10000","ts":"0","cb":"0","fd":"0","sd":"0","gz":"0","fs":"0"}
+						try {
+							object = new JSONObject(result);
+							JSONObject data = object.getJSONObject("data");
+							/*user	=	 new UserInfo();
+							user.setUser_rmb(data.getString("rmb"));
+							user.setUser_level(data.getString("lv"));
+							user.setUser_tb(data.getString("tb"));
+							user.setUser_red(data.getString("hbs"));
+							user.setReplay_time(data.getString("cb"));
+							user.setReverse_time(data.getString("fd"));
+							user.setUser_speed(data.getString("sd"));
+							user.setTips(data.getString("ts"));*/
+							
+							handler.sendEmptyMessage(100);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}).start();
+			}
 	private void init() {
 		
 		icon	=	(ImageView) findViewById(R.id.imgHeadOfPersionalInfo);
@@ -151,6 +211,10 @@ public class ActivityPersonalInfo extends BaseActivity {
                 mTencent.invite(ActivityPersonalInfo.this, params, new BaseUIListener(ActivityPersonalInfo.this));
             }
 		}
+		
+		
+		///get user info
+		
 	}
 	
 	private void onClickPkBrag() {
