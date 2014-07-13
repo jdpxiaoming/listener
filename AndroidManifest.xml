@@ -66,7 +66,7 @@
     <application
         android:name=".TBApplication"
         android:allowBackup="true"
-        android:icon="@drawable/logo1"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <meta-data android:name="com.baidu.lbsapi.API_KEY" 
@@ -94,7 +94,6 @@
             android:name=".activity.ActivityLogin"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
-            
           
             
         </activity>
@@ -135,6 +134,11 @@
         </activity>
         <activity
             android:name=".activity.ActivityListenMenue"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
+        </activity>
+        <activity
+            android:name=".activity.AcitivityQuestionOption"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>

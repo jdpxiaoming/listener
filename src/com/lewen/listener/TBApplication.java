@@ -3,12 +3,13 @@ package com.lewen.listener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
-import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.bean.Person;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
+import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
@@ -143,5 +144,18 @@ public class TBApplication extends Application {
 	public static String getPreferenceData(String tag) {
 
 		return sp.getString(tag, null);
+	}
+	
+	
+	/**
+	 * 
+	 * @param context	带跳转activity
+	 * @param target	目标	activity
+	 */
+	public static void goNext(Context context,Class<?>  target){
+		
+		Intent intent = new Intent(context,target);
+		context.startActivity(intent);
+		((Activity)context).overridePendingTransition(R.anim.do_nothing_animate, R.anim.splashfadeout);
 	}
 }

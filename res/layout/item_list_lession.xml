@@ -7,11 +7,11 @@
     <LinearLayout 
         			android:layout_width="match_parent"
         			android:layout_height="match_parent"
-        			android:layout_weight="2"
+        			android:layout_weight="3"
         			android:orientation="vertical"
         			>
         			<ImageView 
-        			    		android:id="@+id/imgIconOfFriend"
+        			    		android:id="@+id/imgIconOfLessionItem"
         			    		android:layout_width="match_parent"
         			    		android:layout_height="match_parent"
         			    		android:layout_margin="10dp"
@@ -31,52 +31,38 @@
 			        			android:layout_weight="1"
 			        			>
 			        			<TextView 
-			        			    		android:id="@+id/textNameOfFriendItem"
+			        			    		android:id="@+id/textNameOfLessionItem"
 			        			    		android:layout_width="wrap_content"
 			        			    		android:layout_height="wrap_content"
-			        			    		android:text="张曼玉"
-			        			    		android:padding="10dp"
-			        			    		/>
-			        			<ImageView 
-			        			    		android:id="@+id/imgSexOfFriendItem"
-			        			    		android:layout_width="wrap_content"
-			        			    		android:layout_height="wrap_content"
-			        			    		android:src="@drawable/icon_home_femal"
-			        			    		android:layout_alignParentRight="true"
-			        			    		/>
-			        			
-			        			<TextView 
-			        			    		android:id="@+id/textLevelOfFriendItem"
-			        			    		android:layout_width="wrap_content"
-			        			    		android:layout_height="wrap_content"
-			        			    		android:layout_below="@id/textNameOfFriendItem"
-			        			    		android:text="* * *"
+			        			    		android:text="初级入门"
+			        			    		android:textSize="20sp"
 			        			    		android:padding="10dp"
 			        			    		/>
 			        			<TextView 
-			        			    		android:id="@+id/textScoreOfFriendItem"
+			        			    		android:id="@+id/textSummaryOfLessionItem"
 			        			    		android:layout_width="wrap_content"
 			        			    		android:layout_height="wrap_content"
-			        			    		android:layout_below="@id/textLevelOfFriendItem"
-			        			    		android:text="1 : 0 "
+			        			    		android:layout_below="@id/textNameOfLessionItem"
+			        			    		android:text="新手必备宝典大全"
+			        			    		android:singleLine="true"
 			        			    		android:padding="10dp"
 			        			    		/>
 			        			
 			    	</RelativeLayout>
         			<LinearLayout 
-			        			android:layout_width="match_parent"
+			        			android:layout_width="wrap_content"
 			        			android:layout_height="fill_parent"
-			        			android:layout_weight="1"
 			        			android:orientation="vertical"
 			        			android:gravity="center_vertical"
 				        		>
 				        	<TextView 
-				        	    		android:id="@+id/textActionOfFriendItem"
+				        	    		android:id="@+id/textActionOfLessionItem"
 				        	    		android:layout_width="match_parent"
 				        	    		android:layout_height="wrap_content"
-				        	    		android:text="应   战"
+				        	    		android:text="选 定"
 				        	    		android:layout_margin="10dp"
-				        	    		style="@style/text_long_button"
+				        	    		style="@style/text_long_button_yingzhan"
+				        	    		android:background="@drawable/green_to_blue"
 				        	    		/>
 			    	</LinearLayout>
         

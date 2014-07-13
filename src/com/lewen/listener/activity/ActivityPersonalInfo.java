@@ -238,6 +238,7 @@ public class ActivityPersonalInfo extends BaseActivity {
                 Bundle params = new Bundle();
                 params.putString(SocialConstants.PARAM_RECEIVER, "3B599FF138EE42DD7FE2234D3B89C44B");
                 params.putString(SocialConstants.PARAM_SEND_MSG, "向某某某发起挑战");
+                params.putString(SocialConstants.PARAM_OPEN_ID, TBApplication.getPreferenceData("openid"));;
                 params.putString(SocialConstants.PARAM_IMG_URL, "http://i.gtimg.cn/qzonestyle/act/qzone_app_img/app888_888_75.png");
                 mTencent.challenge(ActivityPersonalInfo.this, params, new BaseUIListener(ActivityPersonalInfo.this));
             }

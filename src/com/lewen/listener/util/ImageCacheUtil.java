@@ -16,27 +16,27 @@ public class ImageCacheUtil {
 	
 	static{
 		options = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.placeholder)
-		.showImageForEmptyUri(R.drawable.placeholder)
-		.showImageOnFail(R.drawable.placeholder)
+		.showStubImage(R.drawable.logo1)
+		.showImageForEmptyUri(R.drawable.logo1)
+		.showImageOnFail(R.drawable.logo1)
 		.cacheInMemory(true)
 		.cacheOnDisc(true)
 		.bitmapConfig(Bitmap.Config.RGB_565)
 		.build();
 		
 		options2 = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.placeholder_long)
-		.showImageForEmptyUri(R.drawable.placeholder_long)
-		.showImageOnFail(R.drawable.placeholder_long)
+		.showStubImage(R.drawable.logo100)
+		.showImageForEmptyUri(R.drawable.logo100)
+		.showImageOnFail(R.drawable.logo100)
 		.cacheInMemory(true)
 		.cacheOnDisc(true)
 		.bitmapConfig(Bitmap.Config.RGB_565)
 		.build();
 		
 		options3 = new DisplayImageOptions.Builder()
-		.showStubImage(R.drawable.placeholder_high)
-		.showImageForEmptyUri(R.drawable.placeholder_high)
-		.showImageOnFail(R.drawable.placeholder_high)
+		.showStubImage(R.drawable.logo100)
+		.showImageForEmptyUri(R.drawable.logo100)
+		.showImageOnFail(R.drawable.logo100)
 		.cacheInMemory(true)
 		.cacheOnDisc(true)
 		.bitmapConfig(Bitmap.Config.RGB_565)

@@ -11,6 +11,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
 import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
+import com.lewen.listener.adapter.Adapter4Friend;
 import com.lewen.listener.adapter.Myadapter;
 import com.lewen.listener.adapter.PaperAdapter;
 import com.lewen.listener.bean.Constants;
@@ -94,6 +95,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 			};
 	//friend
 	private TextView textLv,textTb,textHbs,textRmb;
+	private List<Friend> flist;
 		
 		
 	private BaseAdapter adapter4LIST;
@@ -228,6 +230,8 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 		linAD		=	(LinearLayout) views.get(0).findViewById(R.id.linAD);
 		myListView = (MyListView) views.get(0).findViewById(R.id.listViewOfFriends);
 		addADHead(linAD);
+		
+		/*
 //		progressbar1 = (LinearLayout) views.get(0).findViewById(R.id.progressbarOfShowInfo);
 		ArrayAdapter<String> mAdapter =  
 				new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, Arrays.asList(mStrings));
@@ -243,7 +247,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 				ToastUtil.showToastShort( "clicked!+ on  " +arg2,mContext);
 				// TODO Auto-generated method stub
 				}
-		});
+		});*/
 		
 		//本市,suzhou
 		listview = (MyPullToRefreshListView)views.get(1).findViewById(R.id.listview);
@@ -320,7 +324,7 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 			        if(!TextUtils.isEmpty(result)){
 			        	
 			        	System.out.println(result);
-			        	List<Friend> flist = JsonService.getMyFriends(result);
+			        	flist = JsonService.getMyFriends(result);
 			        	if(flist.size()>0){
 			        		System.out.println("success!");
 			        	}
@@ -356,6 +360,14 @@ public class FragementYanChu extends Fragment implements OnClickListener ,OnTouc
 					textHbs.setText(user.getUser_red());
 					textRmb.setText(user.getUser_rmb());
 				}
+				
+				if(flist!=null&&flist.size()>0){
+					Adapter4Friend adapter = new Adapter4Friend(flist, mContext);
+	        		myListView.setAdapter(adapter);
+				}else{
+					//默认的、or从数据库去拉去信息
+				}
+				
 				break;
 			}
 			

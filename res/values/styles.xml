@@ -64,12 +64,22 @@
     
         <!-- long button style added by poe -->
     <style name="text_long_button">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">20sp</item> 
         <item name="android:gravity">center</item>
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:padding">10dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/gray_to_blue</item>
+        <item name="android:clickable">true</item>
+    </style>
+    <style name="text_long_button_yingzhan">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/red2_to_blue</item>
+        <item name="android:clickable">true</item>
     </style>
     <!-- 猜单词 -->
     <style name="text_long_button_guess_word">

@@ -65,7 +65,17 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			goNext();
+			switch (msg.what) {
+			case 0:
+				goNext();
+				break;
+			case 1://已经登录了！~
+				ToastUtil.throwTipShort("已经登录了~");
+				break;
+			default:
+				break;
+			}
+			
 		}
 	};
 	
@@ -191,6 +201,7 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 				try {
 					final AuthReply ar  = XmlToListService.GetAuth(values.toString());
 					if(null!=ar){
+						TBApplication.pushPreferenceData("openid", ar.getOpenID());
 					new Thread(new Runnable() {
 							
 							@Override
@@ -199,6 +210,7 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 								
 								if(TBApplication.getPreferenceData("session")!=null){
 									System.out.println("session有效："+TBApplication.getPreferenceData("session"));
+									mHandler.sendEmptyMessage(1);
 								}else{
 									
 								NameValuePair pair1 = new BasicNameValuePair("openid", ar.getOpenID());
@@ -231,8 +243,7 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
-									
-									mHandler.sendEmptyMessage(0);
+									updateUserInfo();
 						        	}
 								}
 									//执行跳转
@@ -301,7 +312,8 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 									mPerson.setUserName(json.getString("nickname"));
 									mPerson.setGender(json.getString("gender"));
 									TBApplication.person = mPerson;
-									goNext();
+									mHandler.sendEmptyMessage(0);
+									
 								} catch (JSONException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -356,12 +368,12 @@ public class ActivityLogin extends BaseActivity implements OnClickListener{
 
 		@Override
 		public void onError(UiError e) {
-			ToastUtil.showToastShort("onError: " + e.errorDetail,ActivityLogin.this);
+			ToastUtil.throwTipShort("onError: " + e.errorDetail);
 		}
 
 		@Override
 		public void onCancel() {
-			ToastUtil.showToastShort("onCancel:",ActivityLogin.this);
+			ToastUtil.throwTipShort("onCancel:");
 		}
 	}
 	

@@ -1,14 +1,20 @@
 package com.lewen.listener.activity;
 
+import java.util.List;
+
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.iflytek.cloud.speech.SpeechConstant;
 import com.iflytek.cloud.speech.SpeechError;
 import com.iflytek.cloud.speech.SpeechListener;
@@ -17,11 +23,18 @@ import com.iflytek.cloud.speech.SpeechUser;
 import com.iflytek.cloud.speech.SynthesizerListener;
 import com.lewen.listener.R;
 import com.lewen.listener.activity.parent.BaseActivity;
+import com.lewen.listener.bean.Question;
+import com.lewen.listener.http.HttpUtil;
+import com.lewen.listener.service.XmlToListService;
 import com.lewen.listener.util.MediaPlayerUtil;
+import com.lewen.listener.util.ToastUtil;
 
 public class ActivityListenWord extends BaseActivity implements SynthesizerListener {
-	private Button btnBack;
+	private ImageButton btnBack;
 	private TextView textA, textB, textC, textD, textQuestion;
+	/**
+	 * 用户选择的答案 A,B,C,D
+	 */
 	private String answer = null;
 	// 合成对象.
 	private SpeechSynthesizer mSpeechSynthesizer;
@@ -32,6 +45,13 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	private ImageView imgTipsRW;
 	//footer
 	private RelativeLayout relativeHelp1,relativeHelp2,relativeHelp3;//服
+	
+	//题目列表
+	private List<Question> qList;
+	private ProgressBar progress;
+	private int qSelected = 0;//当前进行的题目
+	private String qpref;//题目前半部分
+	private String qbehand;//题目后半部分
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +63,8 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	}
 
 	private void init() {
-		btnBack = (Button) findViewById(R.id.gobackbt);
+		progress	=	(ProgressBar) findViewById(R.id.progress);
+		btnBack = (ImageButton) findViewById(R.id.imgbtnBack);
 		btnBack.setOnClickListener(clickListener);
 
 		textA = (TextView) findViewById(R.id.textA);
@@ -70,17 +91,86 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		relativeHelp2.setOnClickListener(clickListener);
 		relativeHelp3.setOnClickListener(clickListener);
 		
-		setQuestion(answer);
-
 		SpeechUser.getUser().login(ActivityListenWord.this, null, null, "appid=" + getString(R.string.app_id), listener);
 		// 初始化合成对象.
 		mSpeechSynthesizer = SpeechSynthesizer.createSynthesizer(this);
+		
+		//获取题库
+		String url_xml = getIntent().getStringExtra("xml");
+		getQuestions(url_xml);
 	}
 
+	private Handler mHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			
+			switch (msg.what) {
+			case 101://获取题目列表完毕
+				progress.setVisibility(View.GONE);
+				updateQuestion();
+				break;
+
+			default:
+				break;
+			}
+		}
+	};
+	
+	private void getQuestions(final String url_xml) {
+		progress.setVisibility(View.VISIBLE);
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					String result = HttpUtil.getConnection(url_xml);
+					qList = XmlToListService.GetQuestionList(result);
+					
+					if(null!=qList&&qList.size()>0){
+						//设置第一题
+						qSelected = 0;
+					}
+					
+					mHandler.sendEmptyMessage(101);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}).start();
+	}
+
+	/**
+	 * 根据qSelected来设定题目信息
+	 */
+	private void updateQuestion() {
+		Question q = qList.get(qSelected);
+		
+		String question = q.getQuestion();
+		String ans 		= q.getAnswer();
+		
+		if(question!=null&&ans!=null&&question.contains(ans)){
+			qpref	=	question.substring(0,question.indexOf(ans));
+			qbehand	=	question.substring(question.indexOf(ans)+ans.length());
+		}
+		
+		textA.setText(q.getSelectedA());
+		textB.setText(q.getSelectedB());
+		textC.setText(q.getSelectedC());
+		textD.setText(q.getSelectedD());
+		//谁是答案，4个item
+		setQuestion(answer);
+	}
+	
 	//根据用户选择的答案进行 结果正确答案解释页面展示
 	private void showResultTips(boolean isOk,String selectedAnswer){
 		relativeTips.setVisibility(View.VISIBLE);
 		textTipsAnswer.setText(selectedAnswer);
+		textTipsRightDes.setText(qList.get(qSelected).getAnswerDes());
 		
 		if(isOk){
 			imgTipsRW.setImageResource(R.drawable.icon_right);
@@ -110,7 +200,7 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	};
 
 	/**
-	 * 设置答案
+	 * 设置题目、答案部分用——代替
 	 * 
 	 * @param answer2
 	 */
@@ -119,24 +209,33 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 			mediaUtil = new MediaPlayerUtil(ActivityListenWord.this);
 		}
 		textQuestion.setText("");
-		textQuestion.append("Maybe you should ");
+		textQuestion.append(qpref+" ");
 		if (null != answer2) {
-			if (answer2.trim().equals("chew")) {
+			if (answer2.trim().equals( qList.get(qSelected).getAnswer())) {
 				textQuestion.append(Html.fromHtml("<u><font color=\"green\">  " + answer2 + "</font></u>"));
 				// 讯飞读音 回答 正确 +10分
 				mediaUtil.PlayRight();
 				showResultTips(true, answer2);
+				
+				mHandler.postDelayed(new Runnable() {
+					
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						NextQuestion();
+					}
+				}, 2*1000);
+				
 			} else {
-				textQuestion.append(Html.fromHtml("<u><font color=\"red\">  " + "chew" + "</font></u>"));
+				textQuestion.append(Html.fromHtml("<u><font color=\"red\">  " +  qList.get(qSelected).getAnswer() + "</font></u>"));
 				mediaUtil.PlayWrong();
-				synthetizeInSilence("chew！chew！chew！");
+				synthetizeInSilence( qList.get(qSelected).getAnswer()+"!"+ qList.get(qSelected).getAnswer()+"!"+ qList.get(qSelected).getAnswer()+"!");
 				showResultTips(false, answer2);
 			}
 		} else {
 			textQuestion.append(" __ ");
 		}
-		textQuestion.append(" on myface ");
-
+		textQuestion.append("   "+qbehand);
 	}
 
 	/**
@@ -178,31 +277,31 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		public void onClick(View v) {
 
 			switch (v.getId()) {
-			case R.id.gobackbt://
+			case R.id.imgbtnBack://
 				finish();
 				break;
 			case R.id.textA:
-				answer = " is ";
+				answer = qList.get(qSelected).getSelectedA();
 				setQuestion(answer);
 //				textA.setBackgroundColor(getResources().getColor(R.color.gray_1));
 				break;
 			case R.id.textB:// 猜图片
-				answer = " book ";
+				answer =  qList.get(qSelected).getSelectedB();
 				setQuestion(answer);
 //				textB.setBackgroundColor(getResources().getColor(R.color.gray_1));
 				break;
 			case R.id.textC:// 猜图片
-				answer = " chew ";
+				answer =  qList.get(qSelected).getSelectedC();
 				setQuestion(answer);
 //				textC.setBackgroundColor(getResources().getColor(R.color.green));
 				break;
 			case R.id.textD:// 猜图片
-				answer = " are ";
+				answer =  qList.get(qSelected).getSelectedD();
 				setQuestion(answer);
 //				textD.setBackgroundColor(getResources().getColor(R.color.gray_1));
 				break;
 			case R.id.relative1OfGuessFooter:
-				setQuestion("chew");
+				setQuestion(qList.get(qSelected).getAnswer());
 				break;
 			case R.id.relative2OfGuessFooter:
 				relativeTips.setVisibility(View.GONE);
@@ -219,19 +318,29 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 
 	@Override
 	public void onBufferProgress(int arg0, int arg1, int arg2, String arg3) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onCompleted(SpeechError arg0) {
-		// TODO Auto-generated method stub
+		NextQuestion();
+	}
 
+	private void NextQuestion() {
+		
+		if(qSelected<qList.size()-1){
+			qSelected++;
+			answer = null;
+			relativeTips.setVisibility(View.GONE);
+			updateQuestion();
+		}else{
+			//跳转到 pk结果页面
+			ToastUtil.throwTipShort("Pk结束，即将进入得分页面~");
+		}
 	}
 
 	@Override
 	public void onSpeakBegin() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -243,13 +352,11 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 
 	@Override
 	public void onSpeakProgress(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void onSpeakResumed() {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -1,6 +1,13 @@
 package com.lewen.listener.util;
 
-import android.content.Context;
+import com.lewen.listener.R;
+import com.lewen.listener.TBApplication;
+import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -10,13 +17,48 @@ import android.widget.Toast;
  */
 public class ToastUtil {
 	
-	public static void showToastLong(String content ,Context mContext){
-		Toast.makeText(mContext, content, 800).show();;
+	private static android.widget.Toast toast;
+	private static Handler handler = new Handler();
+	private static Runnable run = new Runnable() {
+		public void run() {
+			toast.cancel();
+		}
+	};
+	
+	private static TextView tv;
+
+	public static void throwTipShort(String conent) {
+		
+		if(toast==null){
+			init(conent);
+		}
+		
+		tv.setText(conent);
+		toast.show();
+		handler.postDelayed(run, Toast.LENGTH_SHORT+1500);
 	}
-	public static void showToastMiddle(String content ,Context mContext){
-		Toast.makeText(mContext, content, 600).show();;
+
+	@SuppressLint("ShowToast")
+	private static void init(String conent) {
+		toast = Toast.makeText(TBApplication.App, conent, Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		
+		LayoutInflater lin = LayoutInflater.from(TBApplication.App);
+		View layout = lin.inflate(R.layout.loading,null);
+		tv	=	(TextView) layout.findViewById(R.id.tvOfToast);
+		
+		toast.setView(layout);
 	}
-	public static void showToastShort(String content ,Context mContext){
-		Toast.makeText(mContext, content, 300).show();;
+	
+	public static void throwTipLong(String conent) {
+		
+		if(toast==null){
+			init(conent);
+		}
+		tv.setText(conent);
+		
+		
+		handler.postDelayed(run, Toast.LENGTH_LONG+2500);
+		toast.show();
 	}
 }

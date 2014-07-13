@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.lewen.listener.bean.Friend;
+import com.lewen.listener.bean.QuestionProp;
 import com.lewen.listener.bean.UserInfo;
 
 /**
@@ -64,6 +65,38 @@ public class JsonService {
 					friend.setAct(jfriend.getString("act"));
 					friend.setWarid(jfriend.getString("warid"));
 					friend.setLevel(jfriend.getString("level"));
+					
+					result.add(friend);
+				}
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 选取我的课件
+	 * @param input
+	 * @return
+	 */
+	public static List<QuestionProp> getMyLessions(String input){
+		List<QuestionProp> result =new ArrayList<QuestionProp>();
+		
+		try {
+			JSONObject object = new JSONObject(input);
+			JSONArray jsonArray = object.getJSONArray("data");
+			if(jsonArray!=null&&jsonArray.length()>0){
+				for(int i=0;i<jsonArray.length();i++){
+					JSONObject jfriend = jsonArray.getJSONObject(i);
+					QuestionProp friend = new QuestionProp();
+					
+					friend.setId(jfriend.getString("id"));
+					friend.setIcon(jfriend.getString("image"));
+					friend.setTitle(jfriend.getString("title"));
+					friend.setSummary(jfriend.getString("summary"));
 					
 					result.add(friend);
 				}

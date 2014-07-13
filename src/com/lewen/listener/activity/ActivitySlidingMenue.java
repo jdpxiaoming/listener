@@ -164,7 +164,7 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 			startActivity(intent);
 			break;
 		case R.id.nav_bt_website:
-			Uri uri = Uri.parse("http://www.baidu.com");  
+			Uri uri = Uri.parse("http://ting.joysw.cn/index.php");  
             intent = new Intent(Intent.ACTION_VIEW, uri);  
             startActivity(intent);  
 			break;

@@ -4,16 +4,86 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
+
 import com.lewen.listener.bean.AuthReply;
 import com.lewen.listener.bean.Question;
 import com.lewen.listener.bean.Question.LISTENERTYPE;
+
 import android.util.Xml;
 
 public class XmlToListService {
 	
 	public static List<Question> GetQuestionList(String str)throws Exception{
+		if(str==null||"".equals(str))
+			return null;
+		List<Question> news = null;//问题列表
+		Question newInfo = null;
+		List<String> aList =null;//答案列表
+		XmlPullParser parser = Xml.newPullParser();
+		InputStream  inputStream   =   new   ByteArrayInputStream(str.getBytes());
+		parser.setInput(inputStream, "utf-8");
+		int eventType = parser.getEventType();
+		while(eventType!=XmlPullParser.END_DOCUMENT){
+			switch (eventType) {
+			case XmlPullParser.START_DOCUMENT:
+				news = new ArrayList<Question>();
+				break;
+			case XmlPullParser.START_TAG:
+				String name = parser.getName();
+				if("main".equals(name)){
+					newInfo = new Question();
+					newInfo.setType(LISTENERTYPE.word);
+					aList	=	new ArrayList<String>();
+				}
+				
+				if(newInfo!=null){
+					
+					if("id".equals(name))
+						newInfo.setId(parser.nextText());
+					
+					if("title".equals(name)){
+						newInfo.setAnswerDes(parser.getAttributeValue(0));
+						newInfo.setQuestion(parser.nextText());
+					}
+					
+					if("Word".equals(name)){
+						aList.add(parser.nextText());
+					}
+					
+					if("starttime".equals(name)){
+						newInfo.setStartTime(parser.nextText());
+					}
+					if("stoptime".equals(name)){
+						newInfo.setEndTime(parser.nextText());
+					}
+				}
+				break;
+			case XmlPullParser.END_TAG:
+				if("main".equals(parser.getName())){
+					if(aList.size()>3){
+						newInfo.setSelectedA(aList.get(0));
+						newInfo.setSelectedB(aList.get(1));
+						newInfo.setSelectedC(aList.get(2));
+						newInfo.setSelectedD(aList.get(3));
+						
+						int var = (int)(Math.random()*4);
+						
+						newInfo.setAnswer(aList.get(var));
+					}
+					news.add(newInfo);
+					newInfo = null;
+					aList = null;
+				}
+				break;
+			}
+			eventType = parser.next();
+		}
+		return news;
+	}
+	/*public static List<Question> GetQuestionList(String str)throws Exception{
 		if(str==null||"".equals(str))
 			return null;
 		List<Question> news = null;
@@ -75,7 +145,7 @@ public class XmlToListService {
 			eventType = parser.next();
 		}
 		return news;
-	}
+	}*/
 	
 	/**
 	 * 获取QQ授权的返回结果

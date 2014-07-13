@@ -7,15 +7,34 @@ public class Question {
 	private String id;	//题目编号 
 	private String question;
 	private String answer;//答案、 选项
-	private String answerDes;//问题难易程度 1难，2易
+	private String answerDes;//汉语翻译
 	private String selectedA;//A选项
 	private String selectedB;
 	private String selectedC;
 	private String selectedD;//可以是单词 、图片uri
+	private String startTime;//开始时间
+	private String endTime;	 //结束时间
 	
 	public String getId() {
 		return id;
 	}
+	
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
