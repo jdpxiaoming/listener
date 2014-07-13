@@ -1,11 +1,14 @@
 package com.lewen.listener.activity;
 
 import java.util.HashMap;
+
 import com.lewen.listener.R;
 import com.lewen.listener.bean.Task;
 import com.lewen.listener.bean.TaskType;
 import com.lewen.listener.fragment.FragementYanChu;
+import com.lewen.listener.util.ToastUtil;
 import com.lewen.listener.view.SlideHolder;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -174,6 +177,12 @@ public class ActivitySlidingMenue extends FragmentActivity implements
 		case R.id.nav_bt_setting:
 			intent.setClass(this, ActivitySet.class);
 			startActivity(intent);
+			break;
+		case R.id.nav_bt_activie:
+		case R.id.nav_bt_nearby:
+		case R.id.nav_bt_score:
+		case R.id.nav_bt_shopping:
+			ToastUtil.throwTipShort("暂未实现此功能！");
 			break;
 		default:
 			break;

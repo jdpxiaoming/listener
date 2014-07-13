@@ -1,7 +1,7 @@
 package com.lewen.listener.activity;
 
 import java.util.List;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.iflytek.cloud.speech.SpeechConstant;
 import com.iflytek.cloud.speech.SpeechError;
 import com.iflytek.cloud.speech.SpeechListener;
@@ -27,9 +26,9 @@ import com.lewen.listener.bean.Question;
 import com.lewen.listener.http.HttpUtil;
 import com.lewen.listener.service.XmlToListService;
 import com.lewen.listener.util.MediaPlayerUtil;
-import com.lewen.listener.util.ToastUtil;
 
 public class ActivityListenWord extends BaseActivity implements SynthesizerListener {
+	
 	private ImageButton btnBack;
 	private TextView textA, textB, textC, textD, textQuestion;
 	/**
@@ -52,7 +51,9 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	private int qSelected = 0;//当前进行的题目
 	private String qpref;//题目前半部分
 	private String qbehand;//题目后半部分
-
+	String url_xml="http://tftp.joysw.cn/Courseware/140710010639983255/20140710010357/wohan.xml";
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,7 +97,13 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		mSpeechSynthesizer = SpeechSynthesizer.createSynthesizer(this);
 		
 		//获取题库
-		String url_xml = getIntent().getStringExtra("xml");
+		try{
+			if(null!= getIntent()&&getIntent().getStringExtra("xml")!=null){
+				url_xml = getIntent().getStringExtra("xml");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		getQuestions(url_xml);
 	}
 
@@ -110,6 +117,7 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 			switch (msg.what) {
 			case 101://获取题目列表完毕
 				progress.setVisibility(View.GONE);
+				controlButton(true);
 				updateQuestion();
 				break;
 
@@ -117,10 +125,23 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 				break;
 			}
 		}
+
 	};
+	
+	private void controlButton(boolean state) {
+		textA.setEnabled(state);
+		textB.setEnabled(state);
+		textC.setEnabled(state);
+		textD.setEnabled(state);
+		relativeHelp1.setEnabled(state);
+		relativeHelp2.setEnabled(state);
+		relativeHelp3.setEnabled(state);
+	}
 	
 	private void getQuestions(final String url_xml) {
 		progress.setVisibility(View.VISIBLE);
+		controlButton(false);
+		
 		new Thread(new Runnable() {
 			
 			@Override
@@ -335,7 +356,12 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 			updateQuestion();
 		}else{
 			//跳转到 pk结果页面
-			ToastUtil.throwTipShort("Pk结束，即将进入得分页面~");
+//			ToastUtil.throwTipShort("Pk结束，即将进入得分页面~");
+			Intent intent = new Intent(ActivityListenWord.this,ActivityPKResult.class);
+			intent.putExtra("xml", url_xml);
+			startActivity(intent);
+			overridePendingTransition(R.anim.do_nothing_animate, R.anim.splashfadeout);
+			finish();
 		}
 	}
 

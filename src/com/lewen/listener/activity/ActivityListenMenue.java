@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.lewen.listener.R;
 import com.lewen.listener.activity.parent.BaseActivity;
+import com.lewen.listener.util.ToastUtil;
 
 public class ActivityListenMenue extends BaseActivity {
 	
@@ -56,9 +57,10 @@ public class ActivityListenMenue extends BaseActivity {
 				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
 				break;
 			case R.id.imgGuessPictureOfListenMenue://猜图片
-				intent.setClass(ActivityListenMenue.this, ActivityListenPicture.class);
-				startActivity(intent);
-				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+//				intent.setClass(ActivityListenMenue.this, ActivityListenPicture.class);
+//				startActivity(intent);
+//				overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
+				ToastUtil.throwTipShort("暂未实现此功能！");
 				break;
 			default:
 				break;

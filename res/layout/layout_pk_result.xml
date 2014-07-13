@@ -25,23 +25,182 @@
         		    		android:textSize="23sp"
         		    		android:textColor="@color/white"
         		    		android:layout_centerInParent="true"
-        		    		android:text="选择课件"
+        		    		android:text="对战结果"
         		    		/>
     </RelativeLayout>
-    
-    <ListView 
-	    		android:id="@+id/listviewOfLession"
+    <LinearLayout 
+        			android:id="@+id/footer"
+        			android:layout_width="match_parent"
+        			android:layout_height="wrap_content"
+        			android:layout_alignParentBottom="true"
+        			android:orientation="horizontal"
+        			>
+        		<ImageButton
+        		    		android:id="@+id/imgRecover"
+        		    		android:layout_width="match_parent"
+        		    		android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:background="@drawable/btk_recover"    		    		
+        		    		/>
+        		<ImageButton
+        		    		android:id="@+id/imgShow"
+        		    		android:layout_width="match_parent"
+        		    		android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:background="@drawable/btk_show"    		    		
+        		    		/>
+    </LinearLayout>
+    <LinearLayout 
 	    		android:layout_width="match_parent"
 	    		android:layout_height="match_parent"
 	    		android:layout_below="@id/toper"
-	    		android:cacheColorHint="#00000000"
-	    		android:background="@color/white"
-	    		/>
-    <ProgressBar
-        android:id="@+id/progress"
-        style="?android:attr/progressBarStyleInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+	    		android:layout_above="@id/footer"
+	    		android:orientation="vertical"
+	    		>
+        	<RelativeLayout 
+        	    			android:id="@+id/relativeBgOfPKResult"
+        	    			android:layout_width="match_parent"
+        	    			android:layout_height="100dp"
+        	    			android:background="@drawable/tb_bg_challage_fail"
+        	    			>
+        	    			<ImageView 
+        	    			    		android:id="@+id/imgIconOfPKResult"
+        	    			    		android:layout_width="wrap_content"
+        	    			    		android:layout_height="wrap_content"
+        	    			    		android:scaleType="centerInside"
+        	    			    		android:src="@drawable/tb_img_challage_fail"
+        	    			    		android:layout_centerInParent="true"
+        	    			    		/>
+        	    			<ImageView 	
+        	    			    		android:id="@+id/imgTipOfPKResult"
+        	    			    		android:layout_width="wrap_content"
+        	    			    		android:layout_height="wrap_content"
+        	    			    		android:scaleType="centerInside"
+        	    			    		android:src="@drawable/fail"
+        	    			    		android:layout_alignParentRight="true"
+        	    			    		android:layout_alignParentBottom="true"
+        	    			    		android:layout_margin="10dp"
+        	    			    		/>
+        	</RelativeLayout>		
+        	<LinearLayout 
+        	    		android:layout_width="match_parent"
+        	    		android:layout_height="wrap_content"
+        	    		android:orientation="horizontal"
+        	    		android:background="#e5ebf0"	
+        	    			>
+        	    	<RelativeLayout 
+        	    	    			android:layout_width="match_parent"
+        	    	    			android:layout_height="wrap_content"
+        	    	    			android:layout_weight="1"
+        	    	    			>
+        	    	    			
+        	    	   			<TextView 	
+        	    	   			    	android:id="@+id/textScore1OfPKResult"
+        	    	   			    	android:layout_width="wrap_content"
+        	    	   			    	android:layout_height="wrap_content"
+        	    	   			    	android:text="15001"
+        	    	   			    	android:textColor="@color/red"	
+        	    	   			    	android:padding="10dp"
+        	    	   			    		/>
+        	    	   			
+        	    	   			<TextView 	
+        	    	   			    	android:id="@+id/textName1OfPKResult"
+        	    	   			    	android:layout_width="wrap_content"
+        	    	   			    	android:layout_height="wrap_content"
+        	    	   			    	android:layout_toRightOf="@id/textScore1OfPKResult"
+        	    	   			    	android:text="张迷"
+        	    	   			    	android:textColor="@color/black"	
+        	    	   			    	android:padding="10dp"
+        	    	   			    	/>
+        	    	   			
+        	    	</RelativeLayout>
+        	    	<TextView 
+        	    	    		android:layout_width="wrap_content"
+        	    	    		android:layout_height="wrap_content"
+        	    	    		android:text="VS"
+        	    	    		android:textSize="30sp"
+        	    	    		android:textColor="@color/red"
+        	    	    		/>
+        	    	<RelativeLayout 
+        	    	    			android:layout_width="match_parent"
+        	    	    			android:layout_height="wrap_content"
+        	    	    			android:layout_weight="1"
+        	    	    			>
+        	    	    			
+        	    	   			<TextView 	
+        	    	   			    	android:id="@+id/textScore2OfPKResult"
+        	    	   			    	android:layout_width="wrap_content"
+        	    	   			    	android:layout_height="wrap_content"
+        	    	   			    	android:layout_alignParentRight="true"
+        	    	   			    	android:text="42854"
+        	    	   			    	android:textColor="@color/red"	
+        	    	   			    	android:padding="10dp"
+        	    	   			    		/>
+        	    	   			
+        	    	   			<TextView 	
+        	    	   			    	android:id="@+id/textName2OfPKResult"
+        	    	   			    	android:layout_width="wrap_content"
+        	    	   			    	android:layout_height="wrap_content"
+        	    	   			    	android:layout_toLeftOf="@id/textScore2OfPKResult"
+        	    	   			    	android:text="张迷"
+        	    	   			    	android:textColor="@color/black"	
+        	    	   			    	android:padding="10dp"
+        	    	   			    	/>
+        	    	   			
+        	    	</RelativeLayout>
+        	    	</LinearLayout>
+        	    	<RelativeLayout 
+        	    	    		android:layout_width="match_parent"
+        	    	    		android:layout_height="wrap_content"
+        	    	    			>
+        	    	    	<TextView 
+        	    	    	    		android:id="@+id/textbenju"
+        	    	    	    		android:layout_width="wrap_content"
+        	    	    	    		android:layout_height="wrap_content"
+        	    	    	    		android:text="本局比分："
+        	    	    	    		android:textSize="23sp"
+        	    	    	    		android:textColor="@color/gray"
+        	    	    	    		android:padding="10dp"
+        	    	    	    		/>
+        	    	    	<TextView 
+        	    	    	    		android:id="@+id/textScoreOfPKResult"
+        	    	    	    		android:layout_width="wrap_content"
+        	    	    	    		android:layout_height="wrap_content"
+        	    	    	    		android:text="468 : 730 "
+        	    	    	    		android:layout_below="@id/textbenju"
+        	    	    	    		android:layout_centerHorizontal="true"
+        	    	    	    		android:textColor="@color/gray"
+        	    	    	    		android:padding="10dp"
+        	    	    	    		/>
+        	    	    	
+        	</RelativeLayout>
+        	<RelativeLayout 
+        	    	    		android:layout_width="match_parent"
+        	    	    		android:layout_height="wrap_content"
+        	    	    			>
+        	    	    	<TextView 
+        	    	    	    		android:id="@+id/textpk"
+        	    	    	    		android:layout_width="wrap_content"
+        	    	    	    		android:layout_height="wrap_content"
+        	    	    	    		android:text="PK总比："
+        	    	    	    		android:textSize="23sp"
+        	    	    	    		android:textColor="@color/gray"
+        	    	    	    		android:padding="10dp"
+        	    	    	    		/>
+        	    	    	<TextView 
+        	    	    	    		android:id="@+id/textPKScoreOfPKResult"
+        	    	    	    		android:layout_width="wrap_content"
+        	    	    	    		android:layout_height="wrap_content"
+        	    	    	    		android:text="1 : 2 "
+        	    	    	    		android:textSize="22sp"
+        	    	    	    		android:layout_below="@id/textpk"
+        	    	    	    		android:layout_centerHorizontal="true"
+        	    	    	    		android:textColor="@color/gray"
+        	    	    	    		android:padding="10dp"
+        	    	    	    		/>
+        	    	    	
+        	</RelativeLayout>
+        
+    </LinearLayout>
     
 </RelativeLayout>

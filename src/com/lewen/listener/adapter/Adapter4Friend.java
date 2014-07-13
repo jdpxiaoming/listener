@@ -108,6 +108,7 @@ public class Adapter4Friend extends BaseAdapter{
 				
 				@Override
 				public void onClick(View v) {
+					TBApplication.pushPreferenceData("warname", friend.getName());
 					if("1".equals(act)){//应战
 						//跳转到答题界面
 						ToastUtil.throwTipShort("我要应战了!");;
