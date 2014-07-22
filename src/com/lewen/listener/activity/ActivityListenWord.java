@@ -1,19 +1,23 @@
 package com.lewen.listener.activity;
 
 import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.iflytek.cloud.speech.SpeechConstant;
 import com.iflytek.cloud.speech.SpeechError;
 import com.iflytek.cloud.speech.SpeechListener;
@@ -21,14 +25,17 @@ import com.iflytek.cloud.speech.SpeechSynthesizer;
 import com.iflytek.cloud.speech.SpeechUser;
 import com.iflytek.cloud.speech.SynthesizerListener;
 import com.lewen.listener.R;
+import com.lewen.listener.TBApplication;
 import com.lewen.listener.activity.parent.BaseActivity;
 import com.lewen.listener.bean.Question;
 import com.lewen.listener.http.HttpUtil;
 import com.lewen.listener.service.XmlToListService;
+import com.lewen.listener.util.ImageCacheUtil;
 import com.lewen.listener.util.MediaPlayerUtil;
+import com.lewen.listener.util.ToastUtil;
 
 public class ActivityListenWord extends BaseActivity implements SynthesizerListener {
-	
+
 	private ImageButton btnBack;
 	private TextView textA, textB, textC, textD, textQuestion;
 	/**
@@ -37,23 +44,32 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	private String answer = null;
 	// 合成对象.
 	private SpeechSynthesizer mSpeechSynthesizer;
-	
 	private MediaPlayerUtil mediaUtil = null;
-	private RelativeLayout	relativeTips;
+	private RelativeLayout relativeTips;
 	private TextView textTipsAnswer, textTipsRightDes;
 	private ImageView imgTipsRW;
-	//footer
-	private RelativeLayout relativeHelp1,relativeHelp2,relativeHelp3;//服
-	
-	//题目列表
+	// footer
+	private RelativeLayout relativeHelp1, relativeHelp2, relativeHelp3;// 服
+
+	// 题目列表
 	private List<Question> qList;
 	private ProgressBar progress;
-	private int qSelected = 0;//当前进行的题目
-	private String qpref;//题目前半部分
-	private String qbehand;//题目后半部分
-	String url_xml="http://tftp.joysw.cn/Courseware/140710010639983255/20140710010357/wohan.xml";
-	
-	
+	private int qSelected = 0;// 当前进行的题目
+	private String qpref;// 题目前半部分
+	private String qbehand;// 题目后半部分
+	String url_xml = "http://tftp.joysw.cn/Courseware/140710010639983255/20140710010357/wohan.xml";
+
+	// 倒计时
+	private int TIME_REMAIN = 100;
+	private LinearLayout linearProgress;
+	private static long TIME_START = -1;
+	private TextView tvScore;
+
+	// pk双方头像及得分
+	private ImageView imgSelft, imgWar;
+	private TextView txtNameSelft, txtNameWar, txtScoreSelf, txtScoreOther;
+	private int totalScore = 0;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,9 +80,28 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	}
 
 	private void init() {
-		progress	=	(ProgressBar) findViewById(R.id.progress);
+		progress = (ProgressBar) findViewById(R.id.progress);
 		btnBack = (ImageButton) findViewById(R.id.imgbtnBack);
 		btnBack.setOnClickListener(clickListener);
+
+		// 倒计时
+		linearProgress = (LinearLayout) findViewById(R.id.linearProgress);
+		if (null == TBApplication.metrics) {
+			TBApplication.metrics = new DisplayMetrics();
+			getWindowManager().getDefaultDisplay().getMetrics(TBApplication.metrics);
+		}
+
+		tvScore = (TextView) findViewById(R.id.textScoreOfGuessword);
+		// myself
+		imgSelft = (ImageView) findViewById(R.id.imgMyselfOfGuessWord);
+		txtNameSelft = (TextView) findViewById(R.id.textMyNameOfGuessWord);
+		txtScoreSelf = (TextView) findViewById(R.id.textScore1OfGuessWord);
+		// war
+		imgWar = (ImageView) findViewById(R.id.imgOthersOfGuessWord);
+		txtNameWar = (TextView) findViewById(R.id.textOtherNameOfGuessWord);
+		txtScoreOther = (TextView) findViewById(R.id.textScore2OfGuessWord);
+
+		linearProgress.setLayoutParams(new android.widget.FrameLayout.LayoutParams(TBApplication.metrics.widthPixels, android.widget.FrameLayout.LayoutParams.MATCH_PARENT));
 
 		textA = (TextView) findViewById(R.id.textA);
 		textA.setOnClickListener(clickListener);
@@ -78,44 +113,57 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		textD.setOnClickListener(clickListener);
 
 		textQuestion = (TextView) findViewById(R.id.textQuestion);
-		
-		relativeTips	=	(RelativeLayout) findViewById(R.id.relativeResult);
-		textTipsAnswer	=	(TextView) findViewById(R.id.textTipsAnswer);
-		textTipsRightDes=	(TextView) findViewById(R.id.textTipsRightAnserDes);
-		imgTipsRW		=	(ImageView) findViewById(R.id.imgTipsRightOrWrong);
-		
-		relativeHelp1	=	(RelativeLayout) findViewById(R.id.relative1OfGuessFooter);
-		relativeHelp2	=	(RelativeLayout) findViewById(R.id.relative2OfGuessFooter);
-		relativeHelp3	=	(RelativeLayout) findViewById(R.id.relative3OfGuessFooter);
-		
+
+		relativeTips = (RelativeLayout) findViewById(R.id.relativeResult);
+		textTipsAnswer = (TextView) findViewById(R.id.textTipsAnswer);
+		textTipsRightDes = (TextView) findViewById(R.id.textTipsRightAnserDes);
+		imgTipsRW = (ImageView) findViewById(R.id.imgTipsRightOrWrong);
+
+		relativeHelp1 = (RelativeLayout) findViewById(R.id.relative1OfGuessFooter);
+		relativeHelp2 = (RelativeLayout) findViewById(R.id.relative2OfGuessFooter);
+		relativeHelp3 = (RelativeLayout) findViewById(R.id.relative3OfGuessFooter);
+
 		relativeHelp1.setOnClickListener(clickListener);
 		relativeHelp2.setOnClickListener(clickListener);
 		relativeHelp3.setOnClickListener(clickListener);
-		
+
 		SpeechUser.getUser().login(ActivityListenWord.this, null, null, "appid=" + getString(R.string.app_id), listener);
 		// 初始化合成对象.
 		mSpeechSynthesizer = SpeechSynthesizer.createSynthesizer(this);
-		
-		//获取题库
-		try{
-			if(null!= getIntent()&&getIntent().getStringExtra("xml")!=null){
+
+		// 获取题库
+		try {
+			if (null != getIntent() && getIntent().getStringExtra("xml") != null) {
 				url_xml = getIntent().getStringExtra("xml");
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		getQuestions(url_xml);
+
+		// set the datas
+		ImageCacheUtil ic = new ImageCacheUtil();
+		if (TBApplication.friend != null) {
+			txtNameWar.setText(TBApplication.friend.getName());
+			ic.loadImageList(TBApplication.imageLoader, imgWar, TBApplication.friend.getIcon());
+		}
+
+		if (TBApplication.person != null) {
+			txtNameSelft.setText(TBApplication.person.getUserName());
+			ic.loadImageList(TBApplication.imageLoader, imgSelft, TBApplication.person.getIcon_url());
+		}
+
 	}
 
-	private Handler mHandler = new Handler(){
+	private Handler mHandler = new Handler() {
 
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
 			super.handleMessage(msg);
-			
+
 			switch (msg.what) {
-			case 101://获取题目列表完毕
+			case 101:// 获取题目列表完毕
 				progress.setVisibility(View.GONE);
 				controlButton(true);
 				updateQuestion();
@@ -127,7 +175,7 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		}
 
 	};
-	
+
 	private void controlButton(boolean state) {
 		textA.setEnabled(state);
 		textB.setEnabled(state);
@@ -137,24 +185,24 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		relativeHelp2.setEnabled(state);
 		relativeHelp3.setEnabled(state);
 	}
-	
+
 	private void getQuestions(final String url_xml) {
 		progress.setVisibility(View.VISIBLE);
 		controlButton(false);
-		
+
 		new Thread(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				try {
 					String result = HttpUtil.getConnection(url_xml);
 					qList = XmlToListService.GetQuestionList(result);
-					
-					if(null!=qList&&qList.size()>0){
-						//设置第一题
+
+					if (null != qList && qList.size() > 0) {
+						// 设置第一题
 						qSelected = 0;
 					}
-					
+
 					mHandler.sendEmptyMessage(101);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -170,35 +218,54 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	 */
 	private void updateQuestion() {
 		Question q = qList.get(qSelected);
-		
+
 		String question = q.getQuestion();
-		String ans 		= q.getAnswer();
+		String ans = q.getAnswer();
 		
-		if(question!=null&&ans!=null&&question.contains(ans)){
-			qpref	=	question.substring(0,question.indexOf(ans));
-			qbehand	=	question.substring(question.indexOf(ans)+ans.length());
+		if (question != null && ans != null && question.contains(ans)) {
+			qpref = question.substring(0, question.indexOf(ans));
+			qbehand = question.substring(question.indexOf(ans) + ans.length());
 		}
-		
+
 		textA.setText(q.getSelectedA());
 		textB.setText(q.getSelectedB());
 		textC.setText(q.getSelectedC());
 		textD.setText(q.getSelectedD());
-		//谁是答案，4个item
+		// 谁是答案，4个item
 		setQuestion(answer);
 	}
-	
-	//根据用户选择的答案进行 结果正确答案解释页面展示
-	private void showResultTips(boolean isOk,String selectedAnswer){
+
+	private Runnable runableTimeMinus = new Runnable() {
+
+		@Override
+		public void run() {
+			TIME_REMAIN--;
+			int width = TBApplication.metrics.widthPixels * TIME_REMAIN / 100;
+			tvScore.setText("" + TIME_REMAIN );
+			linearProgress.setLayoutParams(new android.widget.FrameLayout.LayoutParams(width, android.widget.FrameLayout.LayoutParams.MATCH_PARENT));
+
+			if (TIME_REMAIN > 0) {
+				mHandler.postDelayed(runableTimeMinus, 100);
+			} else {
+				ToastUtil.throwTipShort("答题结束！");
+				TIME_REMAIN = 100;
+			}
+		}
+	};
+
+	// 根据用户选择的答案进行 结果正确答案解释页面展示
+	private void showResultTips(boolean isOk, String selectedAnswer) {
 		relativeTips.setVisibility(View.VISIBLE);
 		textTipsAnswer.setText(selectedAnswer);
 		textTipsRightDes.setText(qList.get(qSelected).getAnswerDes());
-		
-		if(isOk){
+
+		if (isOk) {
 			imgTipsRW.setImageResource(R.drawable.icon_right);
-		}else{
+		} else {
 			imgTipsRW.setImageResource(R.drawable.icon_wrong);
 		}
 	}
+
 	/**
 	 * 用户登录回调监听器.
 	 */
@@ -226,37 +293,55 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 	 * @param answer2
 	 */
 	private void setQuestion(String answer2) {
+		synthetizeInSilence(qList.get(qSelected).getQuestion());
+		mHandler.removeCallbacks(runableTimeMinus);
+		int score = Integer.parseInt(tvScore.getText().toString());
+		totalScore+=score;
+		txtScoreSelf.setText(totalScore+"");
+		
 		if (mediaUtil == null) {
 			mediaUtil = new MediaPlayerUtil(ActivityListenWord.this);
 		}
 		textQuestion.setText("");
-		textQuestion.append(qpref+" ");
+		textQuestion.append(qpref + " ");
 		if (null != answer2) {
-			if (answer2.trim().equals( qList.get(qSelected).getAnswer())) {
+			if (answer2.trim().equals(qList.get(qSelected).getAnswer())) {
 				textQuestion.append(Html.fromHtml("<u><font color=\"green\">  " + answer2 + "</font></u>"));
 				// 讯飞读音 回答 正确 +10分
 				mediaUtil.PlayRight();
 				showResultTips(true, answer2);
-				
+
 				mHandler.postDelayed(new Runnable() {
-					
+
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
 						NextQuestion();
 					}
-				}, 2*1000);
-				
+				}, 2 * 1000);
+
 			} else {
-				textQuestion.append(Html.fromHtml("<u><font color=\"red\">  " +  qList.get(qSelected).getAnswer() + "</font></u>"));
+				textQuestion.append(Html.fromHtml("<u><font color=\"red\">  " + qList.get(qSelected).getAnswer() + "</font></u>"));
 				mediaUtil.PlayWrong();
-				synthetizeInSilence( qList.get(qSelected).getAnswer()+"!"+ qList.get(qSelected).getAnswer()+"!"+ qList.get(qSelected).getAnswer()+"!");
+				synthetizeInSilence(qList.get(qSelected).getAnswer() + "!" + qList.get(qSelected).getAnswer() + "!" + qList.get(qSelected).getAnswer() + "!");
 				showResultTips(false, answer2);
+
+				mHandler.postDelayed(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						NextQuestion();
+					}
+				}, 3 * 1000);
 			}
 		} else {
 			textQuestion.append(" __ ");
+			// 倒计时 
+			TIME_START = System.currentTimeMillis();
+			mHandler.post(runableTimeMinus);
 		}
-		textQuestion.append("   "+qbehand);
+		textQuestion.append("   " + qbehand);
 	}
 
 	/**
@@ -275,7 +360,7 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		// 设置发音人
 		mSpeechSynthesizer.setParameter(SpeechConstant.VOICE_NAME, role);
 		// 获取语速
-		int speed = 50;
+		int speed = 70;
 		// 设置语速
 		mSpeechSynthesizer.setParameter(SpeechConstant.SPEED, "" + speed);
 		// 获取音量.
@@ -304,22 +389,22 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 			case R.id.textA:
 				answer = qList.get(qSelected).getSelectedA();
 				setQuestion(answer);
-//				textA.setBackgroundColor(getResources().getColor(R.color.gray_1));
+				// textA.setBackgroundColor(getResources().getColor(R.color.gray_1));
 				break;
 			case R.id.textB:// 猜图片
-				answer =  qList.get(qSelected).getSelectedB();
+				answer = qList.get(qSelected).getSelectedB();
 				setQuestion(answer);
-//				textB.setBackgroundColor(getResources().getColor(R.color.gray_1));
+				// textB.setBackgroundColor(getResources().getColor(R.color.gray_1));
 				break;
 			case R.id.textC:// 猜图片
-				answer =  qList.get(qSelected).getSelectedC();
+				answer = qList.get(qSelected).getSelectedC();
 				setQuestion(answer);
-//				textC.setBackgroundColor(getResources().getColor(R.color.green));
+				// textC.setBackgroundColor(getResources().getColor(R.color.green));
 				break;
 			case R.id.textD:// 猜图片
-				answer =  qList.get(qSelected).getSelectedD();
+				answer = qList.get(qSelected).getSelectedD();
 				setQuestion(answer);
-//				textD.setBackgroundColor(getResources().getColor(R.color.gray_1));
+				// textD.setBackgroundColor(getResources().getColor(R.color.gray_1));
 				break;
 			case R.id.relative1OfGuessFooter:
 				setQuestion(qList.get(qSelected).getAnswer());
@@ -337,6 +422,8 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 		}
 	};
 
+	private boolean isReading = false;
+
 	@Override
 	public void onBufferProgress(int arg0, int arg1, int arg2, String arg3) {
 
@@ -344,20 +431,21 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 
 	@Override
 	public void onCompleted(SpeechError arg0) {
-		NextQuestion();
+		// NextQuestion();
+		isReading = false;
 	}
 
 	private void NextQuestion() {
-		
-		if(qSelected<qList.size()-1){
+
+		if (qSelected < qList.size() - 1) {
 			qSelected++;
 			answer = null;
 			relativeTips.setVisibility(View.GONE);
 			updateQuestion();
-		}else{
-			//跳转到 pk结果页面
-//			ToastUtil.throwTipShort("Pk结束，即将进入得分页面~");
-			Intent intent = new Intent(ActivityListenWord.this,ActivityPKResult.class);
+		} else {
+			// 跳转到 pk结果页面
+			// ToastUtil.throwTipShort("Pk结束，即将进入得分页面~");
+			Intent intent = new Intent(ActivityListenWord.this, ActivityPKResult.class);
 			intent.putExtra("xml", url_xml);
 			startActivity(intent);
 			overridePendingTransition(R.anim.do_nothing_animate, R.anim.splashfadeout);
@@ -367,13 +455,13 @@ public class ActivityListenWord extends BaseActivity implements SynthesizerListe
 
 	@Override
 	public void onSpeakBegin() {
-
+		isReading = true;
 	}
 
 	@Override
 	public void onSpeakPaused() {
 		// TODO Auto-generated method stub
-
+		isReading = false;
 	}
 
 	@Override

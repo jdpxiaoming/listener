@@ -6,6 +6,7 @@ import com.lewen.listener.R;
 import com.lewen.listener.TBApplication;
 import com.lewen.listener.activity.AcitivityQuestionOption;
 import com.lewen.listener.activity.ActivityListenWord;
+import com.lewen.listener.activity.ActivityPKResult;
 import com.lewen.listener.bean.Friend;
 import com.lewen.listener.util.ImageCacheUtil;
 import com.lewen.listener.util.ToastUtil;
@@ -108,19 +109,15 @@ public class Adapter4Friend extends BaseAdapter{
 				
 				@Override
 				public void onClick(View v) {
+					TBApplication.friend	= friend;
 					TBApplication.pushPreferenceData("warname", friend.getName());
 					if("1".equals(act)){//应战
 						//跳转到答题界面
-						ToastUtil.throwTipShort("我要应战了!");;
 						TBApplication.goNext(mContext, ActivityListenWord.class);
 					}else if("2".equals(act)){//发起挑战-》选题-》开始
-						
-						ToastUtil.throwTipShort("我要挑战了!");;
 						TBApplication.goNext(mContext, AcitivityQuestionOption.class);
 					}else {//查看结果，查看pk结果页面
-						
-						ToastUtil.throwTipShort("我要查看中奖结果了！！");;
-						
+						TBApplication.goNext(mContext, ActivityPKResult.class);
 					}
 					
 				}

@@ -2,102 +2,178 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/all_bg"
-    >
-     <RelativeLayout 
-        		android:id="@+id/navigatebar"
-        		android:layout_width="match_parent"
-        		android:layout_height="55dp"
-        		android:background="@drawable/bg_top_guess"
-        		>
-        
-        		<ImageButton 
-        		    		android:id="@+id/imgbtnBack"
-        		    		android:layout_width="55dp"
-        		    		android:layout_height="fill_parent"
-        		    		android:background="@drawable/tb_back_normal"
-        		    		android:scaleType="centerInside"
-        		    		/>
-        		<TextView 
-        		    		android:layout_width="wrap_content"
-        		    		android:layout_height="wrap_content"
-        		    		android:textSize="23sp"
-        		    		android:textColor="@color/white"
-        		    		android:layout_centerInParent="true"
-        		    		android:text="@string/str_listen_word"
-        		    		/>
+    android:background="@drawable/all_bg" >
+
+    <RelativeLayout
+        android:id="@+id/navigatebar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_top_guess"
+        android:visibility="gone" >
+
+        <ImageButton
+            android:id="@+id/imgbtnBack"
+            android:layout_width="55dp"
+            android:layout_height="fill_parent"
+            android:background="@drawable/tb_back_normal"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/str_listen_word"
+            android:textColor="@color/white"
+            android:textSize="23sp" />
     </RelativeLayout>
-    
-	<include
-	        android:id="@+id/footer"
-	        android:layout_width="match_parent"
-	        android:layout_height="85dp"
-	        layout="@layout/footer_guess" 
-	        android:layout_alignParentBottom="true"
-	        />
+
+    <include
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:layout_alignParentBottom="true"
+        layout="@layout/footer_guess" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_above="@id/footer"
         android:layout_below="@id/navigatebar"
-         >
+        android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="140dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/chew" />
-
-        <TextView
-            android:id="@+id/textQuestion"
-            style="@style/text_long_button_guess_word_question"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Maybe you should _ on my face" />
-
-        
         <RelativeLayout
-		        android:id="@+id/relativeResult"
-		        android:layout_width="match_parent"
-		        android:layout_height="match_parent"
-		        android:visibility="gone"
-		        >
-        		<TextView 
-        		    		android:id="@+id/textTipsAnswer"
-        		    		android:layout_width="match_parent"
-        		    		android:layout_height="50dp"
-        		    		android:layout_alignParentBottom="true"
-        		    		android:text="chew"
-        		    		android:textSize="20sp"
-        		    		android:textColor="@color/black"
-        		    		android:background="#DDDDDD"
-        		    		android:gravity="center"
-        		    		/>
-        		<TextView 
-        		    		android:id="@+id/textTipsRightAnserDes"
-        		    		android:layout_width="match_parent"
-        		    		android:layout_height="match_parent"
-        		    		android:layout_above="@id/textTipsAnswer"
-        		    		android:padding="10dp"
-        		    		android:textSize="26sp"
-        		    		android:gravity="center"
-        		    		android:textColor="@color/black"
-        		    		android:text="vt.use the teeth to crush  or grind \n =咀嚼；嚼碎；深思 "
-        		    		/>
-        		
-        		<ImageView 
-        		    		android:id="@+id/imgTipsRightOrWrong"
-        		    		android:layout_width="wrap_content"
-        		    		android:layout_height="wrap_content"
-        		    		android:src="@drawable/icon_right"
-        		    		android:layout_alignParentRight="true"
-        		    		android:layout_alignParentBottom="true"
-        		    		android:padding="20dp"
-        		    		android:scaleType="centerInside"
-        		    		/>
-     </RelativeLayout>
-     
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/chew" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#34343400"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <ImageView
+                    android:id="@+id/imgMyselfOfGuessWord"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/textMyNameOfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/imgMyselfOfGuessWord"
+                    android:padding="5dp"
+                    android:text="耗子"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textScore1OfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textMyNameOfGuessWord"
+                    android:layout_toRightOf="@id/imgMyselfOfGuessWord"
+                    android:padding="5dp"
+                    android:text="等待着"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imgOthersOfGuessWord"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/logo" />
+                
+                <TextView
+                    android:id="@+id/textOtherNameOfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/imgOthersOfGuessWord"
+                    android:padding="5dp"
+                    android:text="耗子"
+                    android:textColor="@color/white" />
+			<TextView
+                    android:id="@+id/textScore2OfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textOtherNameOfGuessWord"
+                    android:layout_toLeftOf="@id/imgOthersOfGuessWord"
+                    android:padding="5dp"
+                    android:text="等待着"
+                    android:textColor="@color/white" />
+			
+                <TextView
+                    android:id="@+id/textScoreOfGuessword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="5dp"
+                    android:text="90"
+                    android:textColor="@color/white" />
+                
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFF00" >
+
+            <LinearLayout
+                android:id="@+id/linearProgress"
+                android:layout_width="10dp"
+                android:layout_height="fill_parent"
+                android:background="@color/green"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:id="@+id/textQuestion"
+                style="@style/text_long_button_guess_word_question"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Maybe you should _ on my face" />
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" >
+
+            <TextView
+                android:id="@+id/textTipsAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="#DDDDDD"
+                android:gravity="center"
+                android:text="chew"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textTipsRightAnserDes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/textTipsAnswer"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="vt.use the teeth to crush  or grind \n =咀嚼；嚼碎；深思 "
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <ImageView
+                android:id="@+id/imgTipsRightOrWrong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:padding="20dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_right" />
+        </RelativeLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -154,11 +230,12 @@
                 android:text="are" />
         </LinearLayout>
     </LinearLayout>
-     <ProgressBar
+
+    <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyleInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
-    
+
 </RelativeLayout>
