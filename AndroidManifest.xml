@@ -81,11 +81,6 @@
             android:name=".activity.ActivitySplash"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
             
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             
         </activity>
         
@@ -117,6 +112,13 @@
             android:name=".activity.Whatsnew"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
         </activity>
         
         

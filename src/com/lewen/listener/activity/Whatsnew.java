@@ -3,6 +3,7 @@ package com.lewen.listener.activity;
 import java.util.ArrayList;
 
 import com.lewen.listener.R;
+import com.lewen.listener.TBApplication;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -90,6 +91,13 @@ public class Whatsnew extends Activity {
 		};
 		
 		mViewPager.setAdapter(mPagerAdapter);
+		
+		
+		if(TBApplication.getPreferenceData("first")!=null){
+			startbutton();
+		}else{
+			TBApplication.pushPreferenceData("first", "no");
+		}
     }    
     
 
@@ -124,6 +132,7 @@ public class Whatsnew extends Activity {
 			case 5:
 				mPage5.setImageDrawable(getResources().getDrawable(R.drawable.page_now));
 				mPage4.setImageDrawable(getResources().getDrawable(R.drawable.page));
+				startbutton();
 				break;
 			}
 			currIndex = arg0;
@@ -139,9 +148,9 @@ public class Whatsnew extends Activity {
 		public void onPageScrollStateChanged(int arg0) {
 		}
 	}
-    public void startbutton(View v) {  
+    public void startbutton() {  
       	Intent intent = new Intent();
-		intent.setClass(Whatsnew.this,ActivityLogin.class);
+		intent.setClass(Whatsnew.this,ActivitySplash.class);
 		startActivity(intent);
 		this.finish();
       }  
