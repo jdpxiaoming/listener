@@ -2,12 +2,10 @@ package com.lewen.listener.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,17 +16,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-
 import com.lewen.listener.R;
 import com.lewen.listener.activity.parent.BaseActivity;
 import com.lewen.listener.adapter.Adapter4Lession;
 import com.lewen.listener.adapter.Adapter4Lession.ISelected;
 import com.lewen.listener.bean.Constants;
-import com.lewen.listener.bean.Question;
 import com.lewen.listener.bean.QuestionProp;
 import com.lewen.listener.http.HttpUtil;
 import com.lewen.listener.service.JsonService;
-import com.lewen.listener.service.XmlToListService;
 import com.lewen.listener.util.ToastUtil;
 /**
  * 选择题库页面
@@ -51,17 +46,20 @@ public class AcitivityQuestionOption extends BaseActivity {
 			super.handleMessage(msg);
 			
 			progressbar.setVisibility(View.GONE);
+			
 			switch (msg.what) {
 			case 0://..
 				if(null!=datas){
+					
 					adapter 	=	new Adapter4Lession(datas, mContext	,new ISelected() {
-								
 								@Override
 								public void selected(String id) {
 									getLessionsById(id);
 								}
 							});
+					
 		        	listview.setAdapter(adapter);
+		        	
 				}else{
 					ToastUtil.throwTipShort("获取数据失败！");
 				}
@@ -113,6 +111,7 @@ public class AcitivityQuestionOption extends BaseActivity {
 		//获取课件
 		getLessions();
 	}
+	
 	//test get user info by cookies
 		private void getLessions() {
 				// TODO Auto-generated method stub
@@ -123,6 +122,7 @@ public class AcitivityQuestionOption extends BaseActivity {
 					public void run() {
 						// TODO Auto-generated method stub
 				        String result	=	HttpUtil.getConnection(Constants.url_get_my_course);
+				        System.out.println(result);
 				        if(!TextUtils.isEmpty(result)){
 				        	System.out.println(result);
 				        	//解析 lession列表 点击谁再去拉去对应的数据

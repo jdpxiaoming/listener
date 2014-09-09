@@ -86,5 +86,43 @@
         	    		/>
         
     </LinearLayout>
+     <LinearLayout 
+        			android:id="@+id/linearDivider"
+        			android:layout_width="match_parent"
+        			android:layout_height="2px"
+        			android:orientation="horizontal"
+        			android:background="@drawable/tb_guess_divider"
+        			/>
+    <LinearLayout 
+        			android:id="@+id/linearListenerWorld"
+        			android:layout_width="match_parent"
+        			android:layout_height="match_parent"
+        			android:layout_weight="1"
+        			android:orientation="vertical"
+        			android:gravity="center"
+        			>
+        		
+        	<ImageView 
+        	    	android:id="@+id/imgListenerWorldOfListenMenue"
+        	    	android:layout_width="wrap_content"
+        	    	android:layout_height="wrap_content"
+        	    	android:src="@drawable/tb_guess_word"
+        	    	android:scaleType="centerInside"
+        	    		
+        	    		/>
+        	<TextView 
+        	    		android:layout_width="wrap_content"
+        	    		android:layout_height="wrap_content"
+        	    		android:padding="5dp"
+        	    		android:textSize="22sp"
+        	    		android:textColor="@color/blue_dark"
+        	    		android:text="听世界"
+        	    		android:textStyle="bold"
+        	    		/>
+        
+    </LinearLayout>
+    
+    
+    
 	
 </LinearLayout>

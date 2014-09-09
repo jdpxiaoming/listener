@@ -5,41 +5,6 @@
     android:background="@drawable/all_bg"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/navigatebar"
-        android:layout_width="fill_parent"
-        android:layout_height="50.0dip"
-        android:background="@drawable/title_bar"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingLeft="8.0dip"
-        android:paddingRight="8.0dip"
-        android:paddingTop="6.0dip" >
-
-        <Button
-            android:id="@+id/gobackbt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/title_bar_button"
-            android:paddingLeft="4.0dip"
-            android:paddingRight="4.0dip"
-            android:text="@string/cancel"
-            android:textColor="#ffffffff"
-            android:textSize="14.0dip" />
-
-        <TextView
-            android:id="@+id/title"
-            style="@style/titleshadow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="8.0dip"
-            android:gravity="center"
-            android:text="@string/str_listen_picture"
-            android:textColor="#ffffffff" />
-    </RelativeLayout>
 
     <include
         android:id="@+id/footer"
@@ -55,19 +20,139 @@
         android:layout_below="@id/navigatebar"
         android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="fill_parent"
+         <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/xiongmao1" />
+            android:background="@drawable/chew" >
 
-        <TextView
-            android:id="@+id/textQuestion"
-            style="@style/text_long_button_guess_word_question"
-            android:layout_width="fill_parent"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#34343400"
+                android:orientation="horizontal"
+                android:padding="5dp" >
+
+                <ImageView
+                    android:id="@+id/imgMyselfOfGuessWord"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/textMyNameOfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/imgMyselfOfGuessWord"
+                    android:padding="5dp"
+                    android:text="耗子"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textScore1OfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textMyNameOfGuessWord"
+                    android:layout_toRightOf="@id/imgMyselfOfGuessWord"
+                    android:padding="5dp"
+                    android:text="等待着"
+                    android:textColor="@color/white" />
+
+                <ImageView
+                    android:id="@+id/imgOthersOfGuessWord"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/logo" />
+                
+                <TextView
+                    android:id="@+id/textOtherNameOfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/imgOthersOfGuessWord"
+                    android:padding="5dp"
+                    android:text="耗子"
+                    android:textColor="@color/white" />
+			<TextView
+                    android:id="@+id/textScore2OfGuessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textOtherNameOfGuessWord"
+                    android:layout_toLeftOf="@id/imgOthersOfGuessWord"
+                    android:padding="5dp"
+                    android:text="等待着"
+                    android:textColor="@color/white" />
+			
+                <TextView
+                    android:id="@+id/textScoreOfGuessword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:padding="5dp"
+                    android:text="90"
+                    android:textColor="@color/white" />
+                
+            </RelativeLayout>
+        </RelativeLayout>
+        
+         <FrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Maybe you should _ on my face" />
+            android:background="#FFFF00" >
 
+            <LinearLayout
+                android:id="@+id/linearProgress"
+                android:layout_width="10dp"
+                android:layout_height="fill_parent"
+                android:background="@color/green"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:id="@+id/textQuestion"
+                style="@style/text_long_button_guess_word_question"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Maybe you should _ on my face" />
+        </FrameLayout>
+
+          <RelativeLayout
+            android:id="@+id/relativeResult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+             >
+
+            <TextView
+                android:id="@+id/textTipsAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="#DDDDDD"
+                android:gravity="center"
+                android:text="chew"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/textTipsRightAnserDes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/textTipsAnswer"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="vt.use the teeth to crush  or grind \n =咀嚼；嚼碎；深思 "
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+
+            <ImageView
+                android:id="@+id/imgTipsRightOrWrong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:padding="20dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_right" />
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -79,10 +164,10 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/a1" 
                 android:padding="2dp"
-                android:background="@color/gray"
+                android:background="@drawable/rectange_text_red"
                 />
 
             <ImageView
@@ -90,10 +175,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/a2" 
                 android:padding="2dp"
-                android:background="@color/gray"
                 />
         </LinearLayout>
 
@@ -108,10 +192,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/a3" 
                 android:padding="2dp"
-                android:background="@color/gray"
                 />
 
             <ImageView
@@ -119,12 +202,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/a4" 
-                android:background="@color/gray"
                 android:padding="2dp"
                 />
         </LinearLayout>
     </LinearLayout>
 
+    
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    
 </RelativeLayout>

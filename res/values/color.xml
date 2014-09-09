@@ -17,6 +17,7 @@
     
     <!--  -->
     <color name="transparent">#00000000</color>
+    <color name="transparent_gray">#8000</color>
     <color name="listview_hint_color">#fffbf8f3</color>
     <color name="text_num_gray">#ff333333</color>
     <color name="dialog_title_blue">#ff9cccf7</color>
